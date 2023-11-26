@@ -1,22 +1,31 @@
-<script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
-</script>
+<script setup></script>
 
 <template>
-    <Head title="Dashboard" />
+    <div class="w-full h-screen flex justify-center">
+        <div class="w-[1200px] py-10 my-10">
+            <span>1/40</span>
+            <div class="flex flex-col items-center gap-10 mt-10">
+                <p class="text-center text-xl">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Repellendus, harum asperiores pariatur a ipsum sapiente
+                    velit eos esse reprehenderit illum ut nostrum architecto
+                    soluta culpa eum cumque veritatis distinctio placeat.
+                </p>
+                <div class=""><span>Answer: </span> aSDfsdf</div>
 
-    <AuthenticatedLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
-        </template>
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">You're logged in!</div>
+                <div class="w-full flex justify-between">
+                    <div
+                        class="py-2 px-5 border-2 border-blue-500 rounded-md text-blue-500 font-semibold"
+                    >
+                        Back
+                    </div>
+                    <div
+                        class="py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
+                    >
+                        Next
+                    </div>
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </div>
 </template>
