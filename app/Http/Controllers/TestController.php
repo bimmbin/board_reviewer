@@ -11,10 +11,15 @@ class TestController extends Controller
 {
   public function index($id)
   { 
-    $lesson = Lesson::with('choices')->findOrFail($id);
-    
+    $category = Category::with('lessons', 'lessons.choices')->findOrFail(1);
+    $lessons_count = Category::withCount('lessons')->findOrFail(1)->lessons_count;
+  
+    $lesson = $category->lessons[$id - 1];
     return Inertia::render('Test', [
       'lesson' => $lesson,
+      'current_page' => $id,
+      'lessons_count' => $lessons_count,
+
     ]);
   }
 }
