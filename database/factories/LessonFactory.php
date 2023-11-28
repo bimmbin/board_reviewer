@@ -20,7 +20,7 @@ class LessonFactory extends Factory
     return [
       'category_id' => Category::factory(),
       'lesson_question' => fake()->paragraph(). ' ' . fake()->paragraph(),
-      'correct_index' => 'a',
+      'correct_index' => chr(ord('a') + rand(0, 3)),
     ];
   }
 }

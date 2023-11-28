@@ -19,7 +19,7 @@ class CategoryFactory extends Factory
   {
     return [
       'major_id' => Major::factory(),
-      'category_name' => fake()->title(),
+      'category_name' => fake()->catchPhrase(),
     ];
   }
 }

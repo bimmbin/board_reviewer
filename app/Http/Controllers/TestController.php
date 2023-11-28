@@ -9,15 +9,18 @@ use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
-  public function index($id)
+  public function index($id, $page)
   { 
-    $category = Category::with('lessons', 'lessons.choices')->findOrFail(1);
-    $lessons_count = Category::withCount('lessons')->findOrFail(1)->lessons_count;
+    $category = Category::with('lessons', 'lessons.choices')->findOrFail($id);
+    $lessons_count = Category::withCount('lessons')->findOrFail($id)->lessons_count;
   
-    $lesson = $category->lessons[$id - 1];
-    return Inertia::render('Test', [
+    $lesson = $category->lessons[$page - 1];
+    // dd($lesson->choices);
+
+    return Inertia::render('Student/Lesson', [
+      'category_id' => $category->id,
       'lesson' => $lesson,
-      'current_page' => $id,
+      'current_page' => $page,
       'lessons_count' => $lessons_count,
 
     ]);

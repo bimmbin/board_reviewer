@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
 
     Major::factory(1)
       ->has(
-        Category::factory()->count(1)
+        Category::factory()->count(5)
           ->has(
             Lesson::factory()->count(38)
               ->has(Choice::factory()->count(4), 'choices'),
