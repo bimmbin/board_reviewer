@@ -131,7 +131,7 @@ const chcc_bg = ref("/img/chcc_bg.png");
 
                     <div class="w-full">
 
-                      <Link :href="route('lessons.index')" class="mt-3 w-full inline-flex justify-center items-center px-4 py-3 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-400 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                      <Link :href="route('category.index')" class="mt-3 w-full inline-flex justify-center items-center px-4 py-3 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-400 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                         Login
                       </Link>
                         <!-- <PrimaryButton
