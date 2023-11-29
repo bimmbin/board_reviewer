@@ -13,7 +13,7 @@ const lesson_icon = ref("/img/lesson_icon.svg");
 
 <template>
     <Link :href="route('test.index', [category.id, 1])"
-        class="w-[550px] px-6 py-4  bg-gradient-to-r from-blue-700 to-blue-400 max-2xl:w-[450px] max-xl:w-full h-52 max-sm:h-60 bg-gray2 flex flex-col justify-between rounded-xl"
+        class="w-[550px] px-6 py-4  bg-gradient-to-r from-blue-600 to-blue-400 max-2xl:w-[450px] max-xl:w-full h-52 max-sm:h-40 bg-gray2 flex flex-col justify-between rounded-xl"
     >
         <div class="w-full h-full flex flex-col justify-between">
             <img :src="lesson_icon" alt="" class="w-12" />

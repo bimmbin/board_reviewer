@@ -42,7 +42,7 @@ const show_nav = ref(false);
         >
             <!-- Header -->
             <div
-                class="flex justify-between bg-blue-500 items-center bg-gray1 absolute z-10 top-0 left-0 w-screen py-2 px-5 text-black md:hidden"
+                class="flex justify-between bg-blue-500 items-center bg-gray1 absolute z-10 top-0 left-0 w-full py-2 px-5 text-black md:hidden"
             >
                 <div>
                     <img :src="chcc_logo" alt="" class="h-12" />
