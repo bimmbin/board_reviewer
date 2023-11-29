@@ -19,4 +19,8 @@ class Choice extends Model
   {
     return $this->belongsTo(Lesson::class);
   }
+  public function correct_answer()
+  {
+    return $this->hasOne(CorrectAnswer::class);
+  }
 }

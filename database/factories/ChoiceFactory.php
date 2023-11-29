@@ -18,12 +18,8 @@ class ChoiceFactory extends Factory
   public function definition(): array
   {
     return [
-
- 
-    
       'lesson_id' => Lesson::factory(),
-      'choice_index' => chr(ord('a') + rand(0, 3)),
-      'choice_description' => fake()->catchPhrase(). ' ' . fake()->catchPhrase(),
+      'choice_description' => fake()->catchPhrase() . ' ' . fake()->catchPhrase(),
     ];
   }
 }

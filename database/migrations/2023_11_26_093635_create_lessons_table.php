@@ -17,7 +17,6 @@ return new class extends Migration
             ->constrained('categories')
             ->onDelete('cascade');
             $table->text('lesson_question');
-            $table->string('correct_index');
             $table->timestamps();
         });
     }

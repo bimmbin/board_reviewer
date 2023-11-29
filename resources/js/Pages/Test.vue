@@ -23,7 +23,7 @@ const { lesson, current_page, lessons_count, category_id } = defineProps({
         <div class="w-[1200px] py-10 my-10">
             <span class="px-3 py-3 bg-blue-200 rounded-md text-blue-500">{{ current_page }}/{{ lessons_count }}</span>
             <div class="flex flex-col items-center gap-10 mt-10">
-                <p class="text-center text-xl">
+                <p class="text-center text-xl max-md:text-sm">
                     {{ lesson.lesson_question }}
                 </p>
                 <div

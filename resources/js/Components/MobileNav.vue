@@ -8,7 +8,7 @@ const close_img = ref("/img/close.svg");
 
 const emit = defineEmits(["close_emit"]);
 
-const logo = ref("/img/logo.png");
+const chcc_logo = ref("/img/chcc_logo.png");
 </script>
 
 <template>
@@ -16,21 +16,22 @@ const logo = ref("/img/logo.png");
         class="w-screen fixed top-0 left-0 h-screen bg-black bg-opacity-80 z-10 flex select-none"
     >
         <div
-            class="flex-1 h-full bg-gray2 px-7 max-sm:px-5 py-5 z-20 flex flex-col gap-20"
+            class="flex-1 h-full bg-blue-500 px-7 max-sm:px-5 py-5 z-20 flex flex-col gap-20"
         >
             <!-- Logo -->
             <Link class="flex items-center gap-2 px-3">
-                <img :src="logo" alt="" class="h-7 max-md:h-6" />
-                <h1 class="text-3xl max-md:text-2xl font-semibold">Vinrecs</h1>
+                <img :src="chcc_logo" alt="" class="h-7 max-md:h-6" />
+                <h1 class="text-3xl max-md:text-2xl font-semibold text-white">ILE</h1>
             </Link>
 
             <!-- navigation -->
             <div class="h-full flex flex-col gap-10 sticky left-0 top-0">
                 <DashNav
-                    image="chcc_logo"
-                    nav_name="Create"
-                    :href="route('lessons.index')"
+                    image="project"
+                    nav_name="Lessons"
+                    :href="route('category.index')"
                     @click="$emit('close_emit')"
+                    :active="$page.url.startsWith('/student/lessons')"
                 />
             </div>
         </div>

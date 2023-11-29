@@ -4,11 +4,13 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Category;
+use App\Models\Major;
 use App\Models\Choice;
 use App\Models\Lesson;
-use App\Models\Major;
+use App\Models\Category;
+use App\Models\CorrectAnswer;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,10 +22,16 @@ class DatabaseSeeder extends Seeder
 
     Major::factory(1)
       ->has(
-        Category::factory()->count(5)
+        Category::factory()->count(10)
           ->has(
-            Lesson::factory()->count(38)
-              ->has(Choice::factory()->count(4), 'choices'),
+            Lesson::factory()->count(40)
+              ->has(
+                Choice::factory()->count(4),
+                'choices'
+              )->has(
+                CorrectAnswer::factory()->count(1)->sequence(fn (Sequence $sequence) => ['choice_id' => ($sequence->index+1)*4]),
+                'correct_answer'
+              ),
             'lessons'
           ),
         'categories'

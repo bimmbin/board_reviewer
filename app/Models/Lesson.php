@@ -24,4 +24,8 @@ class Lesson extends Model
   {
     return $this->hasMany(Choice::class);
   }
+  public function correct_answer()
+  {
+    return $this->hasOne(CorrectAnswer::class);
+  }
 }

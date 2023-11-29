@@ -6,7 +6,6 @@ export default {
 };
 </script>
 
-
 <script setup>
 import { Link } from "@inertiajs/vue3";
 
@@ -19,42 +18,56 @@ const { lesson, current_page, lessons_count, category_id } = defineProps({
 </script>
 
 <template>
-    <div class="w-full h-screen flex justify-center">
+    <div class="w-full h-screen flex justify-center max-md:mt-6">
         <div class="w-[1200px] py-10 my-10">
-            <span class="px-3 py-3 bg-blue-200 rounded-md text-blue-500">{{ current_page }}/{{ lessons_count }}</span>
+            <span class="px-3 py-3 bg-blue-200 rounded-md text-blue-500 max-md:text-sm max-md:py-2 max-md:px-2"
+                >{{ current_page }}/{{ lessons_count }}</span
+            >
             <div class="flex flex-col items-center gap-10 mt-10">
-                <p class="text-center text-xl">
+                <p class="text-center text-xl  max-md:text-base">
                     {{ lesson.lesson_question }}
                 </p>
-                <div
-                    v-for="choice in lesson.choices"
-                    class="flex gap-2 items-center"
-                >
-                    <input
-                        type="radio"
-                        :id="choice.id"
-                        name="fav_language"
-                        :value="choice.choice_index"
-                        class="cursor-pointer"
-                    />
-                    <label :for="choice.id" class="cursor-pointer"
-                        > <span class="capitalize">{{ choice.choice_index }}.</span>
-                        {{ choice.choice_description }}</label
-                    ><br />
-                </div>
+
+                <span>Answer: {{ lesson.correct_answer.choice.choice_description }}</span>
 
                 <div class="w-full flex justify-between">
+                  
+                  <div v-if="current_page == 1">
+                    <Link
+                        :href="
+                            route('category.index')
+                        "
+                        class="py-2 px-5 border-2 border-blue-500 rounded-md text-blue-500 font-semibold"
+                    >
+                        Back to lessons
+                    </Link>
+                  </div>
+                  <div v-else>
                     <Link
                         :href="
                             route('test.index', [
                                 category_id,
-                                parseInt(current_page - 1) - 1,
+                                parseInt(current_page) - 1,
                             ])
                         "
                         class="py-2 px-5 border-2 border-blue-500 rounded-md text-blue-500 font-semibold"
                     >
                         Back
                     </Link>
+                  </div>
+                   
+                  <div v-if="current_page == lessons_count">
+                    
+                    <Link
+                        :href="
+                            route('category.index')
+                        "
+                        class="py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
+                    >
+                        Finish
+                    </Link>
+                  </div>
+                  <div v-else>
                     <Link
                         :href="
                             route('test.index', [
@@ -66,6 +79,7 @@ const { lesson, current_page, lessons_count, category_id } = defineProps({
                     >
                         Next
                     </Link>
+                  </div>
                 </div>
             </div>
         </div>

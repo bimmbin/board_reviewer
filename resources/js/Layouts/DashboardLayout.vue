@@ -42,16 +42,16 @@ const show_nav = ref(false);
         >
             <!-- Header -->
             <div
-                class="flex justify-between items-center bg-gray1 absolute z-10 top-0 left-0 w-screen py-5 px-5 text-black md:hidden"
+                class="flex justify-between bg-blue-500 items-center bg-gray1 absolute z-10 top-0 left-0 w-screen py-2 px-5 text-black md:hidden"
             >
                 <div>
-                    <img :src="chcc_logo" alt="" class="h-8" />
+                    <img :src="chcc_logo" alt="" class="h-12" />
                 </div>
                 <div
                     class="lg:hidden cursor-pointer select-none"
                     @click="show_nav = !show_nav"
                 >
-                    <img :src="chcc_logo" alt="" class="h-6" />
+                    <img :src="burger" alt="" class="h-6" />
                 </div>
             </div>
             <!-- Responsive Nav -->
