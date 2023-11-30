@@ -3,10 +3,12 @@ import { Link } from "@inertiajs/vue3";
 import { ref, watch } from "vue";
 import DashNav from "@/Components/DashNav.vue";
 import MobileNav from "@/Components/MobileNav.vue";
+import UserInfo from "@/Components/UserInfo.vue";
 
 import "typeface-poppins";
 const chcc_logo = ref("/img/chcc_logo.png");
 const burger = ref("/img/burger.svg");
+const logout = ref("/img/logout.svg");
 
 const show_nav = ref(false);
 </script>
@@ -21,6 +23,8 @@ const show_nav = ref(false);
             <div class="flex justify-center gap-2 px-3 py-5">
                 <img :src="chcc_logo" alt="" class="h-32 max-md:h-6" />
             </div>
+            <UserInfo></UserInfo>
+            <!-- <UserInfo :user="Auth::user()"/> -->
             <div class="mt-20">
                 <DashNav
                     image="project"
@@ -36,9 +40,19 @@ const show_nav = ref(false);
                     :active="$page.url.startsWith('/student/lessons')"
                 />
             </div>
+
+            <Link
+                :href="route('logout')"
+                method="post"
+                as="button"
+                class="w-[80%] m-auto text-blue-500 bg-white border border-main rounded-md py-3 flex justify-center items-center gap-5 hover:bg-blue-200 hover:text-blue-800"
+            >
+                Logout
+                <img :src="logout" class="h-3">
+            </Link>
         </div>
         <div
-            class="w-[1180px] min-h-screen mx-auto max-2xl:w-[1000px] max-xl:w-[1000px] max-md:w-screen max-md:px-5 py-5 max-sm:py-0 text-black"
+            class="w-[1180px] min-h-screen mx-auto max-2xl:w-[1000px] max-xl:w-[1000px] max-md:w-screen max-md:px-5 py-5 max-sm:py-0 text-black max-xl:px-10"
         >
             <!-- Header -->
             <div

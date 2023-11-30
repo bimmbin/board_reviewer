@@ -5,6 +5,7 @@ import { Link } from "@inertiajs/vue3";
 import DashNav from "@/Components/DashNav.vue";
 
 const close_img = ref("/img/close.svg");
+const logout = ref("/img/logout.svg");
 
 const emit = defineEmits(["close_emit"]);
 
@@ -21,7 +22,9 @@ const chcc_logo = ref("/img/chcc_logo.png");
             <!-- Logo -->
             <Link class="flex items-center gap-2 px-3">
                 <img :src="chcc_logo" alt="" class="h-7 max-md:h-6" />
-                <h1 class="text-3xl max-md:text-2xl font-semibold text-white">ILE</h1>
+                <h1 class="text-3xl max-md:text-2xl font-semibold text-white">
+                    ILE
+                </h1>
             </Link>
 
             <!-- navigation -->
@@ -33,6 +36,16 @@ const chcc_logo = ref("/img/chcc_logo.png");
                     @click="$emit('close_emit')"
                     :active="$page.url.startsWith('/student/lessons')"
                 />
+                <Link
+                    v-if="$page.props.auth.user"
+                    :href="route('logout')"
+                    method="post"
+                    as="button"
+                    class="text-blue-500 bg-white border border-main rounded-md py-3 flex justify-center items-center gap-5 hover:bg-blue-200 hover:text-blue-800"
+                >
+                    Logout
+                    <img :src="logout" class="h-3" />
+                </Link>
             </div>
         </div>
         <div

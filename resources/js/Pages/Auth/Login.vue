@@ -17,7 +17,7 @@ defineProps({
 });
 
 const form = useForm({
-    email: "",
+    username: "",
     password: "",
     remember: false,
 });
@@ -31,34 +31,30 @@ const submit = () => {
 const chcc_logo = ref("/img/chcc_logo.png");
 const login_icon = ref("/img/login_icon.png");
 const chcc_bg = ref("/img/chcc_bg.png");
-
 </script>
 
 <template>
     <div class="flex absolute w-full top-0 left-0">
-        <div
-            class="relative bg-chcc_bg w-full h-screen max-xl:hidden"
-           
-        >
-        <div class="absolute top-0 left-0 w-full h-full bg-blue-600 bg-opacity-90 text-white bg-cover hidden xl:flex flex-col items-center px-[62px] pt-[73px] gap-[20px] 2xl:justify-center 2xl:pt-0">
-          <img
-                class="xl:w-[350px]"
-                :src="chcc_logo"
-                alt="CHCC-Logo"
-            />
-            
+        <div class="relative bg-chcc_bg w-full h-screen max-xl:hidden">
+            <div
+                class="absolute top-0 left-0 w-full h-full bg-blue-600 bg-opacity-90 text-white bg-cover hidden xl:flex flex-col items-center px-[62px] pt-[73px] gap-[20px] 2xl:justify-center 2xl:pt-0"
+            >
+                <img class="xl:w-[350px]" :src="chcc_logo" alt="CHCC-Logo" />
 
-            <h1 class="font-semibold text-[25px]">
-              Interactive Licensure Exam Reviewer
-            </h1>
-            
-            <p class="text-[17px] text-center">
-              Get ready to ace your licensure exams with our Interactive Licensure Exam Reviewer! Specifically designed for the School of Teacher Education at Concepcion Holy Cross College, Inc., this dynamic system offers an engaging platform to empower aspiring educators. Dive into targeted content, explore user-friendly features, and supercharge your exam preparation for success in the world of teaching
-            </p>
-        </div>
+                <h1 class="font-semibold text-[25px]">
+                    Interactive Licensure Exam Reviewer
+                </h1>
 
-            
-
+                <p class="text-[17px] text-center">
+                    Get ready to ace your licensure exams with our Interactive
+                    Licensure Exam Reviewer! Specifically designed for the
+                    School of Teacher Education at Concepcion Holy Cross
+                    College, Inc., this dynamic system offers an engaging
+                    platform to empower aspiring educators. Dive into targeted
+                    content, explore user-friendly features, and supercharge
+                    your exam preparation for success in the world of teaching
+                </p>
+            </div>
         </div>
 
         <div
@@ -72,12 +68,7 @@ const chcc_bg = ref("/img/chcc_bg.png");
                 <div
                     class="flex justify-center mt-[60px] xl:mt-[1px] xl:w-[352px] xl:justify-start"
                 >
-                    
-                    <img
-                        class=" w-14"
-                        :src="login_icon"
-                        alt="Flash-Vector"
-                    />
+                    <img class="w-14" :src="login_icon" alt="Flash-Vector" />
                 </div>
 
                 <div class="sm:w-[352px] sm:text-left">
@@ -95,19 +86,19 @@ const chcc_bg = ref("/img/chcc_bg.png");
 
                 <form @submit.prevent="submit" class="mt-3">
                     <div>
-                        <InputLabel for="email" value="Email" />
+                        <InputLabel for="username" value="Username" />
 
                         <TextInput
-                            id="email"
-                            type="email"
+                            id="username"
+                            type="text"
                             class="mt-1 block w-full"
-                            v-model="form.email"
+                            v-model="form.username"
                             required
                             autofocus
                             autocomplete="username"
                         />
 
-                        <InputError class="mt-2" :message="form.errors.email" />
+                        <InputError class="mt-2" :message="form.errors.username" />
                     </div>
 
                     <div class="mt-4">
@@ -128,19 +119,17 @@ const chcc_bg = ref("/img/chcc_bg.png");
                         />
                     </div>
 
-
                     <div class="w-full">
-
-                      <Link :href="route('category.index')" class="mt-3 w-full inline-flex justify-center items-center px-4 py-3 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-400 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                        <!-- <Link :href="route('category.index')" class="mt-3 w-full inline-flex justify-center items-center px-4 py-3 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-400 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                         Login
-                      </Link>
-                        <!-- <PrimaryButton
+                      </Link> -->
+                        <PrimaryButton
                             class="w-full mt-3"
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
                             Log in
-                        </PrimaryButton> -->
+                        </PrimaryButton>
                     </div>
                 </form>
             </div>

@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Student\CategoryController;
-use App\Http\Controllers\Student\LessonsController;
-use App\Http\Controllers\TestController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Student\LessonsController;
+use App\Http\Controllers\Student\CategoryController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,13 +22,22 @@ use Inertia\Inertia;
 
 
 
-Route::get('/', function () {
-  return Inertia::render('Auth/Login');
+// Route::get('/', function () {
+//   return Inertia::render('Auth/Login');
+// });
+Route::get('/', [AuthenticatedSessionController::class, 'create']);
+
+Route::get('/error/unauthorized', function () {
+  return Inertia::render('Unauthorized');
+})->name('unauthorized');
+
+
+Route::middleware(['auth', 'student'])->group(function () {
+  Route::get('/student/lessons', [CategoryController::class, 'index'])->name('category.index');
+
+  Route::get('/student/lessons/{id}/page/{page}', [TestController::class, 'index'])->name('test.index');
 });
 
-Route::get('/student/lessons/{id}/page/{page}', [TestController::class, 'index'])->name('test.index');
-
-Route::get('/student/lessons', [CategoryController::class, 'index'])->name('category.index');
 
 // Route::get('/student/lessons', [LessonsController::class, 'index'])->name('lessons.index');
 

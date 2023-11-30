@@ -16,9 +16,9 @@ const lesson_icon = ref("/img/lesson_icon.svg");
         class="w-[550px] px-6 py-4  bg-gradient-to-r from-blue-600 to-blue-400 max-2xl:w-[450px] max-xl:w-full h-52 max-sm:h-40 bg-gray2 flex flex-col justify-between rounded-xl"
     >
         <div class="w-full h-full flex flex-col justify-between">
-            <img :src="lesson_icon" alt="" class="w-12" />
+            <img :src="lesson_icon" alt="" class="w-12 max-md:w-10" />
             <div class="flex items-center">
-                <h2 class="text-white text-2xl font-light">
+                <h2 class="text-white text-2xl font-light max-md:text-xl">
                     {{ category.category_name }}
                 </h2>
             </div>
