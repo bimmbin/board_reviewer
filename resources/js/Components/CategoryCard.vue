@@ -39,7 +39,7 @@ const lesson_icon = ref("/img/lesson_icon.svg");
         <div class="w-full h-full flex flex-col justify-between">
             <div class="flex justify-between items-center">
                 <img :src="lesson_icon" alt="" class="w-12 max-md:w-10" />
-                <span v-if="!props.category.page_views.length == 0" class="bg-white px-3 py-2 rounded-md text-blue-500">{{ props.category.page_views.length }}/{{ props.category.lessons.length }}</span>
+                <span v-if="!props.category.page_views.length == 0" class="bg-white px-3 py-2 max-md:px-2 max-md:py-1 rounded-md text-blue-500 max-md:text-sm">{{ props.category.page_views.length }}/{{ props.category.lessons.length }}</span>
             </div>
             <div class="flex items-center">
                 <h2 class="text-white text-2xl font-light max-md:text-xl">

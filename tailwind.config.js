@@ -20,6 +20,9 @@ export default {
             colors: {
                 hover_bg: "#5F9BFF",
             },
+            backgroundImage: {
+              'chcc_bg': "url('/img/chcc_bg.png')",
+            }
         },
     },
 
