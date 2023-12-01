@@ -24,4 +24,8 @@ class Category extends Model
   {
     return $this->hasMany(Lesson::class);
   }
+  public function page_views()
+  {
+    return $this->hasMany(PageViews::class);
+  }
 }

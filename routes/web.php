@@ -35,7 +35,7 @@ Route::get('/error/unauthorized', function () {
 Route::middleware(['auth', 'student'])->group(function () {
   Route::get('/student/lessons', [CategoryController::class, 'index'])->name('category.index');
 
-  Route::get('/student/lessons/{id}/page/{page}', [TestController::class, 'index'])->name('test.index');
+  Route::get('/student/lessons/{id}/page/{page}', [LessonsController::class, 'index'])->name('test.index');
 });
 
 

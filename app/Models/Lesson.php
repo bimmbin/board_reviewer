@@ -28,4 +28,9 @@ class Lesson extends Model
   {
     return $this->hasOne(CorrectAnswer::class);
   }
+
+  public function page_views()
+  {
+    return $this->hasMany(PageViews::class);
+  }
 }

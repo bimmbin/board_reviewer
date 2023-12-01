@@ -26,12 +26,12 @@ const show_nav = ref(false);
             <UserInfo></UserInfo>
             <!-- <UserInfo :user="Auth::user()"/> -->
             <div class="mt-20">
-                <DashNav
+                <!-- <DashNav
                     image="project"
                     nav_name="Create"
                     :href="route('category.index')"
                     @click="$emit('close_emit')"
-                />
+                /> -->
                 <DashNav
                     image="project"
                     nav_name="Lessons"
@@ -45,7 +45,7 @@ const show_nav = ref(false);
                 :href="route('logout')"
                 method="post"
                 as="button"
-                class="w-[80%] m-auto text-blue-500 bg-white border border-main rounded-md py-3 flex justify-center items-center gap-5 hover:bg-blue-200 hover:text-blue-800"
+                class="w-[80%] m-auto text-blue-500 bg-white border rounded-md py-3 flex justify-center items-center gap-5  hover:text-blue-800 hover:border-blue-600"
             >
                 Logout
                 <img :src="logout" class="h-3">
