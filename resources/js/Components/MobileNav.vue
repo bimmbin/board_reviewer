@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { Link } from "@inertiajs/vue3";
 
 import DashNav from "@/Components/DashNav.vue";
+import DashDrop from "@/Components/DashDrop.vue";
 
 const close_img = ref("/img/close.svg");
 const logout = ref("/img/logout.svg");
@@ -28,7 +29,7 @@ const chcc_logo = ref("/img/chcc_logo.png");
             </Link>
 
             <!-- navigation -->
-            <div class="h-full flex flex-col gap-10 sticky left-0 top-0">
+            <div class="flex flex-col sticky left-0 top-0">
                 <DashNav
                     image="project"
                     nav_name="Lessons"
@@ -36,7 +37,26 @@ const chcc_logo = ref("/img/chcc_logo.png");
                     @click="$emit('close_emit')"
                     :active="$page.url.startsWith('/student/lessons')"
                 />
-                <Link
+                <DashNav
+                    image="project"
+                    nav_name="Exam"
+                    href="sdfasdf"
+                    @click="$emit('close_emit')"
+                    :active="$page.url.startsWith('/sdfsdf')"
+                />
+                <DashDrop image="project" nav_name="Recents">
+                    <DashNav
+                        image="project"
+                        nav_name="Lessons"
+                        :href="route('category.index')"
+                        @click="$emit('close_emit')"
+                        :active="$page.url.startsWith('/student/lessons')"
+                        :sub_nav="true"
+                    />
+                </DashDrop>
+                
+            </div>
+            <Link
                     v-if="$page.props.auth.user"
                     :href="route('logout')"
                     method="post"
@@ -46,7 +66,6 @@ const chcc_logo = ref("/img/chcc_logo.png");
                     Logout
                     <img :src="logout" class="h-3" />
                 </Link>
-            </div>
         </div>
         <div
             class="w-[30%] h-full cursor-pointer"

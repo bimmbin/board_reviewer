@@ -18,20 +18,26 @@ const props = defineProps({
     route_name: {
         type: String,
     },
+    sub_nav: {
+        type: Boolean,
+    },
 });
 const classes = computed(() =>
     props.active
-        ? "active:bg-blue-300 hover:bg-hover_bg bg-hover_bg text-white flex items-center gap-3 hover:bg-gray2 px-10 py-3 bg-gray3 bg-opacity-500 border-l-4 border-white"
-        : "active:bg-blue-300 hover:bg-hover_bg text-white flex items-center gap-3 hover:bg-gray2 px-10 py-3"
+        ? "active:bg-blue-300 hover:bg-hover_bg bg-hover_bg flex gap-2 text-white hover:bg-gray2 px-10 py-3 bg-gray3 bg-opacity-500 border-l-4 border-white select-none"
+        : "active:bg-blue-300 hover:bg-hover_bg text-white flex gap-2 hover:bg-gray2 px-10 py-3 select-none"
 );
 const img_path = ref("/img/");
 </script>
 
 <template>
     <Link :href="href" :class="classes">
-        <img :src="img_path + image + '.svg'" class="w-4 h-4" />
-        <span class="text-lg whitespace-nowrap max-sm:text-base">{{
-            nav_name
-        }}</span>
+        <div v-if="sub_nav" class="w-5"></div>
+        <div class="flex items-center gap-3">
+            <img :src="img_path + image + '.svg'" class="w-4 h-4" />
+            <span class="text-lg whitespace-nowrap max-sm:text-base">{{
+                nav_name
+            }}</span>
+        </div>
     </Link>
 </template>

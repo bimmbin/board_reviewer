@@ -4,6 +4,7 @@ import { ref, watch } from "vue";
 import DashNav from "@/Components/DashNav.vue";
 import MobileNav from "@/Components/MobileNav.vue";
 import UserInfo from "@/Components/UserInfo.vue";
+import DashDrop from "@/Components/DashDrop.vue";
 
 import "typeface-poppins";
 const chcc_logo = ref("/img/chcc_logo.png");
@@ -39,16 +40,33 @@ const show_nav = ref(false);
                     @click="$emit('close_emit')"
                     :active="$page.url.startsWith('/student/lessons')"
                 />
+                <DashNav
+                    image="project"
+                    nav_name="Exam"
+                    href="sdfasdf"
+                    @click="$emit('close_emit')"
+                    :active="$page.url.startsWith('/sdfsdf')"
+                />
+                <DashDrop image="project" nav_name="Recents">
+                    <DashNav
+                        image="project"
+                        nav_name="Lessons"
+                        :href="route('category.index')"
+                        @click="$emit('close_emit')"
+                        :active="$page.url.startsWith('/student/lessons')"
+                        :sub_nav="true"
+                    />
+                </DashDrop>
             </div>
 
             <Link
                 :href="route('logout')"
                 method="post"
                 as="button"
-                class="w-[80%] m-auto text-blue-500 bg-white border rounded-md py-3 flex justify-center items-center gap-5  hover:text-blue-800 hover:border-blue-600"
+                class="w-[80%] m-auto text-blue-500 bg-white border rounded-md py-3 flex justify-center items-center gap-5 hover:text-blue-800 hover:border-blue-600"
             >
                 Logout
-                <img :src="logout" class="h-3">
+                <img :src="logout" class="h-3" />
             </Link>
         </div>
         <div
