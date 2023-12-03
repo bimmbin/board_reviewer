@@ -28,6 +28,7 @@ class LessonsController extends Controller
     ]);
 
     if (!$page_view->exists) {
+      $category->touch();
       $page_view->save();
     }
 

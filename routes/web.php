@@ -3,10 +3,9 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
-use App\Http\Controllers\TestController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Student\LessonsController;
 use App\Http\Controllers\Student\CategoryController;
+use App\Http\Controllers\Student\RecentLessonsController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
@@ -36,6 +35,9 @@ Route::middleware(['auth', 'student'])->group(function () {
   Route::get('/student/lessons', [CategoryController::class, 'index'])->name('category.index');
 
   Route::get('/student/lessons/{id}/page/{page}', [LessonsController::class, 'index'])->name('test.index');
+
+  Route::get('/student/recents/lessons', [RecentLessonsController::class, 'index'])->name('recent.lesson.index');
+
 });
 
 

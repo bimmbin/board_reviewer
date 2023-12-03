@@ -9,7 +9,7 @@ const props = defineProps({
     },
 });
 let page_number = ref();
-if (props.category.page_views.length == 0) {
+if ((props.category.page_views.length == 0)||(props.category.page_views.length == props.category.lessons.length)) {
   page_number = 1;
 } else {
   page_number = props.category.page_views.length + 1;

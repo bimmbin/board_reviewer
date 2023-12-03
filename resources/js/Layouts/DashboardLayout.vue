@@ -51,9 +51,9 @@ const show_nav = ref(false);
                     <DashNav
                         image="project"
                         nav_name="Lessons"
-                        :href="route('category.index')"
+                        :href="route('recent.lesson.index')"
                         @click="$emit('close_emit')"
-                        :active="$page.url.startsWith('/student/lessons')"
+                        :active="$page.component === 'Dashboard/WebDev/WebDev'"
                         :sub_nav="true"
                     />
                 </DashDrop>
