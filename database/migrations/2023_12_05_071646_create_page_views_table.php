@@ -13,9 +13,12 @@ return new class extends Migration
   {
     Schema::create('page_views', function (Blueprint $table) {
       $table->id();
+      $table->foreignId('recent_lesson_id')
+        ->constrained('recent_lessons')
+        ->onDelete('cascade');
       $table->foreignId('category_id')
-      ->constrained('categories')
-      ->onDelete('cascade');
+        ->constrained('categories')
+        ->onDelete('cascade');
       $table->foreignId('lesson_id')
         ->constrained('lessons')
         ->onDelete('cascade');

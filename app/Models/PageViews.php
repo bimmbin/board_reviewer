@@ -11,6 +11,7 @@ class PageViews extends Model
 
     protected $fillable = [
       'category_id',
+      'recent_lesson_id',
       'lesson_id',
       'user_id',
       'page_number'
@@ -27,5 +28,9 @@ class PageViews extends Model
     public function category()
     {
       return $this->belongsTo(Category::class);
+    }
+    public function recent_lesson()
+    {
+      return $this->belongsTo(RecentLesson::class);
     }
 }

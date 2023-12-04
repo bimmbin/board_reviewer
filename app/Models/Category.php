@@ -28,4 +28,8 @@ class Category extends Model
   {
     return $this->hasMany(PageViews::class);
   }
+  public function recent_lesson()
+  {
+    return $this->hasOne(RecentLesson::class);
+  }
 }

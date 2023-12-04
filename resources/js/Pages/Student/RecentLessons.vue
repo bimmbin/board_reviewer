@@ -10,8 +10,8 @@ export default {
 import { Link } from "@inertiajs/vue3";
 import { format } from "date-fns";
 
-const { categories } = defineProps({
-    categories: Object,
+const { recent_lessons } = defineProps({
+    recent_lessons: Object,
 });
 
 const formatDate = (dateString) => {
@@ -63,28 +63,28 @@ const formatTime = (dateString) => {
 
             <tbody class="text-left">
                 <tr
-                    v-for="(category, index) in categories"
+                    v-for="(recent_lesson, index) in recent_lessons"
                     :key="index"
                     class="border border-blue-300 text-sm md:text-base lg:text-lg font-regular"
                 >
-                    <td class="pl-5 py-3">{{ category.category_name }}</td>
+                    <td class="pl-5 py-3">{{ recent_lesson.category.category_name }}</td>
 
-                    <td>{{ formatDate(category.page_views[0].created_at) }}</td>
+                    <td>{{ formatDate(recent_lesson.page_views[0].created_at) }}</td>
                     <td>
-                        {{ formatTime(category.page_views[0].created_at) }}
+                        {{ formatTime(recent_lesson.page_views[0].created_at) }}
                     </td>
                     <td>
-                        {{ category.page_views.length }}/{{
-                            category.lessons.length
+                        {{ recent_lesson.page_views.length }}/{{
+                            recent_lesson.category.lessons.length
                         }}
                     </td>
                     <td>
-                      <span v-if="category.page_views.length == category.lessons.length" class="px-3 py-2 bg-green-300 text-green-800 rounded-md text-sm max-md:text-xs max-md:py-1">Finished</span>
+                      <span v-if="recent_lesson.page_views.length == recent_lesson.category.lessons.length" class="px-3 py-2 bg-green-300 text-green-800 rounded-md text-sm max-md:text-xs max-md:py-1">Finished</span>
                       <span v-else class="px-3 py-2 bg-yellow-300 text-yellow-800 rounded-md text-sm max-md:text-xs max-md:py-1">Unfinished</span>
                     </td>
                     <td>
-                      <Link v-if="category.page_views.length == category.lessons.length" :href="route('test.index', [category.id,1])" class="underline text-base">Retake</Link>
-                      <Link v-else :href="route('test.index', [category.id,category.page_views.length+1])" class="underline text-base">Continue</Link>
+                      <Link v-if="recent_lesson.page_views.length == recent_lesson.category.lessons.length" :href="route('test.index', [recent_lesson.category.id,1])" class="underline text-base">Retake</Link>
+                      <Link v-else :href="route('test.index', [recent_lesson.category.id,recent_lesson.page_views.length+1])" class="underline text-base">Continue</Link>
                     </td>
                 </tr>
             </tbody>
