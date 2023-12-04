@@ -1,6 +1,7 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { Collapse } from "vue-collapsed";
+import { usePage } from "@inertiajs/vue3";
 
 defineProps({
     image: {
@@ -11,10 +12,14 @@ defineProps({
     },
 });
 
+const page = usePage();
+
 const img_path = ref("/img/");
 const drop = ref("/img/drop.svg");
 
-const show_details = ref(false);
+let show_details = ref(false);
+
+
 </script>
 
 <template>
@@ -41,7 +46,7 @@ const show_details = ref(false);
     <!-- collapse details -->
     <Collapse
         :when="show_details"
-        class="w-full overflow-hidden flex flex-col gap-2 "
+        class="w-full overflow-hidden flex flex-col gap-2"
     >
         <slot></slot>
     </Collapse>

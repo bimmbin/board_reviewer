@@ -58,13 +58,14 @@ const chcc_bg = ref("/img/chcc_bg.png");
         </div>
 
         <div
-            class="bg-white w-full h-screen relative items-center flex flex-col xl:justify-center"
+            class="bg-white w-full h-screen relative items-center flex flex-col xl:justify-center "
         >
+            <div class="w-full h-20 bg-blue-500 xl:hidden"></div>
             <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
                 {{ status }}
             </div>
 
-            <div class="">
+            <div class="pb-10">
                 <div
                     class="flex justify-center mt-[60px] xl:mt-[1px] xl:w-[352px] xl:justify-start"
                 >
@@ -84,7 +85,7 @@ const chcc_bg = ref("/img/chcc_bg.png");
                     </p>
                 </div>
 
-                <form @submit.prevent="submit" class="mt-3">
+                <form @submit.prevent="submit" class="mt-10">
                     <div>
                         <InputLabel for="username" value="Username" />
 
@@ -98,7 +99,10 @@ const chcc_bg = ref("/img/chcc_bg.png");
                             autocomplete="username"
                         />
 
-                        <InputError class="mt-2" :message="form.errors.username" />
+                        <InputError
+                            class="mt-2"
+                            :message="form.errors.username"
+                        />
                     </div>
 
                     <div class="mt-4">
@@ -132,6 +136,21 @@ const chcc_bg = ref("/img/chcc_bg.png");
                         </PrimaryButton>
                     </div>
                 </form>
+            </div>
+            <div class="w-full h-full bg-blue-500 xl:hidden">
+                <div
+                    class="w-full h-full flex flex-col items-center gap-10 py-10 text-white"
+                >
+                    <img
+                        class="xl:w-[350px]"
+                        :src="chcc_logo"
+                        alt="CHCC-Logo"
+                    />
+
+                    <h1 class="font-semibold text-[25px] max-md:text-xl">
+                        Interactive Licensure Exam Reviewer
+                    </h1>
+                </div>
             </div>
         </div>
     </div>

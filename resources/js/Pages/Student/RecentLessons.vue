@@ -83,8 +83,8 @@ const formatTime = (dateString) => {
                       <span v-else class="px-3 py-2 bg-yellow-300 text-yellow-800 rounded-md text-sm max-md:text-xs max-md:py-1">Unfinished</span>
                     </td>
                     <td>
-                      <Link v-if="recent_lesson.page_views.length == recent_lesson.category.lessons.length" :href="route('test.index', [recent_lesson.category.id,1])" class="underline text-base">Retake</Link>
-                      <Link v-else :href="route('test.index', [recent_lesson.category.id,recent_lesson.page_views.length+1])" class="underline text-base">Continue</Link>
+                      <Link v-if="recent_lesson.page_views.length == recent_lesson.category.lessons.length" :href="route('test.index', [recent_lesson.category.id,1])" class="underline text-base max-md:text-sm">Retake</Link>
+                      <Link v-else :href="route('test.index', [recent_lesson.category.id,recent_lesson.page_views.length+1])" class="underline text-base max-md:text-sm">Continue</Link>
                     </td>
                 </tr>
             </tbody>

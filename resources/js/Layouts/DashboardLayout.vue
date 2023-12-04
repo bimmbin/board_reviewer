@@ -53,7 +53,7 @@ const show_nav = ref(false);
                         nav_name="Lessons"
                         :href="route('recent.lesson.index')"
                         @click="$emit('close_emit')"
-                        :active="$page.component === 'Dashboard/WebDev/WebDev'"
+                        :active="$page.url.startsWith('/student/recents/lessons')"
                         :sub_nav="true"
                     />
                 </DashDrop>
