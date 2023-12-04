@@ -7,6 +7,7 @@ export default {
 </script>
 
 <script setup>
+import { Link } from "@inertiajs/vue3";
 import { format } from "date-fns";
 
 const { categories } = defineProps({
@@ -81,7 +82,10 @@ const formatTime = (dateString) => {
                       <span v-if="category.page_views.length == category.lessons.length" class="px-3 py-2 bg-green-300 text-green-800 rounded-md text-sm max-md:text-xs max-md:py-1">Finished</span>
                       <span v-else class="px-3 py-2 bg-yellow-300 text-yellow-800 rounded-md text-sm max-md:text-xs max-md:py-1">Unfinished</span>
                     </td>
-                    <td>asdas</td>
+                    <td>
+                      <Link v-if="category.page_views.length == category.lessons.length" :href="route('test.index', [category.id,1])" class="underline text-base">Retake</Link>
+                      <Link v-else :href="route('test.index', [category.id,category.page_views.length+1])" class="underline text-base">Continue</Link>
+                    </td>
                 </tr>
             </tbody>
         </table>
