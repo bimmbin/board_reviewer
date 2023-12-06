@@ -18,7 +18,7 @@ class CategoryFactory extends Factory
   public function definition(): array
   {
     return [
-      'major_id' => Major::factory(),
+      'major_id' => '1',
       'category_name' => fake()->catchPhrase(),
     ];
   }

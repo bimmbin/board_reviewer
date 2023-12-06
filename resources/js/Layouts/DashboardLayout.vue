@@ -25,14 +25,24 @@ const show_nav = ref(false);
                 <img :src="chcc_logo" alt="" class="h-32 max-md:h-6" />
             </div>
             <UserInfo></UserInfo>
-            <!-- <UserInfo :user="Auth::user()"/> -->
-            <div class="mt-20">
-                <!-- <DashNav
+
+            <div
+                v-if="$page.props.auth.user.user_role == 'admin'"
+                class="mt-20"
+            >
+                <DashNav
                     image="project"
-                    nav_name="Create"
-                    :href="route('category.index')"
+                    nav_name="Majors"
+                    :href="route('majors.index')"
                     @click="$emit('close_emit')"
-                /> -->
+                    :active="$page.url.startsWith('/admin/majors')"
+                />
+            </div>
+            <!-- Student Navigation -->
+            <div
+                v-if="$page.props.auth.user.user_role == 'student'"
+                class="mt-20"
+            >
                 <DashNav
                     image="project"
                     nav_name="Lessons"
@@ -53,7 +63,9 @@ const show_nav = ref(false);
                         nav_name="Lessons"
                         :href="route('recent.lesson.index')"
                         @click="$emit('close_emit')"
-                        :active="$page.url.startsWith('/student/recents/lessons')"
+                        :active="
+                            $page.url.startsWith('/student/recents/lessons')
+                        "
                         :sub_nav="true"
                     />
                 </DashDrop>

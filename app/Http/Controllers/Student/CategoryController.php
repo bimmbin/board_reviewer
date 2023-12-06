@@ -13,11 +13,12 @@ class CategoryController extends Controller
   public function index()
   {
     // $categories = Category::with('page_views', 'lessons')->get();
-
+    $user = Auth::user();
     $user_id = Auth::user()->id;
+
     $categories = Category::with(['page_views' => function ($query) use ($user_id) {
       $query->where('user_id', $user_id);
-    }, 'lessons'])->orderBy('updated_at', 'desc')->get();
+    }, 'lessons'])->where('major_id', $user->major->id)->get();
 
     return Inertia::render('Student/Category', [
       'categories' => $categories

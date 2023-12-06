@@ -20,14 +20,24 @@ class tester extends Seeder
    */
   public function run(): void
   {
+    $major_lists = ['Professional Education', 'Social Science', 'Mathematics', 'Filipino', 'English', 'General Education'];
+
+    foreach ($major_lists as $major) {
+      Major::create([
+        'major_name' => $major
+      ]);
+    }
+
     User::create([
       'username' => 'admin',
       'user_role' => 'admin',
+      'major_id' => '1',
       'first_name' => fake()->firstName(),
       'last_name' => fake()->lastName(),
       'password' => Hash::make('admin123'),
     ]);
     User::create([
+      'major_id' => '1',
       'username' => 'student1',
       'user_role' => 'student',
       'first_name' => fake()->firstName(),
@@ -35,6 +45,7 @@ class tester extends Seeder
       'password' => Hash::make('student123'),
     ]);
     User::create([
+      'major_id' => '1',
       'username' => 'student2',
       'user_role' => 'student',
       'first_name' => fake()->firstName(),
@@ -42,22 +53,20 @@ class tester extends Seeder
       'password' => Hash::make('student123'),
     ]);
 
-    Major::factory(1)
+
+    Category::factory()->count(10)
       ->has(
-        Category::factory()->count(10)
+        Lesson::factory()->count(40)
           ->has(
-            Lesson::factory()->count(40)
-              ->has(
-                Choice::factory()->count(4),
-                'choices'
-              )->has(
-                CorrectAnswer::factory()->count(1)->sequence(fn (Sequence $sequence) => ['choice_id' => ($sequence->index + 1) * 4]),
-                'correct_answer'
-              ),
-            'lessons'
+            Choice::factory()->count(4),
+            'choices'
+          )->has(
+            CorrectAnswer::factory()->count(1)->sequence(fn (Sequence $sequence) => ['choice_id' => ($sequence->index + 1) * 4]),
+            'correct_answer'
           ),
-        'categories'
+        'lessons'
       )
+
       ->create();
   }
 }

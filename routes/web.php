@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminLessonController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -40,7 +41,7 @@ Route::middleware(['auth', 'student'])->group(function () {
 
 });
 
-
+Route::resource('/admin/majors', AdminLessonController::class);
 // Route::get('/student/lessons', [LessonsController::class, 'index'])->name('lessons.index');
 
 
