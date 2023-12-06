@@ -15,7 +15,7 @@ const { categories } = defineProps({
 </script>
 
 <template>
-  <h1 class="text-3xl font-semibold mb-5 max-md:mt-20 text-blue-800 max-md:mb-2">Topics</h1>
+  <h1 class="text-3xl font-semibold mb-5 max-md:mt-20 text-blue-800 max-md:mb-2">{{ $page.props.auth.user.major.major_name }}</h1>
     <div
         class="w-full flex flex-wrap gap-3 max-xl:flex-nowrap max-xl:flex-col max-sm:px-0 justify-stretch"
     >

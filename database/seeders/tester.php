@@ -54,19 +54,19 @@ class tester extends Seeder
     ]);
 
 
-    Category::factory()->count(10)
-      ->has(
-        Lesson::factory()->count(40)
-          ->has(
-            Choice::factory()->count(4),
-            'choices'
-          )->has(
-            CorrectAnswer::factory()->count(1)->sequence(fn (Sequence $sequence) => ['choice_id' => ($sequence->index + 1) * 4]),
-            'correct_answer'
-          ),
-        'lessons'
-      )
+    // Category::factory()->count(10)
+    //   ->has(
+    //     Lesson::factory()->count(40)
+    //       ->has(
+    //         Choice::factory()->count(4),
+    //         'choices'
+    //       )->has(
+    //         CorrectAnswer::factory()->count(1)->sequence(fn (Sequence $sequence) => ['choice_id' => ($sequence->index + 1) * 4]),
+    //         'correct_answer'
+    //       ),
+    //     'lessons'
+    //   )
 
-      ->create();
+    //   ->create();
   }
 }
