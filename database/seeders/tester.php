@@ -20,7 +20,7 @@ class tester extends Seeder
    */
   public function run(): void
   {
-    $major_lists = ['Professional Education', 'Social Science', 'Mathematics', 'Filipino', 'English', 'General Education'];
+    $major_lists = ['General Education', 'Social Science', 'Mathematics', 'Filipino', 'English', 'Professional Education'];
 
     foreach ($major_lists as $major) {
       Major::create([

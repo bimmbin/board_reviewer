@@ -19,7 +19,7 @@ class AdminLessonController extends Controller
    */
   public function index()
   {
-    $majors = Major::get();
+    $majors = Major::orderBy('created_at', 'asc')->get();
     return Inertia::render('Admin/AdminMajors', [
       'majors' => $majors
     ]);
