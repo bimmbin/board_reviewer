@@ -23,7 +23,7 @@ const exit = ref("/img/exit.svg");
 <template>
     <div class="w-full h-screen flex justify-center max-md:mt-6">
         <div
-            class="w-[800px] max-xl:w-full my-10 mb-60 max-sm:mb-20 max-md:mt-20 flex flex-col justify-between"
+            class="w-[800px] max-xl:w-full my-10 mb-60 max-sm:mb-20 max-md:mt-20 flex flex-col justify-between relative"
         >
             <div class="flex flex-col gap-10">
                 <div class="flex items-center justify-between">
@@ -56,7 +56,7 @@ const exit = ref("/img/exit.svg");
                     >
                 </div>
             </div>
-            <div class="w-full flex justify-between">
+            <div class="max-md:fixed max-md:bottom-16 max-md:px-5 max-md:left-0 w-full flex justify-between">
                 <div v-if="current_page == 1">
                     <Link
                         :href="route('category.index')"
