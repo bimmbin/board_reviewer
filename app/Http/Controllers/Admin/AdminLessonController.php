@@ -54,6 +54,7 @@ class AdminLessonController extends Controller
       $counter = 0;
       foreach ($reviewers->rows($i) as $sheet) {
 
+        // dd($reviewers->rows($i));
         // Skip the first iteration
         if ($counter++ == 0) continue;
         

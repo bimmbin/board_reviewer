@@ -18,6 +18,7 @@ class LessonsController extends Controller
     $lessons_count = Category::withCount('lessons')->findOrFail($id)->lessons_count;
 
     $lesson = $category->lessons[$page - 1];
+    $lesson->load('category');
     $user_id = Auth::user()->id;
 
     // creating recent lesson when user visits new lesson
