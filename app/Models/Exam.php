@@ -11,6 +11,7 @@ class Exam extends Model
 
   protected $fillable = [
     'user_id',
+    'category_id',
   ];
 
   public function user()
@@ -18,8 +19,13 @@ class Exam extends Model
     return $this->belongsTo(User::class);
   }
 
-  public function pages()
+  public function category()
   {
-    return $this->hasMany(Page::class);
+    return $this->belongsTo(Category::class);
+  }
+
+  public function exam_answers()
+  {
+    return $this->hasMany(ExamAnswer::class);
   }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Student\LessonsController;
 use App\Http\Controllers\Student\CategoryController;
 use App\Http\Controllers\Student\RecentLessonsController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Student\ExamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,11 @@ Route::middleware(['auth', 'student'])->group(function () {
   Route::get('/student/lessons/{id}/page/{page}', [LessonsController::class, 'index'])->name('test.index');
 
   Route::get('/student/recents/lessons', [RecentLessonsController::class, 'index'])->name('recent.lesson.index');
+
+  //Exam
+  Route::get('/student/exam/categories', [ExamController::class, 'index'])->name('exam.index');
+  Route::post('/student/exam/categories/take', [ExamController::class, 'store'])->name('exam.store');
+  Route::get('/student/exam/{id}/page/{page}', [ExamController::class, 'show'])->name('exam.show');
 
 });
 

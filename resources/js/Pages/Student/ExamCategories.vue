@@ -7,7 +7,7 @@ export default {
 </script>
 
 <script setup>
-import CategoryCard from "@/Components/CategoryCard.vue";
+import ExamCategoryCard from "@/Components/ExamCategoryCard.vue";
 
 const { categories } = defineProps({
     categories: Object,
@@ -15,12 +15,12 @@ const { categories } = defineProps({
 </script>
 
 <template>
-  <h1 class="text-3xl font-semibold mb-5 max-md:mt-20 text-blue-800 max-md:mb-2">Lessons</h1>
+  <h1 class="text-3xl font-semibold mb-5 max-md:mt-20 text-blue-800 max-md:mb-2">Exam</h1>
     <div
         class="w-full flex flex-wrap gap-3 max-xl:flex-nowrap max-xl:flex-col max-sm:px-0 justify-stretch"
     >
         <div v-for="category in categories">
-            <CategoryCard :category="category" />
+            <ExamCategoryCard :category="category" />
         </div>
     </div>
 </template>

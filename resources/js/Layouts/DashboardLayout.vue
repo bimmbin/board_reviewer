@@ -53,9 +53,9 @@ const show_nav = ref(false);
                 <DashNav
                     image="project"
                     nav_name="Exam"
-                    href="sdfasdf"
+                    :href="route('exam.index')"
                     @click="$emit('close_emit')"
-                    :active="$page.url.startsWith('/sdfsdf')"
+                    :active="$page.url.startsWith('/student/exam/categories')"
                 />
                 <DashDrop image="project" nav_name="Recents">
                     <DashNav

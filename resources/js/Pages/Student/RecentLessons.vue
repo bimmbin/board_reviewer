@@ -56,7 +56,7 @@ const formatTime = (dateString) => {
                     <th class="text-left py-5 font-semibold">Date</th>
                     <th class="text-left py-5 font-semibold">Time</th>
                     <th class="text-left py-5 font-semibold">Completed</th>
-                    <th class="text-left py-5 font-semibold">Result</th>
+                    <th class="text-left py-5 font-semibold">Status</th>
                     <th class="text-left py-5 font-semibold">Action</th>
                 </tr>
             </thead>
