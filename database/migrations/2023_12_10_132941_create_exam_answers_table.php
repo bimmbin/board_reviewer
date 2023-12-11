@@ -19,8 +19,10 @@ return new class extends Migration
       $table->foreignId('choice_id')
         ->constrained('choices')
         ->onDelete('cascade');
-      $table->string('is_correct');
-
+      $table->foreignId('lesson_id')
+        ->constrained('lessons')
+        ->onDelete('cascade');
+      $table->string('is_correct'); //to show scores
       $table->timestamps();
     });
   }

@@ -23,4 +23,8 @@ class Choice extends Model
   {
     return $this->hasOne(CorrectAnswer::class);
   }
+  public function exam_answers()
+  {
+    return $this->hasMany(ExamAnswer::class);
+  }
 }

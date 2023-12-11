@@ -11,6 +11,7 @@ class ExamAnswer extends Model
 
   protected $fillable = [
     'exam_id',
+    'lesson_id',
     'choice_id',
     'is_correct',
   ];
@@ -23,5 +24,8 @@ class ExamAnswer extends Model
   {
     return $this->belongsTo(Choice::class);
   }
-  
+  public function lesson()
+  {
+    return $this->belongsTo(Lesson::class);
+  }
 }

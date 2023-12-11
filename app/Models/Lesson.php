@@ -33,4 +33,8 @@ class Lesson extends Model
   {
     return $this->hasMany(PageViews::class);
   }
+  public function exam_answers()
+  {
+    return $this->hasMany(ExamAnswer::class);
+  }
 }

@@ -22,20 +22,22 @@ class ExamController extends Controller
 
   public function store(Request $request)
   {
-    Exam::create([
+    $exam = Exam::create([
       'category_id' => $request->category_id,
       'user_id' => Auth::user()->id,
     ]);
 
-    return redirect()->route('exam.show', [$request->category_id, 1]);
+    return redirect()->route('exam.show', [$exam->id, $request->category_id, 1]);
   }
 
-  public function show($id, $page)
+  public function show($exam_id, $id, $page)
   {
     $category = Category::with('recent_lesson', 'lessons')->findOrFail($id);
     $lessons_count = Category::withCount('lessons')->findOrFail($id)->lessons_count;
 
-    $lesson = $category->lessons[$page - 1];
+    $lesson = $category->lessons()->skip($page - 1)->first();
+
+    // $lesson = $category->lessons[$page - 1];
     $lesson->load('category');
 
     $choices = $lesson->choices()->inRandomOrder()->get();
@@ -46,7 +48,7 @@ class ExamController extends Controller
       'choices' => $choices,
       'current_page' => $page,
       'lessons_count' => $lessons_count,
-
+      'exam_id' => $exam_id
     ]);
   }
 }
