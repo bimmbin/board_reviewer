@@ -43,7 +43,7 @@ const submit = () => {
             @submit.prevent="submit"
             class="w-[800px] max-xl:w-full my-10 mb-60 max-sm:mb-20 max-md:mt-20 flex flex-col justify-between relative"
         >
-            <div class="flex flex-col gap-10">
+            <div class="flex flex-col ">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <Link :href="route('category.index')" class="px-1 py-1"
@@ -77,7 +77,7 @@ const submit = () => {
                              
                             <label
                                 :for="choice.id"
-                                class="capitalize w-full px-5 py-2 border border-blue-200 rounded-md hover:bg-blue-200 cursor-pointer"
+                                class="capitalize max-md:text-sm w-full px-5 py-2 border border-blue-200 rounded-md hover:bg-blue-200 cursor-pointer"
                                 :class="{
                                     'bg-blue-200 text-blue-800':
                                         form.choice_id == choice.id,
@@ -93,7 +93,7 @@ const submit = () => {
                 </div>
             </div>
             <div
-                class="max-md:fixed max-md:bottom-16 max-md:px-5 max-md:left-0 w-full flex justify-between"
+                class="max-md:fixed max-md:bottom-16 max-md:px-5 max-md:left-0 w-full flex justify-between items-center"
             >
                 <div v-if="current_page != 1">
                     <Link

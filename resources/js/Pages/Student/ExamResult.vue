@@ -33,7 +33,7 @@ const exit = ref("/img/exit.svg");
         <div
             class="w-[800px] max-xl:w-full my-10 mb-60 max-sm:mb-20 max-md:mt-20 flex flex-col justify-between relative"
         >
-            <div class="flex flex-col gap-10">
+            <div class="flex flex-col">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <Link :href="route('category.index')" class="px-1 py-1"
@@ -56,28 +56,28 @@ const exit = ref("/img/exit.svg");
                     </p>
                     <span
                         v-if="exam_answer.is_correct == 1"
-                        class="text-4xl font-medium text-green-500"
+                        class="text-4xl font-medium text-green-500 max-md:text-2xl"
                         >Correct!</span
                     >
-                    <span v-else class="text-4xl font-medium text-red-500"
+                    <span v-else class="text-4xl font-medium text-red-500 max-md:text-2xl"
                         >Wrong!</span
                     >
                     <div class="flex flex-col w-full gap-2 items-center">
                         <div
                             v-if="exam_answer.is_correct == 0"
-                            class="flex flex-col items-center gap-2"
+                            class="flex flex-col items-center gap-2 max-md:mb-5"
                         >
-                            <span>Your answer</span>
+                            <span class="max-md:text-sm">Your answer</span>
                             <span
-                                class="capitalize w-fit px-5 py-2 text-center bg-red-200 border border-red-200 rounded-md cursor-pointer"
+                                class="capitalize w-fit px-5 py-2 text-center bg-red-200 border border-red-200 rounded-md cursor-pointer max-md:text-sm"
                             >
                                 {{ exam_answer.choice.choice_description }}
                             </span>
                         </div>
-                        <div class="flex flex-col items-center gap-2">
-                            <span>Correct answer</span>
+                        <div class="flex flex-col items-center gap-2 ">
+                            <span class="max-md:text-sm">Correct answer</span>
                             <span
-                                class="capitalize w-fit px-5 py-2 border-2 border-green-500 bg-green-200 rounded-md cursor-pointer"
+                                class="capitalize w-fit px-5 py-2 border-2 border-green-500 bg-green-200 rounded-md cursor-pointer max-md:text-sm"
                             >
                                 {{
                                     lesson.correct_answer.choice
@@ -91,25 +91,12 @@ const exit = ref("/img/exit.svg");
             <div
                 class="max-md:fixed max-md:bottom-16 max-md:px-5 max-md:left-0 w-full flex justify-between"
             >
-                <div v-if="current_page != 1">
-                    <!-- <Link
-                        :href="
-                            route('exam.result.show', [
-                                exam_id,
-                                category_id,
-                                parseInt(current_page) - 1,
-                            ])
-                        "
-                        class="py-2 px-5 border-2 border-blue-500 rounded-md text-blue-500 font-semibold"
-                    >
-                        Back
-                    </Link> -->
-                </div>
-                <div v-else></div>
+                
+                <div></div>
 
                 <div v-if="current_page == lessons_count">
                     <Link
-                        :href="route('category.index')"
+                        :href="route('exam.result.index', exam_id)"
                         class="py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
                     >
                         Finish

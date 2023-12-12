@@ -27,11 +27,12 @@ use App\Http\Controllers\Student\ExamResultController;
 // Route::get('/', function () {
 //   return Inertia::render('Auth/Login');
 // });
-Route::get('/', [AuthenticatedSessionController::class, 'create']);
-
-Route::get('/error/unauthorized', function () {
-  return Inertia::render('Unauthorized');
-})->name('unauthorized');
+Route::middleware(['guest'])->group(function () {
+  Route::get('/', [AuthenticatedSessionController::class, 'create']);
+});
+// Route::get('/error/unauthorized', function () {
+//   return Inertia::render('Unauthorized');
+// })->name('unauthorized');
 
 
 Route::middleware(['auth', 'student'])->group(function () {
@@ -49,7 +50,7 @@ Route::middleware(['auth', 'student'])->group(function () {
   //Exam result
   Route::post('/student/exam/store/answer', [ExamResultController::class, 'store'])->name('exam.answer.store');
   Route::get('/student/exam/{exam_id}/lesson/{lesson_id}/page/{page}/result', [ExamResultController::class, 'show'])->name('exam.result.show');
-
+  Route::get('/student/exam/{exam_id}/result', [ExamResultController::class, 'index'])->name('exam.result.index');
 });
 
 Route::resource('/admin/majors', AdminLessonController::class);
