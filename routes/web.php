@@ -30,10 +30,12 @@ use App\Http\Controllers\Student\ExamResultController;
 Route::middleware(['guest'])->group(function () {
   Route::get('/', [AuthenticatedSessionController::class, 'create']);
 });
-// Route::get('/error/unauthorized', function () {
-//   return Inertia::render('Unauthorized');
-// })->name('unauthorized');
-
+Route::get('/error/unauthorized', function () {
+  return Inertia::render('Unauthorized');
+})->name('unauthorized');
+Route::fallback(function () {
+  return Inertia::render('Unauthorized');
+});
 
 Route::middleware(['auth', 'student'])->group(function () {
   Route::get('/student/lessons', [CategoryController::class, 'index'])->name('category.index');

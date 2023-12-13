@@ -6,11 +6,12 @@ use Inertia\Inertia;
 use App\Models\Major;
 use App\Models\Choice;
 use App\Models\Lesson;
-use Shuchkin\SimpleXLSX;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Shuchkin\SimpleXLSX;
+use App\Http\Requests\File;
+use Illuminate\Http\Request;
 use App\Models\CorrectAnswer;
+use App\Http\Controllers\Controller;
 
 class AdminLessonController extends Controller
 {
@@ -36,9 +37,8 @@ class AdminLessonController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(File $request)
   {
-    // dd($request->all());
     $reviewers = SimpleXLSX::parse($request->file);
 
     //iteration for sheets
@@ -54,10 +54,9 @@ class AdminLessonController extends Controller
       $counter = 0;
       foreach ($reviewers->rows($i) as $sheet) {
 
-        // dd($reviewers->rows($i));
         // Skip the first iteration
         if ($counter++ == 0) continue;
-        
+
         //Lesson
         $lesson = Lesson::firstOrNew([
           'category_id' => $category->id,

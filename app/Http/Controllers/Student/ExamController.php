@@ -42,9 +42,13 @@ class ExamController extends Controller
     $user = Auth::user();
     if (!session()->has($exam_id . $user->username)) {
       return redirect()->back();
-    }
+    }  
     $lessons = Session::get($exam_id . $user->username);
     $lessons_count = count($lessons);
+
+    if (!($page >= 1 && $page <= $lessons_count)) {
+      return redirect()->route('unauthorized');
+    }
     $lesson = $lessons->skip($page - 1)->first();
     $lesson->load('category');
     $lesson->load('choices');

@@ -17,8 +17,7 @@ class StudentMiddleware
   public function handle(Request $request, Closure $next): Response
   {
     if (Auth::check() && Auth::user()->user_role !== 'student') {
-
-      return redirect()->route('unauthorized');
+      return redirect()->route('category.index');
     }
 
     return $next($request);

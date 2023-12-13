@@ -10,21 +10,32 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RedirectIfAuthenticated
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
-    public function handle(Request $request, Closure $next, string ...$guards): Response
-    {
-        $guards = empty($guards) ? [null] : $guards;
+  /**
+   * Handle an incoming request.
+   *
+   * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+   */
+  public function handle(Request $request, Closure $next, string ...$guards): Response
+  {
+    $guards = empty($guards) ? [null] : $guards;
 
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
-            }
+    //if user is logged in
+    if (Auth::check()) {
+      $user_role = Auth::user()->user_role;
+      foreach ($guards as $guard) {
+        if (Auth::guard($guard)->check()) {
+          
+          //redirect them to their own authenticated landing page
+          if ($user_role == 'admin') {
+            return redirect()->route('majors.index');
+          }
+          if ($user_role == 'student') {
+            return redirect()->route('category.index');
+          }
         }
-
-        return $next($request);
+      }
     }
+
+    return $next($request);
+  }
 }

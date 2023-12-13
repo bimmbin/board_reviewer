@@ -77,7 +77,7 @@ const submit = () => {
                              
                             <label
                                 :for="choice.id"
-                                class="capitalize max-md:text-sm w-full px-5 py-2 border border-blue-200 rounded-md hover:bg-blue-200 cursor-pointer"
+                                class="max-md:text-sm w-full px-5 py-2 border border-blue-200 rounded-md hover:bg-blue-200 cursor-pointer"
                                 :class="{
                                     'bg-blue-200 text-blue-800':
                                         form.choice_id == choice.id,
@@ -104,7 +104,7 @@ const submit = () => {
                                 parseInt(current_page) - 1,
                             ])
                         "
-                        class="py-2 px-5 border-2 border-blue-500 rounded-md text-blue-500 font-semibold"
+                        class="select-none py-2 px-5 border-2 border-blue-500 rounded-md text-blue-500 font-semibold"
                     >
                         Back
                     </Link>
@@ -118,7 +118,7 @@ const submit = () => {
                             parseInt(current_page) + 1,
                         ])
                     "
-                    class="py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
+                    class="select-none py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
                 >
                     Check
                 </button>

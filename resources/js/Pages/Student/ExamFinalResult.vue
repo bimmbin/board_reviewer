@@ -7,7 +7,7 @@ export default {
 </script>
 
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link, useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
 
 const { exam, correct_count, lesson_count } = defineProps({
@@ -16,6 +16,14 @@ const { exam, correct_count, lesson_count } = defineProps({
     lesson_count: Number,
 });
 const trophy = ref("/img/trophy.png");
+
+const form = useForm({
+    category_id: exam.category.id,
+});
+
+const submit = () => {
+    form.post(route("exam.store"));
+};
 </script>
 
 <template>
@@ -42,7 +50,8 @@ const trophy = ref("/img/trophy.png");
                     >{{ correct_count }}/{{ lesson_count }}</span
                 >
             </div>
-            <div
+            <form
+                @submit.prevent="submit"
                 class="max-md:fixed max-md:bottom-16 max-md:px-5 max-md:left-0 w-full flex justify-between"
             >
                 <Link
@@ -52,12 +61,12 @@ const trophy = ref("/img/trophy.png");
                     Back to exams
                 </Link>
 
-                <Link
-                    class="py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
+                <button
+                    class="select-none py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
                 >
-                    Retake 
-                </Link>
-            </div>
+                    Retake
+                </button>
+            </form>
         </div>
     </div>
 </template>

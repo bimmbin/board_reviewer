@@ -26,6 +26,8 @@ const {
     exam_id: String,
 });
 const exit = ref("/img/exit.svg");
+
+
 </script>
 
 <template>
@@ -59,7 +61,9 @@ const exit = ref("/img/exit.svg");
                         class="text-4xl font-medium text-green-500 max-md:text-2xl"
                         >Correct!</span
                     >
-                    <span v-else class="text-4xl font-medium text-red-500 max-md:text-2xl"
+                    <span
+                        v-else
+                        class="text-4xl font-medium text-red-500 max-md:text-2xl"
                         >Wrong!</span
                     >
                     <div class="flex flex-col w-full gap-2 items-center">
@@ -69,15 +73,15 @@ const exit = ref("/img/exit.svg");
                         >
                             <span class="max-md:text-sm">Your answer</span>
                             <span
-                                class="capitalize w-fit px-5 py-2 text-center bg-red-200 border border-red-200 rounded-md cursor-pointer max-md:text-sm"
+                                class="w-fit px-5 py-2 text-center bg-red-200 border border-red-200 rounded-md cursor-pointer max-md:text-sm"
                             >
                                 {{ exam_answer.choice.choice_description }}
                             </span>
                         </div>
-                        <div class="flex flex-col items-center gap-2 ">
+                        <div class="flex flex-col items-center gap-2">
                             <span class="max-md:text-sm">Correct answer</span>
                             <span
-                                class="capitalize w-fit px-5 py-2 border-2 border-green-500 bg-green-200 rounded-md cursor-pointer max-md:text-sm"
+                                class="w-fit px-5 py-2 border-2 border-green-500 bg-green-200 rounded-md cursor-pointer max-md:text-sm"
                             >
                                 {{
                                     lesson.correct_answer.choice
@@ -88,16 +92,16 @@ const exit = ref("/img/exit.svg");
                     </div>
                 </div>
             </div>
+
             <div
                 class="max-md:fixed max-md:bottom-16 max-md:px-5 max-md:left-0 w-full flex justify-between"
             >
-                
                 <div></div>
 
                 <div v-if="current_page == lessons_count">
                     <Link
                         :href="route('exam.result.index', exam_id)"
-                        class="py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
+                        class="select-none py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
                     >
                         Finish
                     </Link>
@@ -111,7 +115,7 @@ const exit = ref("/img/exit.svg");
                                 parseInt(current_page) + 1,
                             ])
                         "
-                        class="py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
+                        class="select-none py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
                     >
                         Next
                     </Link>
