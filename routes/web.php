@@ -10,6 +10,7 @@ use App\Http\Controllers\Student\RecentLessonsController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Student\ExamController;
 use App\Http\Controllers\Student\ExamResultController;
+use App\Http\Controllers\Student\RecentExamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,7 @@ Route::middleware(['auth', 'student'])->group(function () {
   Route::get('/student/lessons/{id}/page/{page}', [LessonsController::class, 'index'])->name('test.index');
 
   Route::get('/student/recents/lessons', [RecentLessonsController::class, 'index'])->name('recent.lesson.index');
+  Route::get('/student/recents/exams', [RecentExamController::class, 'index'])->name('recent.exam.index');
 
   //Exam
   Route::get('/student/exam/categories', [ExamController::class, 'index'])->name('exam.index');

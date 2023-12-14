@@ -32,4 +32,8 @@ class Category extends Model
   {
     return $this->hasOne(RecentLesson::class);
   }
+  public function exams()
+  {
+    return $this->hasMany(Exam::class);
+  }
 }
