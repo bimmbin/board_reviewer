@@ -16,14 +16,50 @@ class RecentExamController extends Controller
   {
     $user_id = Auth::user()->id;
 
-    $recent_exams = Exam::with('category', 'lessons')->withCount(['exam_answers' => function (Builder $query) {
+    $recent_exams = Exam::with(['category' => function ($query) {
+      $query->withCount('lessons'); //this counts the grandchild relation
+    }])->withCount(['exam_answers' => function (Builder $query) {
       $query->where('is_correct', '1');
     }])->where('user_id', $user_id)->latest()->get();
 
-    
-    dd($recent_exams);
+    //added time_taken
+    $filtered_recent_exams  = $recent_exams->map(function ($exam) {
+      $time = $exam->created_at->diff($exam->updated_at);
+      if ($time->h > 0) {
+        if ($time->h == 1) {
+          $hour = $time->h . ' hour, ';
+        } else {
+          $hour = $time->h . ' hours, ';
+        }
+      } else {
+        $hour = '';
+      }
+      if ($time->i > 0) {
+        if ($time->i == 1) {
+          $minute = $time->i . ' minute, and ';
+        } else {
+          $minute = $time->i . ' minutes, and ';
+        }
+      } else {
+        $minute = '';
+      }
+       if ($time->s > 0) {
+        if ($time->s == 1) {
+          $second = $time->s . ' second ';
+        } else {
+          $second = $time->s . ' seconds ';
+        }
+      } else {
+        $second = '';
+      }
+      $exam->time_taken = $hour.$minute.$second;
+
+      return $exam;
+    });
+    // dd($filtered_recent_exams);
+
     return Inertia::render('Student/RecentExams', [
-      'recent_exams' => $recent_exams
+      'recent_exams' => $filtered_recent_exams
     ]);
   }
 }

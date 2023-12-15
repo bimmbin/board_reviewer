@@ -9,6 +9,7 @@ export default {
 <script setup>
 import { Link } from "@inertiajs/vue3";
 import { format } from "date-fns";
+import RetakeExam from "@/Components/RetakeExam.vue";
 
 const { recent_exams } = defineProps({
     recent_exams: Object,
@@ -20,20 +21,6 @@ const formatDate = (dateString) => {
 const formatTime = (dateString) => {
     return format(new Date(dateString), "hh:mm a"); // Customize the format as needed
 };
-// const time_taken = (a, b) => {
-//     let first_number = formatTime(a);
-//     let second_number = formatTime(b);
-
-//     let hour =
-//         parseInt(second_number.slice(0, 2)) -
-//         parseInt(first_number.slice(0, 2));
-//     let minutes =
-//         parseInt(second_number.slice(2, 4)) -
-//         parseInt(first_number.slice(2, 4));
-
-//     const time_taken = hour + " " + minutes;
-//     return time_taken;
-// };
 </script>
 
 <template>
@@ -55,7 +42,8 @@ const formatTime = (dateString) => {
                     <th class="text-left pl-5 py-5 font-semibold">Topic</th>
                     <th class="text-left py-5 font-semibold">Date</th>
                     <th class="text-left py-5 font-semibold">Time</th>
-                    <th class="text-left py-5 font-semibold">Completed</th>
+                    <th class="text-left py-5 font-semibold">Time taken</th>
+                    <th class="text-left py-5 font-semibold">Score</th>
                     <th class="text-left py-5 font-semibold">Status</th>
                     <th class="text-left py-5 font-semibold">Action</th>
                 </tr>
@@ -75,15 +63,25 @@ const formatTime = (dateString) => {
                     <td>
                         {{ formatTime(recent_exam.created_at) }}
                     </td>
-                    <td>{{ recent_exam.exam_answers_count }}/{{}}</td>
-                    <!-- <td>
-                      <span v-if="recent_exam.page_views.length == recent_exam.category.lessons.length" class="px-3 py-2 bg-green-300 text-green-800 rounded-md text-sm max-md:text-xs max-md:py-1">Finished</span>
-                      <span v-else class="px-3 py-2 bg-yellow-300 text-yellow-800 rounded-md text-sm max-md:text-xs max-md:py-1">Unfinished</span>
+                    <td>
+                        {{ recent_exam.time_taken }}
                     </td>
                     <td>
-                      <Link v-if="recent_exam.page_views.length == recent_exam.category.lessons.length" :href="route('test.index', [recent_exam.category.id,1])" class="underline text-base max-md:text-sm">Retake</Link>
-                      <Link v-else :href="route('test.index', [recent_exam.category.id,recent_exam.page_views.length+1])" class="underline text-base max-md:text-sm">Continue</Link>
-                    </td> -->
+                        {{ recent_exam.exam_answers_count }}/{{
+                            recent_exam.category.lessons_count
+                        }}
+                    </td>
+                    <td>
+                        <span
+                            v-if="
+                                recent_exam.exam_answers_count >=
+                                recent_exam.category.lessons_count * 0.75
+                            "
+                            class="px-3 py-2 bg-green-300 text-green-800 rounded-md text-sm max-md:text-xs max-md:py-1" >Passed</span
+                        >
+                        <span v-else class="px-3 py-2 bg-red-300 text-red-800 rounded-md text-sm max-md:text-xs max-md:py-1">Failed</span>
+                    </td>
+                    <td><RetakeExam :exam="recent_exam"/></td>
                 </tr>
             </tbody>
         </table>

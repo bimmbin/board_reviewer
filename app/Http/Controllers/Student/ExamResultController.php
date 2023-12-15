@@ -20,6 +20,7 @@ class ExamResultController extends Controller
     Session::forget($id . $user->username);
 
     $exam = Exam::findOrFail($id);
+    $exam->touch();
     $exam->load('exam_answers');
     $exam->load('category', 'category.major');
     $correct_count = $exam->exam_answers()->where('is_correct', 1)->count();

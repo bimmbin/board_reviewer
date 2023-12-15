@@ -8,6 +8,7 @@ import DashDrop from "@/Components/DashDrop.vue";
 
 import "typeface-poppins";
 const chcc_logo = ref("/img/chcc_logo.png");
+const educ = ref("/img/educ.png");
 const burger = ref("/img/burger.svg");
 const logout = ref("/img/logout.svg");
 
@@ -57,14 +58,24 @@ const show_nav = ref(false);
                     @click="$emit('close_emit')"
                     :active="$page.url.startsWith('/student/exam/categories')"
                 />
-                <DashDrop image="project" nav_name="Recents">
+                <DashDrop image="project" nav_name="History">
                     <DashNav
                         image="project"
-                        nav_name="Lessons"
+                        nav_name="Lesson attempts"
                         :href="route('recent.lesson.index')"
                         @click="$emit('close_emit')"
                         :active="
                             $page.url.startsWith('/student/recents/lessons')
+                        "
+                        :sub_nav="true"
+                    />
+                    <DashNav
+                        image="project"
+                        nav_name="Exam attempts"
+                        :href="route('recent.exam.index')"
+                        @click="$emit('close_emit')"
+                        :active="
+                            $page.url.startsWith('/student/recents/exams')
                         "
                         :sub_nav="true"
                     />
@@ -89,7 +100,7 @@ const show_nav = ref(false);
                 class="flex justify-between bg-blue-500 items-center bg-gray1 absolute z-10 top-0 left-0 w-full py-2 px-5 text-black md:hidden"
             >
                 <div>
-                    <img :src="chcc_logo" alt="" class="h-12" />
+                    <Link :href="route('category.index')"><img :src="chcc_logo" alt="" class="h-12" /></Link>
                 </div>
                 <div
                     class="lg:hidden cursor-pointer select-none"

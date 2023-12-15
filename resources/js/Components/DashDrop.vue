@@ -31,7 +31,7 @@ let show_details = ref(false);
         <div class="flex justify-between items-center w-full gap-8">
             <div class="flex items-center gap-3">
                 <img :src="img_path + image + '.svg'" class="w-4 h-4" />
-                <span class="text-white text-lg">{{ nav_name }}</span>
+                <span class="text-white text-lg max-sm:text-base">{{ nav_name }}</span>
             </div>
 
             <img
@@ -46,7 +46,7 @@ let show_details = ref(false);
     <!-- collapse details -->
     <Collapse
         :when="show_details"
-        class="w-full overflow-hidden flex flex-col gap-2"
+        class="w-full overflow-hidden flex flex-col "
     >
         <slot></slot>
     </Collapse>

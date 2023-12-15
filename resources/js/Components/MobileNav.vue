@@ -23,7 +23,7 @@ const chcc_logo = ref("/img/chcc_logo.png");
         >
             <!-- Logo -->
             <div class="flex justify-center">
-                <img :src="chcc_logo" alt="" class="h-32" />
+              <Link @click="$emit('close_emit')" :href="route('category.index')"><img :src="chcc_logo" alt="" class="h-32" /></Link>
             </div>
             <div class="flex flex-col gap-20 mt-10">
                 <UserInfo></UserInfo>
@@ -44,14 +44,24 @@ const chcc_logo = ref("/img/chcc_logo.png");
                         @click="$emit('close_emit')"
                         :active="$page.url.startsWith('/student/exam/categories')"
                     />
-                    <DashDrop image="project" nav_name="Recents">
+                    <DashDrop image="project" nav_name="History">
                         <DashNav
                             image="project"
-                            nav_name="Lessons"
+                            nav_name="Lesson attempts"
                             :href="route('recent.lesson.index')"
                             @click="$emit('close_emit')"
                             :active="
                                 $page.url.startsWith('/student/recents/lessons')
+                            "
+                            :sub_nav="true"
+                        />
+                        <DashNav
+                            image="project"
+                            nav_name="Exams attempts"
+                            :href="route('recent.exam.index')"
+                            @click="$emit('close_emit')"
+                            :active="
+                                $page.url.startsWith('/student/recents/exams')
                             "
                             :sub_nav="true"
                         />
