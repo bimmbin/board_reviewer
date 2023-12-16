@@ -28,9 +28,9 @@ class Category extends Model
   {
     return $this->hasMany(PageViews::class);
   }
-  public function recent_lesson()
+  public function recent_lessons()
   {
-    return $this->hasOne(RecentLesson::class);
+    return $this->hasMany(RecentLesson::class);
   }
   public function exams()
   {

@@ -10,11 +10,12 @@ export default {
 import { Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 
-const { lesson, current_page, lessons_count, category_id } = defineProps({
+const { lesson, current_page, lessons_count, category_id, recent_id } = defineProps({
     lesson: Object,
     current_page: String,
     lessons_count: Number,
     category_id: Number,
+    recent_id: Number,
 });
 
 const exit = ref("/img/exit.svg");
@@ -68,7 +69,8 @@ const exit = ref("/img/exit.svg");
                 <div v-else>
                     <Link
                         :href="
-                            route('test.index', [
+                            route('lesson.index', [
+                                recent_id,
                                 category_id,
                                 parseInt(current_page) - 1,
                             ])
@@ -90,7 +92,8 @@ const exit = ref("/img/exit.svg");
                 <div v-else>
                     <Link
                         :href="
-                            route('test.index', [
+                            route('lesson.index', [
+                                recent_id,
                                 category_id,
                                 parseInt(current_page) + 1,
                             ])

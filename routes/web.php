@@ -41,10 +41,12 @@ Route::fallback(function () {
 Route::middleware(['auth', 'student'])->group(function () {
   Route::get('/student/lessons', [CategoryController::class, 'index'])->name('category.index');
 
-  Route::get('/student/lessons/{id}/page/{page}', [LessonsController::class, 'index'])->name('test.index');
+  //Lesson
+  Route::get('/student/{recent_id}/lessons/{id}/page/{page}', [LessonsController::class, 'index'])->name('lesson.index');
+  Route::get('/student/lessons/{id}/page/{page}/store', [LessonsController::class, 'store'])->name('lesson.store');
 
+  //Lesson Attempts
   Route::get('/student/recents/lessons', [RecentLessonsController::class, 'index'])->name('recent.lesson.index');
-  Route::get('/student/recents/exams', [RecentExamController::class, 'index'])->name('recent.exam.index');
 
   //Exam
   Route::get('/student/exam/categories', [ExamController::class, 'index'])->name('exam.index');
@@ -55,6 +57,9 @@ Route::middleware(['auth', 'student'])->group(function () {
   Route::post('/student/exam/store/answer', [ExamResultController::class, 'store'])->name('exam.answer.store');
   Route::get('/student/exam/{exam_id}/lesson/{lesson_id}/page/{page}/result', [ExamResultController::class, 'show'])->name('exam.result.show');
   Route::get('/student/exam/{exam_id}/result', [ExamResultController::class, 'index'])->name('exam.result.index');
+
+  //Exam Attempts
+  Route::get('/student/recents/exams', [RecentExamController::class, 'index'])->name('recent.exam.index');
 });
 
 Route::resource('/admin/majors', AdminLessonController::class);
