@@ -12,6 +12,7 @@ class RecentLesson extends Model
   protected $fillable = [
     'category_id',
     'user_id',
+    'countdown',
   ];
 
   public function page_views()

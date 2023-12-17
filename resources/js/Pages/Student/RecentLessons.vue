@@ -67,7 +67,9 @@ const formatTime = (dateString) => {
                     :key="index"
                     class="border border-blue-300 text-sm md:text-base lg:text-lg font-regular"
                 >
-                    <td class="pl-5 py-3">{{ recent_lesson.category.category_name }}</td>
+                    <td class="pl-5 py-3">
+                        {{ recent_lesson.category.category_name }}
+                    </td>
 
                     <td>{{ formatDate(recent_lesson.created_at) }}</td>
                     <td>
@@ -79,12 +81,53 @@ const formatTime = (dateString) => {
                         }}
                     </td>
                     <td>
-                      <span v-if="recent_lesson.page_views.length == recent_lesson.category.lessons.length" class="px-3 py-2 bg-green-300 text-green-800 rounded-md text-sm max-md:text-xs max-md:py-1">Finished</span>
-                      <span v-else class="px-3 py-2 bg-yellow-300 text-yellow-800 rounded-md text-sm max-md:text-xs max-md:py-1">Unfinished</span>
+                        <span
+                            v-if="
+                                recent_lesson.page_views.length ==
+                                recent_lesson.category.lessons.length
+                            "
+                            class="px-3 py-2 bg-green-300 text-green-800 rounded-md text-sm max-md:text-xs max-md:py-1"
+                            >Finished</span
+                        >
+                        <span
+                            v-else
+                            class="px-3 py-2 bg-yellow-300 text-yellow-800 rounded-md text-sm max-md:text-xs max-md:py-1"
+                            >Unfinished</span
+                        >
                     </td>
                     <td>
-                      <Link v-if="recent_lesson.page_views.length == recent_lesson.category.lessons.length" :href="route('lesson.store', [recent_lesson.category.id,1])" class="underline text-base max-md:text-sm">Retake</Link>
-                      <Link v-else :href="route('lesson.index', [recent_lesson.id,recent_lesson.category.id,recent_lesson.page_views.length+1])" class="underline text-base max-md:text-sm">Continue</Link>
+                        <Link
+                            v-if="
+                                recent_lesson.page_views.length ==
+                                    recent_lesson.category.lessons.length ||
+                                recent_lesson.time_ended
+                            "
+                            :href="
+                                route('lesson.store', [
+                                    recent_lesson.category.id,
+                                    1,
+                                ])
+                            "
+                            class="underline text-base max-md:text-sm"
+                            >Retake</Link
+                        >
+                        <Link
+                            v-else
+                            :href="
+                                route('lesson.index', [
+                                    recent_lesson.id,
+                                    recent_lesson.category.id,
+                                    recent_lesson.page_views.length + 1,
+                                ])
+                            "
+                            class="flex items-center gap-2"
+                            ><span class="underline text-base max-md:text-sm"
+                                >Continue</span
+                            >
+                            <span class="text-sm text-red-500 max-md:text-xs">{{
+                                recent_lesson.time_remaining
+                            }} remaining</span></Link
+                        >
                     </td>
                 </tr>
             </tbody>

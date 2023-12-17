@@ -22,7 +22,6 @@ class CategoryController extends Controller
     }])->where('major_id', $user->major->id)->get();
     $categories->loadCount('lessons');
 
-    dd(Carbon::now());
     //filtering categories if the user already has a finished recent lesson
     $filtered_categories  = $categories->map(function ($category) {
       foreach ($category->recent_lessons as $recent_lesson) {
