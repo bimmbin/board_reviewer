@@ -21,16 +21,16 @@ class RecentLessonsController extends Controller
 
 
     $recent_lessons = RecentLesson::with('category', 'category.lessons', 'page_views')->where('user_id', $user_id)->latest()->get();
-
     //filtering to determine if countdown is ended
     $filtered_recent_lessons  = $recent_lessons->map(function ($recent_lesson) {
 
       $recent_lesson->time_remaining = now()->diffForHumans($recent_lesson->countdown, true);
       $recent_lesson->time_ended = now()->diff($recent_lesson->countdown)->invert;
+      $recent_lesson->seconds = now()->diffInSeconds($recent_lesson->updated_at);
       return $recent_lesson;
     });
     
-    dd(session()->all());
+    // dd(session()->all());
 
     return Inertia::render('Student/RecentLessons', [
       'recent_lessons' => $filtered_recent_lessons

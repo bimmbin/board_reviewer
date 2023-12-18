@@ -8,7 +8,10 @@ export default {
 
 <script setup>
 import { Link } from "@inertiajs/vue3";
+import { ref, watch } from "vue";
 import { format } from "date-fns";
+
+import Countdown from "@/Components/Countdown.vue";
 
 const { recent_lessons } = defineProps({
     recent_lessons: Object,
@@ -20,27 +23,14 @@ const formatDate = (dateString) => {
 const formatTime = (dateString) => {
     return format(new Date(dateString), "hh:mm a"); // Customize the format as needed
 };
-// const time_taken = (a, b) => {
-//     let first_number = formatTime(a);
-//     let second_number = formatTime(b);
 
-//     let hour =
-//         parseInt(second_number.slice(0, 2)) -
-//         parseInt(first_number.slice(0, 2));
-//     let minutes =
-//         parseInt(second_number.slice(2, 4)) -
-//         parseInt(first_number.slice(2, 4));
-
-//     const time_taken = hour + " " + minutes;
-//     return time_taken;
-// };
 </script>
 
 <template>
     <h1
         class="text-3xl font-semibold mb-5 max-md:mt-20 text-blue-800 max-md:mb-2"
     >
-        Recent lessons
+        Recent lessons 
     </h1>
     <div class="w-full pb-10 overflow-x-auto">
         <table
@@ -73,7 +63,8 @@ const formatTime = (dateString) => {
 
                     <td>{{ formatDate(recent_lesson.created_at) }}</td>
                     <td>
-                        {{ formatTime(recent_lesson.updated_at) }}
+                      {{ formatTime(recent_lesson.created_at) }}
+                        <!-- <Countdown :time="recent_lesson.seconds" :time_ended="recent_lesson.time_ended == 1"/> -->
                     </td>
                     <td>
                         {{ recent_lesson.page_views.length }}/{{
@@ -124,9 +115,12 @@ const formatTime = (dateString) => {
                             ><span class="underline text-base max-md:text-sm"
                                 >Continue</span
                             >
-                            <span class="text-sm text-red-500 max-md:text-xs">{{
-                                recent_lesson.time_remaining
-                            }} remaining</span></Link
+                            <span class="text-sm text-red-500 max-md:text-xs"
+                                >{{
+                                    recent_lesson.time_remaining
+                                }}
+                                remaining</span
+                            ></Link
                         >
                     </td>
                 </tr>

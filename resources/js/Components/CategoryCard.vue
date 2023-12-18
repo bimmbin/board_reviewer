@@ -12,7 +12,8 @@ let page_number = ref();
 let route_name = ref();
 if (
     props.category.latest_lesson_length == 0 ||
-    props.category.latest_lesson_length == props.category.lessons_count
+    props.category.latest_lesson_length == props.category.lessons_count ||
+    props.category.recent_time_ended == 1
 ) {
     page_number = 1;
     route_name = route("lesson.store", [props.category.id, page_number]);

@@ -29,18 +29,22 @@ class CategoryController extends Controller
           $category->is_finished = true;
         }
       }
+      //counting the page based on lessons length
       if (count($category->recent_lessons) != 0) {
         $category->recent_lesson_id = $category->recent_lessons[0]->id;
         $category->latest_lesson_length = count($category->recent_lessons[0]->page_views);
+        $category->recent_time_remaining = now()->diffForHumans($category->recent_lessons[0]->countdown, true);
+        $category->recent_time_ended = now()->diff($category->recent_lessons[0]->countdown)->invert;
       } else {
         $category->latest_lesson_length = 0;
       }
       unset($category->recent_lessons);
       return $category;
     });
-    // dd($filtered_categories);
+    
+    // dd(session()->all());
     return Inertia::render('Student/Category', [
-      'categories' => $categories
+      'categories' => $filtered_categories
     ]);
   }
 }

@@ -18,9 +18,17 @@ class LessonsController extends Controller
     // dd($recent_id, $id, $page);
     $user = Auth::user();
     if (!session()->has($recent_id . $user->username)) {
-      return redirect()->back();
+      return redirect()->route('unauthorized');
     }
-    $lessons = Session::get($recent_id . $user->username);
+
+    $lessons = Session::get($recent_id . $user->username)['lessons'];
+    $session_expiry_date = Session::get($recent_id . $user->username)['expiry_date'];
+
+    //remove session if it expires already
+    if (now()->diff($session_expiry_date)->invert == 1) {
+      Session::forget($recent_id . $user->username);
+    }
+
     $lessons_count = count($lessons);
 
     if (!(($page >= 1) && ($page <= $lessons_count))) {
@@ -59,7 +67,7 @@ class LessonsController extends Controller
   public function store($id, $page)
   {
     $user = Auth::user();
-    
+
     // creating recent lesson when user visits new lesson
     $recent_lesson = RecentLesson::create([
       'category_id' => $id,
@@ -70,7 +78,7 @@ class LessonsController extends Controller
     $category = Category::with('recent_lessons', 'lessons', 'lessons.choices', 'lessons.correct_answer', 'lessons.correct_answer.choice')->findOrFail($id);
     $lesson = $category->lessons()->inRandomOrder()->get();
 
-    session()->put($recent_lesson->id . $user->username, $lesson);
+    session()->put($recent_lesson->id . $user->username, ['lessons' => $lesson, 'expiry_date' => now()->addMinutes(3)]);
 
     return redirect()->route('lesson.index', [$recent_lesson->id, $id, $page]);
   }
