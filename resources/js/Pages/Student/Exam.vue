@@ -10,7 +10,7 @@ export default {
 import { Link, useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
 
-import InputError from "@/Components/InputError.vue";
+import ExamCountdown from "@/Components/ExamCountdown.vue";
 
 const { lesson, choices, current_page, lessons_count, category_id, exam_id } =
     defineProps({
@@ -30,11 +30,19 @@ const form = useForm({
     lesson_id: lesson.id,
     current_page: current_page,
     choice_id: "",
+    not_answered: 0,
 });
 
 const submit = () => {
     form.post(route("exam.answer.store"));
 };
+
+function time_ended_submit() {
+  form.choice_id = 1;
+  form.not_answered = 1;
+  form.post(route("exam.answer.store"));
+}
+
 </script>
 
 <template>
@@ -43,7 +51,7 @@ const submit = () => {
             @submit.prevent="submit"
             class="w-[800px] max-xl:w-full my-10 mb-60 max-sm:mb-20 max-md:mt-20 flex flex-col justify-between relative"
         >
-            <div class="flex flex-col ">
+            <div class="flex flex-col">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <Link :href="route('category.index')" class="px-1 py-1"
@@ -55,6 +63,7 @@ const submit = () => {
                             {{ lesson.category.category_name }}
                         </h1>
                     </div>
+                    <ExamCountdown :time_remaining="lesson.time_remaining" @time_ended_submit="time_ended_submit()"/>
                     <span
                         class="w-fit h-fit px-3 py-3 bg-blue-200 rounded-md text-blue-500 max-md:text-sm max-md:py-2 max-md:px-2"
                         >{{ current_page }}/{{ lessons_count }}</span
@@ -112,12 +121,6 @@ const submit = () => {
                 <div v-else></div>
 
                 <button
-                    :href="
-                        route('test.index', [
-                            category_id,
-                            parseInt(current_page) + 1,
-                        ])
-                    "
                     class="select-none py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
                 >
                     Check

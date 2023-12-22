@@ -26,8 +26,6 @@ const {
     exam_id: String,
 });
 const exit = ref("/img/exit.svg");
-
-
 </script>
 
 <template>
@@ -53,22 +51,29 @@ const exit = ref("/img/exit.svg");
                     >
                 </div>
                 <div class="flex flex-col items-center gap-10 mt-10">
+                  <span v-if="exam_answer.not_answered == 1" class="text-4xl font-medium text-red-500 max-md:text-2xl">Time's up!</span>
                     <p class="text-center text-xl max-md:text-base">
                         {{ lesson.lesson_question }}
                     </p>
-                    <span
-                        v-if="exam_answer.is_correct == 1"
-                        class="text-4xl font-medium text-green-500 max-md:text-2xl"
-                        >Correct!</span
-                    >
-                    <span
-                        v-else
-                        class="text-4xl font-medium text-red-500 max-md:text-2xl"
-                        >Wrong!</span
-                    >
+                    
+                    <div v-if="exam_answer.not_answered == 0">
+                        <span
+                            v-if="exam_answer.is_correct == 1"
+                            class="text-4xl font-medium text-green-500 max-md:text-2xl"
+                            >Correct!</span
+                        >
+                        <span
+                            v-else
+                            class="text-4xl font-medium text-red-500 max-md:text-2xl"
+                            >Wrong!</span
+                        >
+                    </div>
                     <div class="flex flex-col w-full gap-2 items-center">
                         <div
-                            v-if="exam_answer.is_correct == 0"
+                            v-if="
+                                exam_answer.is_correct == 0 &&
+                                exam_answer.not_answered == 0
+                            "
                             class="flex flex-col items-center gap-2 max-md:mb-5"
                         >
                             <span class="max-md:text-sm">Your answer</span>

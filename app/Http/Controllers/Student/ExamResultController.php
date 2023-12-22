@@ -48,7 +48,10 @@ class ExamResultController extends Controller
     $lesson->load('correct_answer');
 
     //check if user choice is correct
-    if ($lesson->correct_answer->choice->id == $request->choice_id) {
+    if ($request->not_answered == 1) {
+      $is_correct = false;
+    }
+    elseif ($lesson->correct_answer->choice->id == $request->choice_id) {
       $is_correct = true;
     } else {
       $is_correct = false;
@@ -59,6 +62,7 @@ class ExamResultController extends Controller
     ], [
       'choice_id' => $request->choice_id,
       'is_correct' => $is_correct,
+      'not_answered' => $request->not_answered,
     ]);
     if (!$e_answer->exists) {
       $e_answer->save();
@@ -76,8 +80,8 @@ class ExamResultController extends Controller
     $lesson = $lessons->skip($page - 1)->first();
     $lesson->load('correct_answer', 'correct_answer.choice');
 
+  
     $exam_answer = ExamAnswer::where('exam_id', $exam_id)->where('lesson_id', $lesson->id)->first();
-
 
     //this prevents the user to go in results page without answering
     if (!$exam_answer) {

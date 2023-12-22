@@ -29,7 +29,7 @@ class ExamController extends Controller
       'category_id' => $request->category_id,
       'user_id' => $user->id,
     ]);
-    $category = Category::with('recent_lesson', 'lessons')->findOrFail($request->category_id);
+    $category = Category::with('lessons')->findOrFail($request->category_id);
     $lesson = $category->lessons()->inRandomOrder()->get();
 
     session()->put($exam->id . $user->username, $lesson);
@@ -53,8 +53,14 @@ class ExamController extends Controller
     $lesson->load('category');
     $lesson->load('choices');
 
+    //set time for each lesson (1min)
+    if (!$lesson->getAttribute('time_ends')) {
+      $lesson->setAttribute('time_ends', now()->addSeconds(15));
+    }
+    $lesson->setAttribute('time_remaining', now()->diff($lesson->time_ends));
+
     $choices = $lesson->choices()->inRandomOrder()->get();
-    // dd($lesson);
+
     return Inertia::render('Student/Exam', [
       'category_id' => $id,
       'lesson' => $lesson,

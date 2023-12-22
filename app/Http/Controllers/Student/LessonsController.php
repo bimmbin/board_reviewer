@@ -41,7 +41,6 @@ class LessonsController extends Controller
 
     // creating page views when user visits specific lesson
     $page_view = PageViews::firstOrNew([
-      'user_id' => $user->id,
       'recent_lesson_id' => $recent_id,
       'category_id' => $id,
       'lesson_id' => $lesson->id

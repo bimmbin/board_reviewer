@@ -13,7 +13,6 @@ class PageViews extends Model
       'category_id',
       'recent_lesson_id',
       'lesson_id',
-      'user_id',
       'page_number'
     ];
   

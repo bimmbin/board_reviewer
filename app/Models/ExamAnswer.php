@@ -14,6 +14,7 @@ class ExamAnswer extends Model
     'lesson_id',
     'choice_id',
     'is_correct',
+    'not_answered',
   ];
 
   public function exam()

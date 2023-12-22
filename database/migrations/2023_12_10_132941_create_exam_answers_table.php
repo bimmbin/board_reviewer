@@ -23,6 +23,7 @@ return new class extends Migration
         ->constrained('lessons')
         ->onDelete('cascade');
       $table->string('is_correct'); //to show scores
+      $table->string('not_answered'); //to show unanswered
       $table->timestamps();
     });
   }
