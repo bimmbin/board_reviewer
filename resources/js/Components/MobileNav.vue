@@ -6,7 +6,6 @@ import DashNav from "@/Components/DashNav.vue";
 import DashDrop from "@/Components/DashDrop.vue";
 import UserInfo from "@/Components/UserInfo.vue";
 
-const close_img = ref("/img/close.svg");
 const logout = ref("/img/logout.svg");
 
 const emit = defineEmits(["close_emit"]);
