@@ -32,7 +32,17 @@ const submit = () => {
                 </h2>
                 <img :src="drop" class="-rotate-90" />
             </div>
-            <form @submit.prevent="submit" class="">
+            <div class="w-full flex items-center justify-between gap-4">
+              <div class="bg-white flex-1 rounded-md flex flex-col items-center py-4 bg-opacity-80 hover:bg-opacity-100 cursor-pointer active:bg-opacity-80 select-none">
+                <h2 class="text-2xl font-medium ">{{ props.major.categories_count }}</h2>
+                <span class="text-xs text-gray-700 ">Lessons</span>
+              </div>
+              <Link :href="route('students.show', props.major.id)" class="bg-white flex-1 rounded-md flex flex-col items-center py-4 bg-opacity-80 hover:bg-opacity-100 cursor-pointer active:bg-opacity-80 select-none">
+                <h2 class="text-2xl font-medium ">{{ props.major.students_count }}</h2>
+                <span class="text-xs text-gray-700 ">Students</span>
+              </Link>
+            </div>
+            <!-- <form @submit.prevent="submit" class="">
                 <input
                     type="file"
                     id="file"
@@ -40,7 +50,7 @@ const submit = () => {
                     accept=".xlsx, .xls"
                 />
                 <button class="bg-white px-3 py-1 rounded-md">submit</button>
-            </form>
+            </form> -->
         </div>
     </div>
 </template>

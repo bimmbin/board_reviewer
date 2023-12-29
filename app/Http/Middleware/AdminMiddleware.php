@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class StudentMiddleware
+class AdminMiddleware
 {
   /**
    * Handle an incoming request.
@@ -18,11 +18,11 @@ class StudentMiddleware
   {
     $user_role = Auth::user()->user_role;
 
-    if (Auth::check() && $user_role !== 'student') {
+    if (Auth::check() && $user_role !== 'admin') {
 
       //redirect them to their own authenticated landing page (add if there are more users)
-      if ($user_role == 'admin') {
-        return redirect()->route('majors.index');
+      if ($user_role == 'student') {
+        return redirect()->route('category.index');
       }
     }
     return $next($request);

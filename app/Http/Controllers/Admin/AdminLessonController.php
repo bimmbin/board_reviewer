@@ -21,6 +21,9 @@ class AdminLessonController extends Controller
   public function index()
   {
     $majors = Major::orderBy('created_at', 'asc')->get();
+    $majors->loadCount('categories');
+    $majors->loadCount('students');
+
     return Inertia::render('Admin/AdminMajors', [
       'majors' => $majors
     ]);

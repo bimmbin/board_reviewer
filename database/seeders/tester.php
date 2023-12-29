@@ -34,6 +34,8 @@ class tester extends Seeder
       'major_id' => '1',
       'first_name' => fake()->firstName(),
       'last_name' => fake()->lastName(),
+      'middle_name' => fake()->lastName(),
+      'student_id' => rand(1000, 9999)."2021",
       'password' => Hash::make('admin123'),
     ]);
     User::create([
@@ -42,6 +44,8 @@ class tester extends Seeder
       'user_role' => 'student',
       'first_name' => fake()->firstName(),
       'last_name' => fake()->lastName(),
+      'middle_name' => fake()->lastName(),
+      'student_id' => rand(1000, 9999)."2021",
       'password' => Hash::make('student123'),
     ]);
     User::create([
@@ -50,10 +54,12 @@ class tester extends Seeder
       'user_role' => 'student',
       'first_name' => fake()->firstName(),
       'last_name' => fake()->lastName(),
+      'middle_name' => fake()->lastName(),
+      'student_id' => rand(1000, 9999)."2021",
       'password' => Hash::make('student123'),
     ]);
 
-
+    User::factory()->count(40)->create();
     // Category::factory()->count(10)
     //   ->has(
     //     Lesson::factory()->count(40)

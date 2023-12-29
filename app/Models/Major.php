@@ -17,7 +17,7 @@ class Major extends Model
   {
     return $this->hasMany(Category::class);
   }
-  public function user()
+  public function students()
   {
     return $this->hasMany(User::class);
   }
