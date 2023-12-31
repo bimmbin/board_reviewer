@@ -65,7 +65,15 @@ Route::middleware(['auth', 'student'])->group(function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
   Route::resource('/admin/majors', AdminLessonController::class);
-  Route::resource('/students', StudentController::class);
+  Route::resource('/students', StudentController::class)->except([
+    'update',
+    'destroy',
+    'create',
+    'edit',
+  ]);;
+  Route::post('/student/store/excel', [StudentController::class, 'store_excel'])->name('students.store.excel');
+  Route::post('/student/update/{id}', [StudentController::class, 'update'])->name('students.update');
+  Route::post('/student/destroy/{id}', [StudentController::class, 'destroy'])->name('students.destroy');
 });
 // Route::get('/student/lessons', [LessonsController::class, 'index'])->name('lessons.index');
 

@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use Inertia\Inertia;
+use Shuchkin\SimpleXLSX;
+use App\Http\Requests\File;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Builder;
@@ -20,11 +23,38 @@ class StudentController extends Controller
   }
 
   /**
-   * Show the form for creating a new resource.
+   * Store a newly created resource using excel.
    */
-  public function create()
+  public function store_excel(File $request)
   {
-    //
+    $reviewers = SimpleXLSX::parse($request->file);
+
+    $counter = 0;
+    foreach ($reviewers->rows() as $row) {
+
+      // Skip the first iteration
+      if ($counter++ == 0) continue;
+
+      $student = User::firstOrNew(
+        [
+          'student_id' => $row[0]
+        ],
+        [
+          'major_id' => 1,
+          'user_role' => 'student',
+          'last_name' => $row[1],
+          'first_name' => $row[2],
+          'middle_name' => $row[3],
+          'username' => $row[1] . $row[0],
+          'password' => Hash::make($row[0])
+        ]
+      );
+      if (!$student->exists) {
+        $student->save();
+      };
+    };
+
+    return redirect()->back();
   }
 
   /**
@@ -106,7 +136,23 @@ class StudentController extends Controller
    */
   public function update(Request $request, string $id)
   {
-    //
+    $request->validate([
+      'student_id' => ['required', Rule::unique('users')->ignore($id)],
+      'first_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
+      'last_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
+      'middle_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
+    ]);
+    
+    $user = User::findOrFail($id);
+
+    //User update
+    $user->student_id = $request->student_id;
+    $user->first_name = $request->first_name;
+    $user->last_name = $request->last_name;
+    $user->middle_name = $request->middle_name;
+    $user->save();
+
+    return redirect()->back();
   }
 
   /**
@@ -114,6 +160,10 @@ class StudentController extends Controller
    */
   public function destroy(string $id)
   {
-    //
+    $user = User::findOrFail($id);
+    $user->delete();
+
+    return redirect()->back();
+
   }
 }

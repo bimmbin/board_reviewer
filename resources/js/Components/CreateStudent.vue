@@ -17,85 +17,96 @@ const form = useForm({
 
 const submit = () => {
     form.post(route("students.store"), {
-        onSuccess: () => emit('close_emit'),
+        onSuccess: () => emit("close_emit"),
     });
 };
 </script>
 
 <template>
-    <h1 class="text-xl font-semibold mt-10 max-md:mt-20 text-blue-800 max-md:mb-2 border-t border-blue-300 pt-5">
-        Create manually
-    </h1>
-    <form
-        @submit.prevent="submit"
-        class="mt-3 flex flex-col gap-3 border-b border-blue-300 pb-5"
-    >
-        <div class="flex gap-3">
-            <div class="flex-1">
-                <InputLabel for="student_id" value="Student ID" />
+    <div class="">
+        <h1 class="text-xl font-semibold text-blue-800 max-md:mb-2">
+            Create manually
+        </h1>
+        <form
+            @submit.prevent="submit"
+            class="mt-3 flex flex-col gap-3  pb-5"
+        >
+            <div class="flex gap-3">
+                <div class="flex-1">
+                    <InputLabel for="student_id" value="Student ID" />
 
-                <TextInput
-                    id="student_id"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.student_id"
-                    required
-                    autofocus
-                    autocomplete="student_id"
-                />
+                    <TextInput
+                        id="student_id"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.student_id"
+                        required
+                        autofocus
+                        autocomplete="student_id"
+                    />
 
-                <InputError class="mt-2" :message="form.errors.student_id" />
+                    <InputError
+                        class="mt-2"
+                        :message="form.errors.student_id"
+                    />
+                </div>
+                <div class="flex-1">
+                    <InputLabel for="first_name" value="First Name" />
+
+                    <TextInput
+                        id="first_name"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.first_name"
+                        required
+                        autofocus
+                        autocomplete="first_name"
+                    />
+
+                    <InputError
+                        class="mt-2"
+                        :message="form.errors.first_name"
+                    />
+                </div>
             </div>
-            <div class="flex-1">
-                <InputLabel for="first_name" value="First Name" />
 
-                <TextInput
-                    id="first_name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.first_name"
-                    required
-                    autofocus
-                    autocomplete="first_name"
-                />
+            <!-- second row  -->
+            <div class="flex gap-3">
+                <div class="flex-1">
+                    <InputLabel for="last_name" value="Last Name" />
 
-                <InputError class="mt-2" :message="form.errors.first_name" />
+                    <TextInput
+                        id="last_name"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.last_name"
+                        required
+                        autofocus
+                        autocomplete="last_name"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.last_name" />
+                </div>
+                <div class="flex-1">
+                    <InputLabel for="middle_name" value="Middle Name" />
+
+                    <TextInput
+                        id="middle_name"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.middle_name"
+                        required
+                        autofocus
+                        autocomplete="middle_name"
+                    />
+
+                    <InputError
+                        class="mt-2"
+                        :message="form.errors.middle_name"
+                    />
+                </div>
             </div>
-        </div>
-
-        <!-- second row  -->
-        <div class="flex gap-3">
-            <div class="flex-1">
-                <InputLabel for="last_name" value="Last Name" />
-
-                <TextInput
-                    id="last_name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.last_name"
-                    required
-                    autofocus
-                    autocomplete="last_name"
-                />
-
-                <InputError class="mt-2" :message="form.errors.last_name" />
-            </div>
-            <div class="flex-1">
-                <InputLabel for="middle_name" value="Middle Name" />
-
-                <TextInput
-                    id="middle_name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.middle_name"
-                    required
-                    autofocus
-                    autocomplete="middle_name"
-                />
-
-                <InputError class="mt-2" :message="form.errors.middle_name" />
-            </div>
-        </div>
-        <PrimaryButton class="w-full">Create Account</PrimaryButton>
-    </form>
+            <PrimaryButton class="w-full">Create Account</PrimaryButton>
+        </form>
+    </div>
 </template>
