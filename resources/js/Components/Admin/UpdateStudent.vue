@@ -33,10 +33,10 @@ const submit = () => {
 
 <template>
     <div 
-        class="w-full h-screen absolute top-0 left-0 px-10 py-5 bg-black bg-opacity-70 flex items-center justify-center cursor-default"
+        class="w-full h-screen absolute top-0 left-0 px-10 max-md:px-5 py-5 bg-black bg-opacity-70 flex items-center justify-center cursor-default"
     >
         <div
-            class="w-[900px] mx-auto max-2xl:w-[800px] max-xl:w-[700px] max-md:w-screen max-md:px-5 py-5 max-sm:py-0 text-black max-xl:px-10 bg-blue-100 rounded-xl px-5"
+            class="w-[900px] mx-auto max-2xl:w-[800px] max-xl:w-[700px] max-md:w-screen max-md:px-5 py-5 max-sm:py-5 text-black max-xl:px-10 bg-blue-100 rounded-xl px-5"
         >
             <!-- Dialog Content -->
             <!-- Edit header -->

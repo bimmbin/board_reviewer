@@ -19,7 +19,7 @@ const show_nav = ref(false);
     <div class="flex font-pop bg-portbg ">
         <!-- navigation -->
         <div
-            class="h-screen bg-blue-500 flex flex-col max-md:hidden  "
+            class="h-screen bg-blue-500 flex flex-col max-md:hidden sticky top-0 left-0 "
         >
             <!-- Logo -->
             <div class="flex justify-center gap-2 px-3 py-5">
@@ -93,7 +93,7 @@ const show_nav = ref(false);
             </Link>
         </div>
         <div
-            class="w-[1180px] min-h-screen  mx-auto max-2xl:w-[1000px] max-xl:w-[1000px] max-md:w-screen max-md:px-5 py-5 max-sm:py-0 text-black max-xl:px-10"
+            class="w-[1180px] min-h-screen  mx-auto max-2xl:w-[1000px] max-xl:w-[900px] max-lg:w-screen max-md:px-5 py-5 max-sm:py-0 text-black max-xl:px-10"
         >
             <!-- Header -->
             <div

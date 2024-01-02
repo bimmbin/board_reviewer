@@ -39,30 +39,33 @@ watch(search, (value) => {
 </script>
 
 <template>
-    <div class="w-full flex items-center justify-between">
-        <div
-            class="flex items-center gap-10"
+    <div
+        class="w-full flex items-center justify-between gap-5 max-lg:flex-col max-lg:items-start max-md:gap-2"
+    >
+        <Link
+            :href="route('students.show', major_id)"
+            class="text-3xl font-semibold max-md:mt-20 text-blue-800 max-md:mb-2 max-md:text-2xl"
             :class="{ 'opacity-20': show_details }"
         >
-            <Link
-                :href="route('students.show', major_id)"
-                class="text-3xl font-semibold max-md:mt-20 text-blue-800 max-md:mb-2"
-            >
-                Students
-            </Link>
+            Students
+        </Link>
+        <div
+            class="w-full flex-1 flex items-center justify-between gap-10 max-md:gap-3"
+        >
             <input
                 v-model="search"
                 type="text"
                 placeholder="Search...."
-                class="rounded-md border border-blue-300 w-[25rem]"
+                class="rounded-md border border-blue-300 w-[25rem] max-md:text-sm max-md:w-full"
+                :class="{ 'opacity-20': show_details }"
             />
-        </div>
-        <div
-            @click="show_details = !show_details"
-            class="bg-blue-500 text-white px-5 py-3 rounded-md select-none cursor-pointer"
-        >
-            <span v-if="!show_details">Create new</span>
-            <span v-else>Close</span>
+            <div
+                @click="show_details = !show_details"
+                class="bg-blue-500 text-white px-5 py-3 rounded-md select-none cursor-pointer max-md:text-sm max-md:px-3 max-md:py-2 whitespace-nowrap border border-blue-500 max-lg:-translate-x-36 max-md:-translate-x-0"
+            >
+                <span v-if="!show_details">Create new</span>
+                <span v-else>Close</span>
+            </div>
         </div>
     </div>
     <Collapse :when="show_details">
@@ -84,20 +87,28 @@ watch(search, (value) => {
     >
         <table
             id="dataTable"
-            class="table-auto text-center w-[1220px] max-lg:w-[1080px] max-sm:w-[900px] text-lg xl:w-full"
+            class="table-auto text-center w-[1220px] max-lg:w-[1080px] max-lg:mr-24 max-md:mr-0 max max-sm:w-[900px] text-lg"
             style="font-size: clamp(0.875rem, 0.75rem + 0.3125vw, 1.125rem)"
         >
             <thead>
                 <tr
                     class="space-y-3 text-sm md:text-base border border-blue-500 lg:text-lg text-start text-btn bg-blue-500 text-white"
                 >
-                    <th class="text-left pl-5 py-5 font-semibold">
+                    <th class="text-left pl-5 py-5 max-md:py-3 font-semibold">
                         Student ID
                     </th>
-                    <th class="text-left py-5 font-semibold">Last Name</th>
-                    <th class="text-left py-5 font-semibold">First Name</th>
-                    <th class="text-left py-5 font-semibold">Middle Name</th>
-                    <th class="text-left py-5 font-semibold">Action</th>
+                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                        Last Name
+                    </th>
+                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                        First Name
+                    </th>
+                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                        Middle Name
+                    </th>
+                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                        Action
+                    </th>
                 </tr>
             </thead>
 
@@ -113,7 +124,7 @@ watch(search, (value) => {
                     <td>
                         <div class="flex items-center gap-3">
                             <div class="">
-                                <EditStudent :student="student"/>
+                                <EditStudent :student="student" />
                             </div>
                         </div>
                     </td>
