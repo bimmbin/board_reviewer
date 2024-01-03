@@ -2,11 +2,11 @@
 import { ref } from "vue";
 import { useForm, Link } from "@inertiajs/vue3";
 
-import UpdateStudent from "@/Components/Admin/UpdateStudent.vue";
 import DeleteUser from "@/Components/Admin/DeleteUser.vue";
+import UpdateStaff from "@/Components/Admin/UpdateStaff.vue";
 
-const { student } = defineProps({
-    student: Object,
+const { staff } = defineProps({
+    staff: Object,
 });
 
 const show_dialog = ref(false);
@@ -32,10 +32,10 @@ const exit = ref("/img/exit.svg");
             <img :src="delete_icon" alt="" />
         </div>
     </div>
-    <DeleteUser v-if="show_delete" :user_id="student.user_id" @close="show_delete = !show_delete"/>
-    <UpdateStudent
+    <DeleteUser v-if="show_delete" :user_id="staff.user_id" @close="show_delete = !show_delete"/>
+    <UpdateStaff
         v-if="show_dialog"
-        :student="student"
+        :staff="staff"
         @close_dialog="show_dialog = !show_dialog"
     />
 </template>

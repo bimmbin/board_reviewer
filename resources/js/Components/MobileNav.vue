@@ -22,50 +22,86 @@ const chcc_logo = ref("/img/chcc_logo.png");
         >
             <!-- Logo -->
             <div class="flex justify-center">
-              <Link @click="$emit('close_emit')" :href="route('category.index')"><img :src="chcc_logo" alt="" class="h-32" /></Link>
+                <Link
+                    @click="$emit('close_emit')"
+                    :href="route('category.index')"
+                    ><img :src="chcc_logo" alt="" class="h-32"
+                /></Link>
             </div>
             <div class="flex flex-col gap-20 mt-10">
                 <UserInfo></UserInfo>
 
-                <!-- navigation -->
-                <div class="flex flex-col sticky left-0 top-0">
+                <!-- admin navigation -->
+                <div
+                    v-if="$page.props.auth.user.user_role == 'admin'"
+                    class="mt-20"
+                >
                     <DashNav
                         image="project"
-                        nav_name="Lessons"
-                        :href="route('category.index')"
+                        nav_name="Majors"
+                        :href="route('majors.index')"
                         @click="$emit('close_emit')"
-                        :active="$page.url.startsWith('/student/lessons')"
+                        :active="$page.url.startsWith('/admin/majors')"
                     />
                     <DashNav
                         image="project"
-                        nav_name="Exam"
-                        :href="route('exam.index')"
+                        nav_name="Instructors"
+                        :href="route('instructors.index')"
                         @click="$emit('close_emit')"
-                        :active="$page.url.startsWith('/student/exam/categories')"
+                        :active="$page.url.startsWith('/instructors')"
                     />
-                    <DashDrop image="project" nav_name="History">
-                        <DashNav
-                            image="project"
-                            nav_name="Lesson attempts"
-                            :href="route('recent.lesson.index')"
-                            @click="$emit('close_emit')"
-                            :active="
-                                $page.url.startsWith('/student/recents/lessons')
-                            "
-                            :sub_nav="true"
-                        />
-                        <DashNav
-                            image="project"
-                            nav_name="Exams attempts"
-                            :href="route('recent.exam.index')"
-                            @click="$emit('close_emit')"
-                            :active="
-                                $page.url.startsWith('/student/recents/exams')
-                            "
-                            :sub_nav="true"
-                        />
-                    </DashDrop>
                 </div>
+                <div
+                    v-if="$page.props.auth.user.user_role == 'student'"
+                    class="mt-20"
+                >
+                    <!-- student navigation -->
+                    <div class="flex flex-col sticky left-0 top-0">
+                        <DashNav
+                            image="project"
+                            nav_name="Lessons"
+                            :href="route('category.index')"
+                            @click="$emit('close_emit')"
+                            :active="$page.url.startsWith('/student/lessons')"
+                        />
+                        <DashNav
+                            image="project"
+                            nav_name="Exam"
+                            :href="route('exam.index')"
+                            @click="$emit('close_emit')"
+                            :active="
+                                $page.url.startsWith('/student/exam/categories')
+                            "
+                        />
+                        <DashDrop image="project" nav_name="History">
+                            <DashNav
+                                image="project"
+                                nav_name="Lesson attempts"
+                                :href="route('recent.lesson.index')"
+                                @click="$emit('close_emit')"
+                                :active="
+                                    $page.url.startsWith(
+                                        '/student/recents/lessons'
+                                    )
+                                "
+                                :sub_nav="true"
+                            />
+                            <DashNav
+                                image="project"
+                                nav_name="Exams attempts"
+                                :href="route('recent.exam.index')"
+                                @click="$emit('close_emit')"
+                                :active="
+                                    $page.url.startsWith(
+                                        '/student/recents/exams'
+                                    )
+                                "
+                                :sub_nav="true"
+                            />
+                        </DashDrop>
+                    </div>
+                </div>
+
                 <Link
                     v-if="$page.props.auth.user"
                     :href="route('logout')"

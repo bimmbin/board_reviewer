@@ -4,15 +4,15 @@ import { useForm } from "@inertiajs/vue3";
 
 import SureDialog from "@/Components/SureDialog.vue";
 
-const { student_id } = defineProps({
-    student_id: String,
+const { user_id } = defineProps({
+    user_id: String,
 });
 
 const form = useForm({});
 const emit = defineEmits(["close"]);
 
 const submit = () => {
-    form.post(route("students.destroy", student_id), {
+    form.post(route("students.destroy", user_id), {
         onFinish: () => emit("close"),
     });
 };

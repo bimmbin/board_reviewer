@@ -23,8 +23,8 @@ class RecentLesson extends Model
   {
     return $this->belongsTo(Category::class);
   }
-  public function user()
+  public function student_profile()
   {
-    return $this->belongsTo(User::class);
+    return $this->belongsTo(StudentProfile::class);
   }
 }

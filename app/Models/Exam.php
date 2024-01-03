@@ -15,9 +15,9 @@ class Exam extends Model
     'category_id',
   ];
 
-  public function user()
+  public function student_profile()
   {
-    return $this->belongsTo(User::class);
+    return $this->belongsTo(StudentProfile::class);
   }
 
   public function category()

@@ -19,6 +19,6 @@ class Major extends Model
   }
   public function students()
   {
-    return $this->hasMany(User::class);
+    return $this->hasMany(StudentProfile::class);
   }
 }

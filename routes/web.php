@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminLessonController;
+use App\Http\Controllers\Admin\InstructorController;
 use App\Http\Controllers\Admin\StudentController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
@@ -65,6 +66,8 @@ Route::middleware(['auth', 'student'])->group(function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
   Route::resource('/admin/majors', AdminLessonController::class);
+
+  //Students
   Route::resource('/students', StudentController::class)->except([
     'update',
     'destroy',
@@ -74,6 +77,17 @@ Route::middleware(['auth', 'admin'])->group(function () {
   Route::post('/student/store/excel', [StudentController::class, 'store_excel'])->name('students.store.excel');
   Route::post('/student/update/{id}', [StudentController::class, 'update'])->name('students.update');
   Route::post('/student/destroy/{id}', [StudentController::class, 'destroy'])->name('students.destroy');
+
+
+  //Instructors
+  Route::resource('/instructors', InstructorController::class)->except([
+    'update',
+    'destroy',
+    'create',
+    'edit',
+  ]);;
+  Route::post('/instructors/update/{id}', [InstructorController::class, 'update'])->name('instructors.update');
+  Route::post('/instructors/destroy/{id}', [InstructorController::class, 'destroy'])->name('instructors.destroy');
 });
 // Route::get('/student/lessons', [LessonsController::class, 'index'])->name('lessons.index');
 

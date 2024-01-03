@@ -22,12 +22,8 @@ class UserFactory extends Factory
     {
         return [
             'username' => fake()->unique()->safeEmail(),
-            'major_id' => '1',
             'user_role' => 'student',
-            'first_name' => fake()->firstName(),
-            'last_name' => fake()->lastName(),
-            'middle_name' => fake()->lastName(),
-            'student_id' => rand(1000, 9999)."2021",
+            
             'password' => static::$password ??= Hash::make('password'),
         ];
     }

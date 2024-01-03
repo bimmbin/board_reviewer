@@ -11,15 +11,18 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('recent_lessons', function (Blueprint $table) {
+    Schema::create('student_profiles', function (Blueprint $table) {
       $table->id();
-      $table->foreignId('category_id')
-        ->constrained('categories')
+      $table->foreignId('major_id')
+        ->constrained('majors')
         ->onDelete('cascade');
-      $table->foreignId('student_profile_id')
-        ->constrained('student_profiles')
+      $table->foreignId('user_id')
+        ->constrained('users')
         ->onDelete('cascade');
-      $table->timestamp('countdown');
+      $table->string('first_name');
+      $table->string('last_name');
+      $table->string('middle_name');
+      $table->string('student_number');
       $table->timestamps();
     });
   }
@@ -29,6 +32,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('recent_lessons');
+    Schema::dropIfExists('student_profiles');
   }
 };

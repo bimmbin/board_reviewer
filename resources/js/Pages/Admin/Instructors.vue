@@ -12,14 +12,13 @@ import { router, Link } from "@inertiajs/vue3";
 import { Collapse } from "vue-collapsed";
 
 import Pagination from "@/Components/Pagination.vue";
-import CreateStudent from "@/Components/CreateStudent.vue";
+import CreateInstructor from "@/Components/Admin/CreateInstructor.vue";
 import UploadExcel from "@/Components/UploadExcel.vue";
-import EditStudent from "@/Components/Admin/EditStudent.vue";
+import EditStaff from "@/Components/Admin/EditStaff.vue";
 
-const { students, major_id, filters } = defineProps({
-    students: Object,
+const { instructors, filters } = defineProps({
+    instructors: Object,
     filters: Object,
-    major_id: String,
 });
 
 let show_details = ref(false);
@@ -28,7 +27,7 @@ const search = ref(filters.search);
 
 watch(search, (value) => {
     router.get(
-        ("/students/", major_id),
+        ("/instructors"),
         { search: value },
         {
             preserveState: true,
@@ -43,11 +42,11 @@ watch(search, (value) => {
         class="w-full flex items-center justify-between gap-5 max-lg:flex-col max-lg:items-start max-md:gap-2"
     >
         <Link
-            :href="route('students.show', major_id)"
+            :href="route('instructors.index')"
             class="text-3xl font-semibold max-md:mt-20 text-blue-800 max-md:mb-2 max-md:text-2xl"
             :class="{ 'opacity-20': show_details }"
         >
-            Students
+            Instructors
         </Link>
         <div
             class="w-full flex-1 flex items-center justify-between gap-10 max-md:gap-3"
@@ -71,13 +70,10 @@ watch(search, (value) => {
     <Collapse :when="show_details">
         <div class="flex flex-col gap-10 bg-blue-100 px-5 mt-5">
             <!-- Create using excel form -->
-            <UploadExcel @close_it="show_details = !show_details" />
-            <div class="flex items-center gap-2">
-                <span class="text-blue-800 font-medium">or</span>
-                <div class="w-full h-fit border-t border-blue-300"></div>
-            </div>
+            <!-- <UploadExcel @close_it="show_details = !show_details" /> -->
+       
             <!-- Create manual form -->
-            <CreateStudent :major_id="major_id" @close_emit="show_details = !show_details" />
+            <CreateInstructor @close_emit="show_details = !show_details" />
         </div>
     </Collapse>
 
@@ -95,7 +91,7 @@ watch(search, (value) => {
                     class="space-y-3 text-sm md:text-base border border-blue-500 lg:text-lg text-start text-btn bg-blue-500 text-white"
                 >
                     <th class="text-left pl-5 py-5 max-md:py-3 font-semibold">
-                        Student ID
+                        Employee ID
                     </th>
                     <th class="text-left py-5 max-md:py-3 font-semibold">
                         Last Name
@@ -114,23 +110,23 @@ watch(search, (value) => {
 
             <tbody class="text-left capitalize">
                 <tr
-                    v-for="student in students.data"
+                    v-for="instructor in instructors.data"
                     class="border border-blue-300 text-sm md:text-base lg:text-lg font-regular"
                 >
-                    <td class="pl-5 py-3">{{ student.student_number }}</td>
-                    <td>{{ student.last_name }}</td>
-                    <td>{{ student.first_name }}</td>
-                    <td>{{ student.middle_name }}</td>
+                    <td class="pl-5 py-3">{{ instructor.employee_number }}</td>
+                    <td>{{ instructor.last_name }}</td>
+                    <td>{{ instructor.first_name }}</td>
+                    <td>{{ instructor.middle_name }}</td>
                     <td>
                         <div class="flex items-center gap-3">
                             <div class="">
-                                <EditStudent :student="student" />
+                                <EditStaff :staff="instructor" />
                             </div>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <Pagination :links="students.links" />
+        <Pagination :links="instructors.links" />
     </div>
 </template>

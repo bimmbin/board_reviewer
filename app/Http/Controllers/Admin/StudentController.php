@@ -9,6 +9,7 @@ use App\Http\Requests\File;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use App\Models\StudentProfile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -37,7 +38,7 @@ class StudentController extends Controller
 
       $student = User::firstOrNew(
         [
-          'student_id' => $row[0]
+          'student_number' => $row[0]
         ],
         [
           'major_id' => 1,
@@ -63,28 +64,40 @@ class StudentController extends Controller
   public function store(Request $request)
   {
     $request->validate([
-      'student_id' => 'required|integer|unique:' . User::class,
+      'student_number' => 'required|integer|unique:' . StudentProfile::class,
       'first_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
       'last_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
       'middle_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
     ]);
 
-    $student = User::firstOrNew(
+    //user
+    $student_user = User::firstOrNew(
+      ['username' => $request->last_name . $request->student_number],
       [
-        'student_id' => $request->student_id
+        'user_role' => 'student',
+        'password' => Hash::make('student123'),
+      ]
+    );
+    if (!$student_user->exists) {
+      $student_user->save();
+    };
+
+    //profile
+    $student_profile = StudentProfile::firstOrNew(
+      [
+        'user_id' => $student_user->id,
       ],
       [
-        'major_id' => 1,
+        'major_id' => $request->major_id,
         'user_role' => 'student',
         'first_name' => $request->first_name,
         'last_name' => $request->last_name,
         'middle_name' => $request->middle_name,
-        'username' => $request->last_name . $request->student_id,
-        'password' => Hash::make($request->student_id)
+        'student_number' => rand(1000, 9999) . "2021",
       ]
     );
-    if (!$student->exists) {
-      $student->save();
+    if (!$student_profile->exists) {
+      $student_profile->save();
     };
 
     return redirect()->back();
@@ -96,13 +109,13 @@ class StudentController extends Controller
   public function show(Request $request, string $id)
   {
 
-    $students = User::whereHas('major', function (Builder $query) use ($id) {
+    $students = StudentProfile::whereHas('major', function (Builder $query) use ($id) {
       $query->where('id', $id);
-    })->when($request->input('search'), function ($query, $search) {
+    })->with('user')->when($request->input('search'), function ($query, $search) {
       $query->where('first_name', 'like', "%{$search}%")
         ->orWhere('last_name', 'like', "%{$search}%")
         ->orWhere('middle_name', 'like', "%{$search}%")
-        ->orWhere('student_id', 'like', "%{$search}%");
+        ->orWhere('student_number', 'like', "%{$search}%");
     })->latest()
       ->paginate(10)
       ->withQueryString()
@@ -112,7 +125,8 @@ class StudentController extends Controller
           'first_name' => $item->first_name,
           'last_name' => $item->last_name,
           'middle_name' => $item->middle_name,
-          'student_id' => $item->student_id,
+          'student_number' => $item->student_number,
+          'user_id' => $item->user->id,
         ];
       });
 
@@ -137,20 +151,20 @@ class StudentController extends Controller
   public function update(Request $request, string $id)
   {
     $request->validate([
-      'student_id' => ['required', Rule::unique('users')->ignore($id)],
+      'student_number' => ['required', Rule::unique('student_profiles')->ignore($id)],
       'first_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
       'last_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
       'middle_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
     ]);
-    
-    $user = User::findOrFail($id);
 
-    //User update
-    $user->student_id = $request->student_id;
-    $user->first_name = $request->first_name;
-    $user->last_name = $request->last_name;
-    $user->middle_name = $request->middle_name;
-    $user->save();
+    $student_profile = StudentProfile::findOrFail($id);
+
+    //StudentProfile update
+    $student_profile->student_number = $request->student_number;
+    $student_profile->first_name = $request->first_name;
+    $student_profile->last_name = $request->last_name;
+    $student_profile->middle_name = $request->middle_name;
+    $student_profile->save();
 
     return redirect()->back();
   }
@@ -164,6 +178,5 @@ class StudentController extends Controller
     $user->delete();
 
     return redirect()->back();
-
   }
 }

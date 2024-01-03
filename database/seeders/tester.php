@@ -8,6 +8,8 @@ use App\Models\Choice;
 use App\Models\Lesson;
 use App\Models\Category;
 use App\Models\CorrectAnswer;
+use App\Models\StaffProfile;
+use App\Models\StudentProfile;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\Sequence;
@@ -28,38 +30,54 @@ class tester extends Seeder
       ]);
     }
 
-    User::create([
+    $admin = User::create([
       'username' => 'admin',
       'user_role' => 'admin',
-      'major_id' => '1',
-      'first_name' => fake()->firstName(),
-      'last_name' => fake()->lastName(),
-      'middle_name' => fake()->lastName(),
-      'student_id' => rand(1000, 9999)."2021",
       'password' => Hash::make('admin123'),
     ]);
-    User::create([
-      'major_id' => '1',
-      'username' => 'student1',
-      'user_role' => 'student',
+    StaffProfile::create([
+      'user_id' => $admin->id,
       'first_name' => fake()->firstName(),
       'last_name' => fake()->lastName(),
       'middle_name' => fake()->lastName(),
-      'student_id' => rand(1000, 9999)."2021",
-      'password' => Hash::make('student123'),
-    ]);
-    User::create([
-      'major_id' => '1',
-      'username' => 'student2',
-      'user_role' => 'student',
-      'first_name' => fake()->firstName(),
-      'last_name' => fake()->lastName(),
-      'middle_name' => fake()->lastName(),
-      'student_id' => rand(1000, 9999)."2021",
-      'password' => Hash::make('student123'),
+      'employee_number' => rand(1000, 9999) . "2021",
     ]);
 
-    User::factory()->count(40)->create();
+
+    for ($i = 0; $i < 40; $i++) {
+      $student = User::create([
+        'username' => 'student' . $i,
+        'user_role' => 'student',
+        'password' => Hash::make('student123'),
+      ]);
+
+      StudentProfile::create([
+        'user_id' => $student->id,
+        'major_id' => 1,
+        'first_name' => fake()->firstName(),
+        'last_name' => fake()->lastName(),
+        'middle_name' => fake()->lastName(),
+        'student_number' => rand(1000, 9999) . "2021",
+      ]);
+    }
+
+    for ($i = 0; $i < 5; $i++) {
+      $instructor = User::create([
+        'username' => 'instructor' . $i,
+        'user_role' => 'instructor',
+        'password' => Hash::make('instructor123'),
+      ]);
+
+      StaffProfile::create([
+        'user_id' => $instructor->id,
+        'first_name' => fake()->firstName(),
+        'last_name' => fake()->lastName(),
+        'middle_name' => fake()->lastName(),
+        'employee_number' => rand(1000, 9999) . "2021",
+      ]);
+    }
+
+    // User::factory()->count(40)->create();
     // Category::factory()->count(10)
     //   ->has(
     //     Lesson::factory()->count(40)

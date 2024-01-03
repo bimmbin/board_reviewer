@@ -13,19 +13,20 @@ const exit = ref("/img/exit.svg");
 const edit_icon = ref("/img/edit.svg");
 const delete_icon = ref("/img/delete.svg");
 
-const { student } = defineProps({
-    student: Object,
+const { staff } = defineProps({
+    staff: Object,
 });
 
 const form = useForm({
-    student_number: student.student_number,
-    first_name: student.first_name,
-    last_name: student.last_name,
-    middle_name: student.middle_name,
+    user_id: staff.user_id,
+    employee_number: staff.employee_number,
+    first_name: staff.first_name,
+    last_name: staff.last_name,
+    middle_name: staff.middle_name,
 });
 
 const submit = () => {
-    form.post(route("students.update", student.id), {
+    form.post(route("instructors.update", staff.id), {
         onSuccess: () => emit('close_dialog'),
     });
 };
@@ -56,21 +57,21 @@ const submit = () => {
             >
                 <div class="flex gap-3">
                     <div class="flex-1">
-                        <InputLabel for="student_number" value="Student ID" />
+                        <InputLabel for="employee_number" value="Employee ID" />
 
                         <TextInput
-                            id="student_number"
+                            id="employee_number"
                             type="text"
                             class="mt-1 block w-full"
-                            v-model="form.student_number"
+                            v-model="form.employee_number"
                             required
                             autofocus
-                            autocomplete="student_number"
+                            autocomplete="employee_number"
                         />
 
                         <InputError
                             class="mt-2"
-                            :message="form.errors.student_number"
+                            :message="form.errors.employee_number"
                         />
                     </div>
                     <div class="flex-1">

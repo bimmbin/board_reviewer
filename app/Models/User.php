@@ -19,14 +19,10 @@ class User extends Authenticatable
    */
   protected $fillable = [
     // 'name',
-    'major_id',
     'username',
     'password',
     'user_role',
-    'first_name',
-    'last_name',
-    'middle_name',
-    'student_id',
+  
   ];
 
   /**
@@ -49,12 +45,5 @@ class User extends Authenticatable
     'password' => 'hashed',
   ];
 
-  public function page_views()
-  {
-    return $this->hasMany(PageViews::class);
-  }
-  public function major()
-  {
-    return $this->belongsTo(Major::class);
-  }
+  
 }
