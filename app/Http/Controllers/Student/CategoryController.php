@@ -15,11 +15,11 @@ class CategoryController extends Controller
   {
     // $categories = Category::with('page_views', 'lessons')->get();
     $user = Auth::user();
-    $user_id = Auth::user()->id;
+    $student_profile_id = Auth::user()->student_profile->id;
 
-    $categories = Category::with(['recent_lessons' => function ($query) use ($user_id) {
-      $query->where('user_id', $user_id)->latest();
-    }])->where('major_id', $user->major->id)->get();
+    $categories = Category::with(['recent_lessons' => function ($query) use ($student_profile_id) {
+      $query->where('student_profile_id', $student_profile_id)->latest();
+    }])->where('major_id', $user->student_profile->major->id)->get();
     $categories->loadCount('lessons');
 
     //filtering categories if the user already has a finished recent lesson

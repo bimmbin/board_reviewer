@@ -11,7 +11,7 @@ class RecentLesson extends Model
 
   protected $fillable = [
     'category_id',
-    'user_id',
+    'student_profile_id',
     'countdown',
   ];
 

@@ -11,7 +11,7 @@ class Exam extends Model
   use HasFactory;
 
   protected $fillable = [
-    'user_id',
+    'student_profile_id',
     'category_id',
   ];
 

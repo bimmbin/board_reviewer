@@ -66,11 +66,11 @@ class LessonsController extends Controller
   public function store($id, $page)
   {
     $user = Auth::user();
-
+    
     // creating recent lesson when user visits new lesson
     $recent_lesson = RecentLesson::create([
       'category_id' => $id,
-      'user_id' => $user->id,
+      'student_profile_id' => $user->student_profile->id,
       'countdown' => now()->addMinutes(3),
     ]);
 

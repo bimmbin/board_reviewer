@@ -14,13 +14,13 @@ class RecentExamController extends Controller
 {
   public function index()
   {
-    $user_id = Auth::user()->id;
+    $user_id = Auth::user()->student_profile->id;
 
     $recent_exams = Exam::with(['category' => function ($query) {
       $query->withCount('lessons'); //this counts the grandchild relation
     }])->withCount(['exam_answers' => function (Builder $query) {
       $query->where('is_correct', '1');
-    }])->where('user_id', $user_id)->latest()->get();
+    }])->where('student_profile_id', $user_id)->latest()->get();
 
     //added time_taken
     $filtered_recent_exams  = $recent_exams->map(function ($exam) {

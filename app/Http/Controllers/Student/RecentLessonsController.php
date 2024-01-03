@@ -17,10 +17,10 @@ class RecentLessonsController extends Controller
   {
     // $recent_lesson12321 = RecentLesson::findOrFail(1)->countdown;
     // dd();
-    $user_id = Auth::user()->id;
+    $user_id = Auth::user()->student_profile->id;
 
 
-    $recent_lessons = RecentLesson::with('category', 'category.lessons', 'page_views')->where('user_id', $user_id)->latest()->get();
+    $recent_lessons = RecentLesson::with('category', 'category.lessons', 'page_views')->where('student_profile_id', $user_id)->latest()->get();
     //filtering to determine if countdown is ended
     $filtered_recent_lessons  = $recent_lessons->map(function ($recent_lesson) {
 

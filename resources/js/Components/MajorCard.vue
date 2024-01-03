@@ -42,7 +42,7 @@ const submit = () => {
                 <span class="text-xs text-gray-700 ">Students</span>
               </Link>
             </div>
-            <!-- <form @submit.prevent="submit" class="">
+            <form @submit.prevent="submit" class="">
                 <input
                     type="file"
                     id="file"
@@ -50,7 +50,7 @@ const submit = () => {
                     accept=".xlsx, .xls"
                 />
                 <button class="bg-white px-3 py-1 rounded-md">submit</button>
-            </form> -->
+            </form>
         </div>
     </div>
 </template>

@@ -15,7 +15,7 @@ class ExamController extends Controller
   public function index()
   {
     $user = Auth::user();
-    $categories = Category::withCount('lessons')->where('major_id', $user->major_id)->get();
+    $categories = Category::withCount('lessons')->where('major_id', $user->student_profile->major_id)->get();
 
     return Inertia::render('Student/ExamCategories', [
       'categories' => $categories
@@ -27,7 +27,7 @@ class ExamController extends Controller
     $user = Auth::user();
     $exam = Exam::create([
       'category_id' => $request->category_id,
-      'user_id' => $user->id,
+      'student_profile_id' => $user->student_profile->id,
     ]);
     $category = Category::with('lessons')->findOrFail($request->category_id);
     $lesson = $category->lessons()->inRandomOrder()->get();
