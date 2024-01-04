@@ -13,6 +13,7 @@ class Category extends Model
   protected $fillable = [
     'major_id',
     'category_name',
+    'status',
   ];
 
   public function major()

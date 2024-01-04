@@ -1,0 +1,40 @@
+[33m97f3b61[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31mreviewer/main[m[33m)[m fixed: profile in sidebar, added: dean account CRUD
+[33m0467830[m fixed: all the things changed in student acc (student_profile)
+[33mf41af08[m Added: StudentProfile and StaffProfile model -m, Added: Lists of instructors acc (CRUD)
+[33m5ed9256[m modified: Students lists in admin module is now responsive
+[33m8c6a54e[m feat: student acc creation using excel (bulk), added: student acc update and delete.
+[33m78f220b[m feat: student account creation, search, and student lists pagination
+[33ma72dc9f[m modified: lists of majors in admin module, added: lessons count and student counts, added: lists of students page per major
+[33mc84b2c1[m styled timer in student exams
+[33m5f3ab14[m added timer in student exam attempts
+[33mbd39806[m added countdown timer component in vue and lessons attempt now have expirations
+[33mbc6689b[m implemented recent lesson timer
+[33m21928c4[m lessons are now random
+[33mbc34407[m finished recent exams and its contents
+[33m895aa62[m added recent exams without lessons count
+[33m353df8c[m fixed middlewares (too many redirects) and added retake in exam final result
+[33m3e48bf0[m added exam final results page and lessons in exam are now sorted random
+[33mf7ccd69[m Implemented exam functions but not yet random sort
+[33m41cca16[m added exam showcase
+[33m18ddc97[m back and next in lesson, positioned fixed
+[33maee4819[m Revised lessons page design format
+[33mebfe241[m changed student seeders majors to gen ed
+[33md326b6e[m implemented excel upload for lessons and choices
+[33m5775b05[m lessons are now based on user's major, and added lists of majors in admin module
+[33ma6d2de2[m added nav in mobile, and refined login ui
+[33mcb81b86[m recent lessons model, recent lesson are now sorted
+[33m5299572[m recent lessons actions
+[33mfac0e58[m recent lessons and its tables
+[33m7a994bc[m check when lesson is finished, dashdrop nav
+[33m21109dc[m minor style changes
+[33m1248c7b[m page views per user integrated
+[33mc79fef3[m auth integrated with roles and middlewares
+[33m8b13110[m composer.lock updated
+[33m09deb49[m mobile responsive in Lessons page
+[33m55f701a[m mobile responsive, back to lessons button per page, correct answers seeder
+[33m9946da3[m lesson.index route changed to category.index
+[33mf3043a8[m Dashboard layout, landing page, based template
+[33m01cec2e[m revised exam template to dynamic pages
+[33m0865677[m lesson wizard template
+[33m15236f1[m Install Breeze
+[33m56f0adf[m Set up a fresh Laravel app

@@ -35,12 +35,15 @@ class AuthenticatedSessionController extends Controller
 
     $request->session()->regenerate();
 
-    if (Auth::user()->user_role == 'student') {
-      return redirect()->route('category.index');
-    } elseif (Auth::user()->user_role == 'admin') {
-      return redirect()->route('majors.index');
-    }
+    $user_role = Auth::user()->user_role;
 
+    if ($user_role == 'student') {
+      return redirect()->route('category.index');
+    } elseif ($user_role == 'admin') {
+      return redirect()->route('majors.index');
+    } elseif ($user_role == 'instructor') {
+      return redirect()->route('instructor.majors.index');
+    }
   }
 
   /**

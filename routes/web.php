@@ -11,6 +11,7 @@ use App\Http\Controllers\Student\LessonsController;
 use App\Http\Controllers\Student\CategoryController;
 use App\Http\Controllers\Student\RecentLessonsController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Instructor\InstructorMajorController;
 use App\Http\Controllers\Student\ExamController;
 use App\Http\Controllers\Student\ExamResultController;
 use App\Http\Controllers\Student\RecentExamController;
@@ -41,7 +42,7 @@ Route::fallback(function () {
   return Inertia::render('Unauthorized');
 });
 
-Route::middleware(['auth', 'student'])->group(function () {
+Route::middleware(['auth', 'role:student'])->group(function () {
   Route::get('/student/lessons', [CategoryController::class, 'index'])->name('category.index');
 
   //Lesson
@@ -65,7 +66,7 @@ Route::middleware(['auth', 'student'])->group(function () {
   Route::get('/student/recents/exams', [RecentExamController::class, 'index'])->name('recent.exam.index');
 });
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'role:admin'])->group(function () {
   Route::resource('/admin/majors', AdminLessonController::class);
 
   //Students
@@ -98,8 +99,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
   ]);;
   Route::post('/dean/update/{id}', [DeanController::class, 'update'])->name('dean.update');
 });
-// Route::get('/student/lessons', [LessonsController::class, 'index'])->name('lessons.index');
+Route::middleware(['auth', 'role:instructor'])->group(function () {
 
+  Route::get('/instructor/majors', [InstructorMajorController::class, 'index'])->name('instructor.majors.index');
+  Route::post('/instructor/majors/upload', [InstructorMajorController::class, 'store'])->name('instructor.majors.store');
+
+});
 
 
 

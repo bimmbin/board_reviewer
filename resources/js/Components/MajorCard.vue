@@ -1,5 +1,5 @@
 <script setup>
-import { Link, useForm } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 
 const props = defineProps({
@@ -11,10 +11,6 @@ const props = defineProps({
 
 const drop = ref("/img/drop.svg");
 
-const form = useForm({
-    file: [],
-    id: props.major.id,
-});
 
 const submit = () => {
     form.post(route("majors.store"));
@@ -42,15 +38,6 @@ const submit = () => {
                 <span class="text-xs text-gray-700 ">Students</span>
               </Link>
             </div>
-            <form @submit.prevent="submit" class="">
-                <input
-                    type="file"
-                    id="file"
-                    @input="form.file = $event.target.files[0]"
-                    accept=".xlsx, .xls"
-                />
-                <button class="bg-white px-3 py-1 rounded-md">submit</button>
-            </form>
         </div>
     </div>
 </template>

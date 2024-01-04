@@ -17,6 +17,7 @@ return new class extends Migration
         ->constrained('majors')
         ->onDelete('cascade');
       $table->string('category_name');
+      $table->string('status');
       $table->timestamps();
     });
   }
