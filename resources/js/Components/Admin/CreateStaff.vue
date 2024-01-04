@@ -6,6 +6,10 @@ import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 
+const { route_name } = defineProps({
+    route_name: String,
+});
+
 const emit = defineEmits(["close_emit"]);
 
 const form = useForm({
@@ -16,7 +20,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route("instructors.store"), {
+    form.post(route(route_name + ".store"), {
         onSuccess: () => emit("close_emit"),
     });
 };
@@ -24,8 +28,8 @@ const submit = () => {
 
 <template>
     <div class="mt-5">
-        <h1 class="text-xl font-semibold text-blue-800 max-md:mb-2">
-            Create Instructor Account
+        <h1 class="text-xl font-semibold text-blue-800 max-md:mb-2 capitalize">
+            Create {{ route_name }} Account
         </h1>
         <form @submit.prevent="submit" class="mt-3 flex flex-col gap-3 pb-5">
             <div class="flex gap-3">

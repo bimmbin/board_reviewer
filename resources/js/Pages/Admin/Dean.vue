@@ -16,25 +16,14 @@ import CreateStaff from "@/Components/Admin/CreateStaff.vue";
 import UploadExcel from "@/Components/UploadExcel.vue";
 import EditStaff from "@/Components/Admin/EditStaff.vue";
 
-const { instructors, filters } = defineProps({
+const { instructors, dean_count } = defineProps({
     instructors: Object,
-    filters: Object,
+    dean_count: Number,
 });
 
 let show_details = ref(false);
 
-const search = ref(filters.search);
 
-watch(search, (value) => {
-    router.get(
-        ("/instructors"),
-        { search: value },
-        {
-            preserveState: true,
-            replace: true,
-        }
-    );
-});
 </script>
 
 <template>
@@ -46,23 +35,25 @@ watch(search, (value) => {
             class="text-3xl font-semibold max-md:mt-20 text-blue-800 max-md:mb-2 max-md:text-2xl"
             :class="{ 'opacity-20': show_details }"
         >
-            Instructors
+            Dean Account
         </Link>
+        
         <div
             class="w-full flex-1 flex items-center justify-between gap-10 max-md:gap-3"
         >
-            <input
+            <!-- <input
                 v-model="search"
                 type="text"
                 placeholder="Search...."
                 class="rounded-md border border-blue-300 w-[25rem] max-md:text-sm max-md:w-full"
                 :class="{ 'opacity-20': show_details }"
-            />
-            <div
+            /> -->
+            <div class=""></div>
+            <div v-if="!(dean_count > 0)"
                 @click="show_details = !show_details"
                 class="bg-blue-500 text-white px-5 py-3 rounded-md select-none cursor-pointer max-md:text-sm max-md:px-3 max-md:py-2 whitespace-nowrap border border-blue-500 max-lg:-translate-x-36 max-md:-translate-x-0"
             >
-                <span v-if="!show_details">Create new</span>
+                <span v-if="!show_details">Create dean account</span>
                 <span v-else>Close</span>
             </div>
         </div>
@@ -73,7 +64,7 @@ watch(search, (value) => {
             <!-- <UploadExcel @close_it="show_details = !show_details" /> -->
        
             <!-- Create manual form -->
-            <CreateStaff route_name="instructors" @close_emit="show_details = !show_details" />
+            <CreateStaff route_name="dean" @close_emit="show_details = !show_details" />
         </div>
     </Collapse>
 
@@ -120,7 +111,7 @@ watch(search, (value) => {
                     <td>
                         <div class="flex items-center gap-3">
                             <div class="">
-                                <EditStaff :staff="instructor" route_name="instructors" />
+                                <EditStaff :staff="instructor" route_name="dean" />
                             </div>
                         </div>
                     </td>

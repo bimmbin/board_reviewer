@@ -13,8 +13,9 @@ const exit = ref("/img/exit.svg");
 const edit_icon = ref("/img/edit.svg");
 const delete_icon = ref("/img/delete.svg");
 
-const { staff } = defineProps({
+const { staff, route_name } = defineProps({
     staff: Object,
+    route_name: String,
 });
 
 const form = useForm({
@@ -26,14 +27,14 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route("instructors.update", staff.id), {
-        onSuccess: () => emit('close_dialog'),
+    form.post(route(route_name + ".update", staff.id), {
+        onSuccess: () => emit("close_dialog"),
     });
 };
 </script>
 
 <template>
-    <div 
+    <div
         class="w-full h-screen absolute top-0 left-0 px-10 max-md:px-5 py-5 bg-black bg-opacity-70 flex items-center justify-center cursor-default"
     >
         <div
@@ -45,10 +46,14 @@ const submit = () => {
                 class="w-full flex flex-col justify-between items-center gap-5"
             >
                 <div class="w-full flex items-center justify-between">
-                    <h1 class="text-xl font-semibold text-blue-800">
-                        Edit Student
+                    <h1 class="text-xl font-semibold text-blue-800 capitalize">
+                        Edit {{ route_name }}
                     </h1>
-                    <img :src="exit" @click="$emit('close_dialog')" class="cursor-pointer h-5"/>
+                    <img
+                        :src="exit"
+                        @click="$emit('close_dialog')"
+                        class="cursor-pointer h-5"
+                    />
                 </div>
             </div>
             <form

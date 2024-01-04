@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminLessonController;
+use App\Http\Controllers\Admin\DeanController;
 use App\Http\Controllers\Admin\InstructorController;
 use App\Http\Controllers\Admin\StudentController;
 use Inertia\Inertia;
@@ -87,7 +88,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
     'edit',
   ]);;
   Route::post('/instructors/update/{id}', [InstructorController::class, 'update'])->name('instructors.update');
-  Route::post('/instructors/destroy/{id}', [InstructorController::class, 'destroy'])->name('instructors.destroy');
+
+  //Dean
+  Route::resource('/dean', DeanController::class)->except([
+    'update',
+    'destroy',
+    'create',
+    'edit',
+  ]);;
+  Route::post('/dean/update/{id}', [DeanController::class, 'update'])->name('dean.update');
 });
 // Route::get('/student/lessons', [LessonsController::class, 'index'])->name('lessons.index');
 

@@ -45,6 +45,13 @@ const show_nav = ref(false);
                     @click="$emit('close_emit')"
                     :active="$page.url.startsWith('/instructors')"
                 />
+                <DashNav
+                    image="project"
+                    nav_name="Dean"
+                    :href="route('dean.index')"
+                    @click="$emit('close_emit')"
+                    :active="$page.url.startsWith('/dean')"
+                />
                 
             </div>
             <!-- Student Navigation -->

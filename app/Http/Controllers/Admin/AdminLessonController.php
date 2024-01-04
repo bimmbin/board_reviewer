@@ -12,6 +12,7 @@ use App\Http\Requests\File;
 use Illuminate\Http\Request;
 use App\Models\CorrectAnswer;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AdminLessonController extends Controller
 {

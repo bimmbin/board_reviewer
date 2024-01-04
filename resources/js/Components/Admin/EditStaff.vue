@@ -5,8 +5,9 @@ import { useForm, Link } from "@inertiajs/vue3";
 import DeleteUser from "@/Components/Admin/DeleteUser.vue";
 import UpdateStaff from "@/Components/Admin/UpdateStaff.vue";
 
-const { staff } = defineProps({
+const { staff, route_name } = defineProps({
     staff: Object,
+    route_name: String,
 });
 
 const show_dialog = ref(false);
@@ -36,6 +37,7 @@ const exit = ref("/img/exit.svg");
     <UpdateStaff
         v-if="show_dialog"
         :staff="staff"
+        :route_name="route_name"
         @close_dialog="show_dialog = !show_dialog"
     />
 </template>
