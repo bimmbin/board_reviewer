@@ -12,6 +12,7 @@ use App\Http\Requests\File;
 use Illuminate\Http\Request;
 use App\Models\CorrectAnswer;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 
 class InstructorMajorController extends Controller
@@ -42,6 +43,7 @@ class InstructorMajorController extends Controller
       //category
       $category = Category::firstOrNew([
         'major_id' => $request->id,
+        'staff_profile_id' => Auth::user()->staff_profile->id,
         'category_name' => $reviewers->sheetName($i),
         'status' => 'pending'
       ]);

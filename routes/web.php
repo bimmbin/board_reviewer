@@ -11,6 +11,7 @@ use App\Http\Controllers\Student\LessonsController;
 use App\Http\Controllers\Student\CategoryController;
 use App\Http\Controllers\Student\RecentLessonsController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Instructor\InstructorLessonsController;
 use App\Http\Controllers\Instructor\InstructorMajorController;
 use App\Http\Controllers\Student\ExamController;
 use App\Http\Controllers\Student\ExamResultController;
@@ -103,6 +104,9 @@ Route::middleware(['auth', 'role:instructor'])->group(function () {
 
   Route::get('/instructor/majors', [InstructorMajorController::class, 'index'])->name('instructor.majors.index');
   Route::post('/instructor/majors/upload', [InstructorMajorController::class, 'store'])->name('instructor.majors.store');
+
+  // Uploaded lessons
+  Route::get('/instructor/majors/{id}/status/{status}', [InstructorLessonsController::class, 'show'])->name('instructor.lessons.show');
 
 });
 

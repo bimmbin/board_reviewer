@@ -16,6 +16,9 @@ return new class extends Migration
       $table->foreignId('major_id')
         ->constrained('majors')
         ->onDelete('cascade');
+      $table->foreignId('staff_profile_id')
+        ->constrained('staff_profiles')
+        ->onDelete('cascade');
       $table->string('category_name');
       $table->string('status');
       $table->timestamps();

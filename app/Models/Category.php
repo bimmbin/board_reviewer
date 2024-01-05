@@ -12,6 +12,7 @@ class Category extends Model
 
   protected $fillable = [
     'major_id',
+    'staff_profile_id',
     'category_name',
     'status',
   ];
@@ -36,5 +37,9 @@ class Category extends Model
   public function exams()
   {
     return $this->hasMany(Exam::class);
+  }
+  public function staff_profile()
+  {
+    return $this->belongsTo(StaffProfile::class);
   }
 }

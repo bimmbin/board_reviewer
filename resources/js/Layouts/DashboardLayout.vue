@@ -16,10 +16,10 @@ const show_nav = ref(false);
 </script>
 
 <template>
-    <div class="flex font-pop bg-portbg ">
+    <div class="flex font-pop bg-portbg">
         <!-- navigation -->
         <div
-            class="h-screen bg-blue-500 flex flex-col max-md:hidden sticky top-0 left-0 "
+            class="h-screen bg-blue-500 flex flex-col max-md:hidden sticky top-0 left-0"
         >
             <!-- Logo -->
             <div class="flex justify-center gap-2 px-3 py-5">
@@ -27,6 +27,7 @@ const show_nav = ref(false);
             </div>
             <UserInfo></UserInfo>
 
+            <!-- Admin Navigation -->
             <div
                 v-if="$page.props.auth.user.user_role == 'admin'"
                 class="mt-20"
@@ -52,7 +53,6 @@ const show_nav = ref(false);
                     @click="$emit('close_emit')"
                     :active="$page.url.startsWith('/dean')"
                 />
-                
             </div>
             <!-- Student Navigation -->
             <div
@@ -89,14 +89,25 @@ const show_nav = ref(false);
                         nav_name="Exam attempts"
                         :href="route('recent.exam.index')"
                         @click="$emit('close_emit')"
-                        :active="
-                            $page.url.startsWith('/student/recents/exams')
-                        "
+                        :active="$page.url.startsWith('/student/recents/exams')"
                         :sub_nav="true"
                     />
                 </DashDrop>
             </div>
 
+            <!-- Student Navigation -->
+            <div
+                v-if="$page.props.auth.user.user_role == 'instructor'"
+                class="mt-20"
+            >
+                <DashNav
+                    image="project"
+                    nav_name="Lists of Majors"
+                    :href="route('instructor.majors.index')"
+                    @click="$emit('close_emit')"
+                    :active="$page.url.startsWith('/instructor/majors')"
+                />
+            </div>
             <Link
                 :href="route('logout')"
                 method="post"
@@ -108,14 +119,16 @@ const show_nav = ref(false);
             </Link>
         </div>
         <div
-            class="w-[1180px] min-h-screen  mx-auto max-2xl:w-[1000px] max-xl:w-[900px] max-lg:w-screen max-md:px-5 py-5 max-sm:py-0 text-black max-xl:px-10"
+            class="w-[1180px] min-h-screen mx-auto max-2xl:w-[1000px] max-xl:w-[900px] max-lg:w-screen max-md:px-5 py-5 max-sm:py-0 text-black max-xl:px-10"
         >
             <!-- Header -->
             <div
                 class="flex justify-between bg-blue-500 items-center bg-gray1 absolute z-10 top-0 left-0 w-full py-2 px-5 text-black md:hidden"
             >
                 <div>
-                    <Link :href="route('category.index')"><img :src="chcc_logo" alt="" class="h-12" /></Link>
+                    <Link :href="route('category.index')"
+                        ><img :src="chcc_logo" alt="" class="h-12"
+                    /></Link>
                 </div>
                 <div
                     class="lg:hidden cursor-pointer select-none"

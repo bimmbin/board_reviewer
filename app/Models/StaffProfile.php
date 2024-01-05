@@ -21,4 +21,8 @@ class StaffProfile extends Model
   {
     return $this->belongsTo(User::class);
   }
+  public function submitted_lessons()
+  {
+    return $this->hasMany(Category::class);
+  }
 }

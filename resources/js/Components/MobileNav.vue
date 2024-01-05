@@ -51,11 +51,12 @@ const chcc_logo = ref("/img/chcc_logo.png");
                         :active="$page.url.startsWith('/instructors')"
                     />
                 </div>
+
+                <!-- student navigation -->
                 <div
                     v-if="$page.props.auth.user.user_role == 'student'"
                     class="mt-20"
                 >
-                    <!-- student navigation -->
                     <div class="flex flex-col sticky left-0 top-0">
                         <DashNav
                             image="project"
@@ -99,6 +100,23 @@ const chcc_logo = ref("/img/chcc_logo.png");
                                 :sub_nav="true"
                             />
                         </DashDrop>
+                    </div>
+                </div>
+
+                <!-- instructor navigation -->
+                <div
+                    v-if="$page.props.auth.user.user_role == 'instructor'"
+                    class="mt-20"
+                >
+                    <div class="flex flex-col sticky left-0 top-0">
+                        <DashNav
+                            image="project"
+                            nav_name="Lists of Majors"
+                            :href="route('instructor.majors.index')"
+                            @click="$emit('close_emit')"
+                            :active="$page.url.startsWith('/instructor/majors')"
+                        />
+                     
                     </div>
                 </div>
 

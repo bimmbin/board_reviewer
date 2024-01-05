@@ -1,6 +1,8 @@
 <script setup>
 import { Link, useForm } from "@inertiajs/vue3";
-import { ref } from "vue";
+import { ref, watch } from "vue";
+
+import FormProgress from "@/Components/FormProgress.vue";
 
 const props = defineProps({
     major: {
@@ -17,7 +19,9 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route("instructor.majors.store"));
+    form.post(route("instructor.majors.store"), {
+        onFinish: () => form.reset("file"),
+    });
 };
 </script>
 
@@ -33,16 +37,17 @@ const submit = () => {
                 <img :src="drop" class="-rotate-90" />
             </div>
             <div class="w-full flex items-center justify-between gap-4">
-                <div
+                <Link
+                    :href="route('instructor.lessons.show', [props.major.id, 'pending'])"
                     class="bg-white flex-1 rounded-md flex flex-col items-center py-4 bg-opacity-80 hover:bg-opacity-100 cursor-pointer active:bg-opacity-80 select-none"
                 >
                     <h2 class="text-2xl font-medium">
                         {{ props.major.category_pending_count }}
                     </h2>
                     <span class="text-xs text-gray-700">Pending Lessons</span>
-                </div>
+                </Link>
                 <Link
-                    :href="route('students.show', props.major.id)"
+                    :href="route('instructor.lessons.show', [props.major.id, 'approved'])"
                     class="bg-white flex-1 rounded-md flex flex-col items-center py-4 bg-opacity-80 hover:bg-opacity-100 cursor-pointer active:bg-opacity-80 select-none"
                 >
                     <h2 class="text-2xl font-medium">
@@ -51,38 +56,48 @@ const submit = () => {
                     <span class="text-xs text-gray-700">Approved Lessons</span>
                 </Link>
             </div>
-            <form
-                @submit.prevent="submit"
-                class="bg-white border border-blue-100 px-5 py-3 max-md:px-3 max-md:py-2 max-md:text-sm flex items-center justify-between mt-5 max-md:flex-col max-md:items-start max-md:gap-3 bg-opacity-80 rounded-md"
-            >
-                <div class="flex items-center gap-5">
-                    <label
-                        for="file"
-                        class="bg-blue-500 px-3 py-2 whitespace-nowrap text-white cursor-pointer hover:bg-blue-400"
-                    >
-                        <input
-                            type="file"
-                            id="file"
-                            @input="form.file = $event.target.files[0]"
-                            accept=".xlsx, .xls"
-                            class="hidden"
-                        />
-                        Choose file
-                    </label>
-                    <span>{{
-                        form.file.length != 0
-                            ? form.file.name
-                            : "No file chosen"
-                    }}</span>
-                </div>
-                <button
-                    class="bg-blue-200 text-white px-3 py-2 rounded-md max-md:w-full"
-                    :disabled="form.file.length == 0"
-                    :class="{ 'bg-blue-500': form.file.length != 0 }"
+
+            <div class="flex flex-col gap-1">
+                <span class="text-white">Upload excel file:</span>
+                <form
+                    @submit.prevent="submit"
+                    class="bg-white border border-blue-100 px-5 py-3 max-md:px-3 max-md:py-2 max-md:text-sm flex items-center justify-between max-md:flex-col max-md:items-start max-md:gap-3 bg-opacity-80 rounded-md"
                 >
-                    submit
-                </button>
-            </form>
+                    <div class="flex items-center gap-5">
+                        <label
+                            :for="major.id"
+                            :class="{ hidden: form.progress }"
+                            class="bg-blue-500 px-3 py-2 select-none whitespace-nowrap text-white cursor-pointer hover:bg-blue-400 rounded"
+                        >
+                            <input
+                                type="file"
+                                :id="major.id"
+                                @input="form.file = $event.target.files[0]"
+                                accept=".xlsx, .xls"
+                                class="hidden"
+                            />
+                            Choose file
+                        </label>
+                        <span>{{
+                            form.file.length != 0
+                                ? form.file.name
+                                : "No file chosen"
+                        }}</span>
+                    </div>
+                    <button
+                        class="bg-blue-200 text-white px-3 py-2 rounded max-md:w-full"
+                        :disabled="form.file.length == 0"
+                        :class="{ 'bg-blue-500': form.file.length != 0 }"
+                    >
+                        submit
+                    </button>
+                </form>
+            </div>
+            <div></div>
+            <FormProgress
+                v-if="form.progress"
+                :percent="form.progress.percentage"
+            />
         </div>
     </div>
 </template>
