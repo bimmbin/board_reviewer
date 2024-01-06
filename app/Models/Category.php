@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
   use HasFactory;
-
 
   protected $fillable = [
     'major_id',
@@ -16,6 +17,51 @@ class Category extends Model
     'category_name',
     'status',
   ];
+
+  public static function getStaffCategories()
+  {
+    $staff_profile_id = Auth::user()->staff_profile->id;
+    $categories = Category::where('staff_profile_id', $staff_profile_id)
+      ->with('staff_profile', 'major')
+      ->withCount('lessons')
+      ->latest()
+      ->paginate(10)
+      ->withQueryString()
+      ->through(function ($item) {
+        return [
+          'id' => $item->id,
+          'category_name' => $item->category_name,
+          'status' => $item->status,
+          'item_count' => $item->lessons_count,
+          'major_name' => $item->major->major_name,
+        ];
+      });
+
+    return $categories;
+  }
+
+  public static function getCategoriesByMajor($major_id, $status)
+  {
+    $categories = Category::whereHas('major', function (Builder $query) use ($major_id) {
+      $query->where('id', $major_id);
+    })->where('status', $status)
+      ->with('staff_profile')
+      ->withCount('lessons')
+      ->latest()
+      ->paginate(10)
+      ->withQueryString()
+      ->through(function ($item) {
+        return [
+          'id' => $item->id,
+          'category_name' => $item->category_name,
+          'status' => $item->status,
+          'item_count' => $item->lessons_count,
+          'uploaded_by' => $item->staff_profile->first_name.' '.$item->staff_profile->last_name,
+        ];
+      });
+
+    return $categories;
+  }
 
   public function major()
   {

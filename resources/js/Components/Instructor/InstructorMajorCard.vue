@@ -38,7 +38,7 @@ const submit = () => {
             </div>
             <div class="w-full flex items-center justify-between gap-4">
                 <Link
-                    :href="route('instructor.lessons.show', [props.major.id, 'pending'])"
+                    :href="route('instructor.lessons.index', [props.major.id, 'pending'])"
                     class="bg-white flex-1 rounded-md flex flex-col items-center py-4 bg-opacity-80 hover:bg-opacity-100 cursor-pointer active:bg-opacity-80 select-none"
                 >
                     <h2 class="text-2xl font-medium">
@@ -47,7 +47,7 @@ const submit = () => {
                     <span class="text-xs text-gray-700">Pending Lessons</span>
                 </Link>
                 <Link
-                    :href="route('instructor.lessons.show', [props.major.id, 'approved'])"
+                    :href="route('instructor.lessons.index', [props.major.id, 'approved'])"
                     class="bg-white flex-1 rounded-md flex flex-col items-center py-4 bg-opacity-80 hover:bg-opacity-100 cursor-pointer active:bg-opacity-80 select-none"
                 >
                     <h2 class="text-2xl font-medium">

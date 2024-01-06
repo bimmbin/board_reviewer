@@ -13,6 +13,7 @@ use App\Http\Controllers\Student\RecentLessonsController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Instructor\InstructorLessonsController;
 use App\Http\Controllers\Instructor\InstructorMajorController;
+use App\Http\Controllers\Instructor\UploadHistoryController;
 use App\Http\Controllers\Student\ExamController;
 use App\Http\Controllers\Student\ExamResultController;
 use App\Http\Controllers\Student\RecentExamController;
@@ -106,7 +107,11 @@ Route::middleware(['auth', 'role:instructor'])->group(function () {
   Route::post('/instructor/majors/upload', [InstructorMajorController::class, 'store'])->name('instructor.majors.store');
 
   // Uploaded lessons
-  Route::get('/instructor/majors/{id}/status/{status}', [InstructorLessonsController::class, 'show'])->name('instructor.lessons.show');
+  Route::get('/instructor/majors/{id}/status/{status}', [InstructorLessonsController::class, 'index'])->name('instructor.lessons.index');
+  Route::get('/instructor/upload/history', [UploadHistoryController::class, 'index'])->name('instructor.history.index');
+
+  //View lessons 
+  Route::get('/instructor/lessons/{category_id}/page/{page}', [InstructorLessonsController::class, 'show'])->name('instructor.lessons.show');
 
 });
 

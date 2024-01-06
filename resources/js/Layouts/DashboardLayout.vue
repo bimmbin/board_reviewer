@@ -95,7 +95,7 @@ const show_nav = ref(false);
                 </DashDrop>
             </div>
 
-            <!-- Student Navigation -->
+            <!-- Instructor Navigation -->
             <div
                 v-if="$page.props.auth.user.user_role == 'instructor'"
                 class="mt-20"
@@ -106,6 +106,13 @@ const show_nav = ref(false);
                     :href="route('instructor.majors.index')"
                     @click="$emit('close_emit')"
                     :active="$page.url.startsWith('/instructor/majors')"
+                />
+                <DashNav
+                    image="project"
+                    nav_name="Upload History"
+                    :href="route('instructor.history.index')"
+                    @click="$emit('close_emit')"
+                    :active="$page.url.startsWith('/instructor/upload/history')"
                 />
             </div>
             <Link

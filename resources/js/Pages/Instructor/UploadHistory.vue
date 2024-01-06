@@ -7,18 +7,13 @@ export default {
 </script>
 
 <script setup>
-import { ref, watch } from "vue";
-import { router, Link } from "@inertiajs/vue3";
-import { Collapse } from "vue-collapsed";
+import { ref } from "vue";
+import { Link } from "@inertiajs/vue3";
 
 import Pagination from "@/Components/Pagination.vue";
-import CreateStaff from "@/Components/Admin/CreateStaff.vue";
-import UploadExcel from "@/Components/UploadExcel.vue";
-import EditStaff from "@/Components/Admin/EditStaff.vue";
 
-const { lessons, status } = defineProps({
+const { lessons } = defineProps({
     lessons: Object,
-    status: String,
 });
 
 let show_details = ref(false);
@@ -31,7 +26,7 @@ let show_details = ref(false);
         <h1
             class="text-3xl font-semibold max-md:mt-20 text-blue-800 max-md:mb-2 max-md:text-2xl capitalize"
         >
-            {{ status }} lessons
+           Upload History
         </h1>
     </div>
 
@@ -52,6 +47,8 @@ let show_details = ref(false);
                         No.
                     </th>
                     <th class="text-left py-5 max-md:py-3 font-semibold">
+                        Major
+                    </th><th class="text-left py-5 max-md:py-3 font-semibold">
                         Lesson Name
                     </th>
                     <th class="text-left py-5 max-md:py-3 font-semibold">
@@ -59,9 +56,6 @@ let show_details = ref(false);
                     </th>
                     <th class="text-left py-5 max-md:py-3 font-semibold">
                         Status
-                    </th>
-                    <th class="text-left py-5 max-md:py-3 font-semibold">
-                        Uploaded by
                     </th>
                     <th class="text-left py-5 max-md:py-3 font-semibold">
                         Action
@@ -75,6 +69,7 @@ let show_details = ref(false);
                     class="border border-blue-300 text-sm md:text-base lg:text-lg font-regular"
                 >
                     <td class="pl-5 py-3">{{ index + 1 }}</td>
+                    <td>{{ lesson.major_name }}</td>
                     <td>{{ lesson.category_name }}</td>
                     <td>{{ lesson.item_count }}</td>
                     <td>
@@ -83,9 +78,8 @@ let show_details = ref(false);
                             >{{ lesson.status }}</span
                         >
                     </td>
-                    <td>{{ lesson.uploaded_by }}</td>
                     <td>
-                      <Link :href="route('instructor.lessons.show', [lesson.id, 1])">
+                        <Link :href="route('instructor.lessons.show', [lesson.id, 1])">
                           view
                         </Link>
                     </td>
