@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -34,6 +35,7 @@ class Category extends Model
           'status' => $item->status,
           'item_count' => $item->lessons_count,
           'major_name' => $item->major->major_name,
+          'date' => $item->created_at->toFormattedDateString(),
         ];
       });
 
@@ -57,6 +59,7 @@ class Category extends Model
           'status' => $item->status,
           'item_count' => $item->lessons_count,
           'uploaded_by' => $item->staff_profile->first_name.' '.$item->staff_profile->last_name,
+          'date' => $item->created_at->toFormattedDateString(),
         ];
       });
 

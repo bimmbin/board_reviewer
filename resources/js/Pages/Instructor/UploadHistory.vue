@@ -11,12 +11,18 @@ import { ref } from "vue";
 import { Link } from "@inertiajs/vue3";
 
 import Pagination from "@/Components/Pagination.vue";
+import ElementDetails from "@/Components/ElementDetails.vue";
+import CancelLesson from "@/Components/Instructor/CancelLesson.vue";
 
 const { lessons } = defineProps({
     lessons: Object,
 });
 
 let show_details = ref(false);
+
+const cancel = ref("/img/cancel.svg");
+const view = ref("/img/view.svg");
+
 </script>
 
 <template>
@@ -26,7 +32,7 @@ let show_details = ref(false);
         <h1
             class="text-3xl font-semibold max-md:mt-20 text-blue-800 max-md:mb-2 max-md:text-2xl capitalize"
         >
-           Upload History
+            Upload History
         </h1>
     </div>
 
@@ -48,7 +54,8 @@ let show_details = ref(false);
                     </th>
                     <th class="text-left py-5 max-md:py-3 font-semibold">
                         Major
-                    </th><th class="text-left py-5 max-md:py-3 font-semibold">
+                    </th>
+                    <th class="text-left py-5 max-md:py-3 font-semibold">
                         Lesson Name
                     </th>
                     <th class="text-left py-5 max-md:py-3 font-semibold">
@@ -56,6 +63,9 @@ let show_details = ref(false);
                     </th>
                     <th class="text-left py-5 max-md:py-3 font-semibold">
                         Status
+                    </th>
+                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                        Date
                     </th>
                     <th class="text-left py-5 max-md:py-3 font-semibold">
                         Action
@@ -78,10 +88,27 @@ let show_details = ref(false);
                             >{{ lesson.status }}</span
                         >
                     </td>
+                    <td>{{ lesson.date }}</td>
                     <td>
-                        <Link :href="route('instructor.lessons.show', [lesson.id, 1])">
-                          view
-                        </Link>
+                      <div class="flex items-center gap-2">
+                            <ElementDetails details="View lesson">
+                                <Link
+                                    :href="
+                                        route('instructor.lessons.show', [
+                                            lesson.id,
+                                            1,
+                                        ])
+                                    "
+                                >
+                                    <div
+                                        class="p-2 bg-blue-100 rounded-md select-none cursor-pointer hover:bg-blue-200 active:bg-blue-100"
+                                    >
+                                        <img :src="view" alt="" class="h-5" />
+                                    </div>
+                                </Link>
+                            </ElementDetails>
+                            <CancelLesson :lesson_id="lesson.id"/>
+                        </div>
                     </td>
                 </tr>
             </tbody>

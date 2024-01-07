@@ -112,6 +112,8 @@ Route::middleware(['auth', 'role:instructor'])->group(function () {
 
   //View lessons 
   Route::get('/instructor/lessons/{category_id}/page/{page}', [InstructorLessonsController::class, 'show'])->name('instructor.lessons.show');
+  //Cancel lesson
+  Route::post('/instructor/lessons/{category_id}/cancel', [InstructorLessonsController::class, 'destroy'])->name('instructor.lessons.destroy');
 
 });
 

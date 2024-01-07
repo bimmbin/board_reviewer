@@ -35,4 +35,11 @@ class InstructorLessonsController extends Controller
       'lessons_count' => $lessons_count,
     ]);
   }
+
+  public function destroy($category_id) {
+    $category = Category::findOrFail($category_id);
+    $category->delete();
+
+    redirect()->back();
+  }
 }
