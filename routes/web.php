@@ -17,6 +17,7 @@ use App\Http\Controllers\Student\RecentExamController;
 use App\Http\Controllers\Student\RecentLessonsController;
 use App\Http\Controllers\Instructor\UploadHistoryController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Dean\DeanHistoryController;
 use App\Http\Controllers\Instructor\InstructorMajorController;
 use App\Http\Controllers\Instructor\InstructorLessonsController;
 
@@ -74,7 +75,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
   Route::resource('/admin/majors', AdminLessonController::class);
 
   //Students
-  Route::resource('/students', StudentController::class)->except([
+  Route::resource('/admin/majors/students', StudentController::class)->except([
     'update',
     'destroy',
     'create',
@@ -129,6 +130,9 @@ Route::middleware(['auth', 'role:dean'])->group(function () {
 
   //Lesson Action
   Route::post('/dean/lessons/{category_id}/action/{action}', [DeanLessonsController::class, 'update'])->name('dean.lessons.update');
+
+  //Dean action history
+  Route::get('/history/dean', [DeanHistoryController::class, 'index'])->name('dean.history.index');
 });
 
 

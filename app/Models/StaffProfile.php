@@ -25,4 +25,8 @@ class StaffProfile extends Model
   {
     return $this->hasMany(Category::class);
   }
+  public function dean_history()
+  {
+    return $this->hasMany(DeanHistory::class);
+  }
 }

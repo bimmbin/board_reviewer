@@ -128,7 +128,13 @@ const show_nav = ref(false);
                     @click="$emit('close_emit')"
                     :active="$page.url.startsWith('/majors/dean')"
                 />
-             
+                <DashNav
+                    image="project"
+                    nav_name="Action History"
+                    :href="route('dean.history.index')"
+                    @click="$emit('close_emit')"
+                    :active="$page.url.startsWith('/history/dean')"
+                />
             </div>
 
 

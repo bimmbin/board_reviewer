@@ -91,4 +91,8 @@ class Category extends Model
   {
     return $this->belongsTo(StaffProfile::class);
   }
+  public function dean_history()
+  {
+    return $this->hasMany(DeanHistory::class);
+  }
 }
