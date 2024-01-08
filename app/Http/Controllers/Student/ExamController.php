@@ -15,7 +15,7 @@ class ExamController extends Controller
   public function index()
   {
     $user = Auth::user();
-    $categories = Category::withCount('lessons')->where('major_id', $user->student_profile->major_id)->get();
+    $categories = Category::withCount('lessons')->where('major_id', $user->student_profile->major_id)->where('status', 'approved')->get();
 
     return Inertia::render('Student/ExamCategories', [
       'categories' => $categories

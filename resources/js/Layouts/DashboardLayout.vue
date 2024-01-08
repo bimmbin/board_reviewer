@@ -115,6 +115,24 @@ const show_nav = ref(false);
                     :active="$page.url.startsWith('/instructor/upload/history')"
                 />
             </div>
+
+            <!-- Dean Navigation -->
+            <div
+                v-if="$page.props.auth.user.user_role == 'dean'"
+                class="mt-20"
+            >
+                <DashNav
+                    image="project"
+                    nav_name="Lists of Majors"
+                    :href="route('dean.majors.index')"
+                    @click="$emit('close_emit')"
+                    :active="$page.url.startsWith('/majors/dean')"
+                />
+             
+            </div>
+
+
+            <!-- Logout -->
             <Link
                 :href="route('logout')"
                 method="post"
@@ -124,6 +142,8 @@ const show_nav = ref(false);
                 Logout
                 <img :src="logout" class="h-3" />
             </Link>
+
+             
         </div>
         <div
             class="w-[1180px] min-h-screen mx-auto max-2xl:w-[1000px] max-xl:w-[900px] max-lg:w-screen max-md:px-5 py-5 max-sm:py-0 text-black max-xl:px-10"

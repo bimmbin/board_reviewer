@@ -77,6 +77,19 @@ class tester extends Seeder
       ]);
     }
 
+    $dean = User::create([
+      'username' => 'dean',
+      'user_role' => 'dean',
+      'password' => Hash::make('dean123'),
+    ]);
+
+    StaffProfile::create([
+      'user_id' => $dean->id,
+      'first_name' => fake()->firstName(),
+      'last_name' => fake()->lastName(),
+      'middle_name' => fake()->lastName(),
+      'employee_number' => rand(1000, 9999) . "2021",
+    ]);
     // User::factory()->count(40)->create();
     // Category::factory()->count(10)
     //   ->has(

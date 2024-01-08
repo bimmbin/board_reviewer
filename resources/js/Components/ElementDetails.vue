@@ -12,7 +12,7 @@ let show_view = ref(false);
     <div
         @mouseover="show_view = !show_view"
         @mouseout="show_view = !show_view"
-        class="relative w-fit"
+        class="relative w-fit flex"
     >
         <slot></slot>
         <span

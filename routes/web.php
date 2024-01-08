@@ -1,22 +1,24 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminLessonController;
-use App\Http\Controllers\Admin\DeanController;
-use App\Http\Controllers\Admin\InstructorController;
-use App\Http\Controllers\Admin\StudentController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
-use App\Http\Controllers\Student\LessonsController;
-use App\Http\Controllers\Student\CategoryController;
-use App\Http\Controllers\Student\RecentLessonsController;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Instructor\InstructorLessonsController;
-use App\Http\Controllers\Instructor\InstructorMajorController;
-use App\Http\Controllers\Instructor\UploadHistoryController;
+use App\Http\Controllers\Admin\DeanController;
 use App\Http\Controllers\Student\ExamController;
+use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Dean\DeanMajorController;
+use App\Http\Controllers\Student\LessonsController;
+use App\Http\Controllers\Admin\InstructorController;
+use App\Http\Controllers\Dean\DeanLessonsController;
+use App\Http\Controllers\Student\CategoryController;
+use App\Http\Controllers\Admin\AdminLessonController;
 use App\Http\Controllers\Student\ExamResultController;
 use App\Http\Controllers\Student\RecentExamController;
+use App\Http\Controllers\Student\RecentLessonsController;
+use App\Http\Controllers\Instructor\UploadHistoryController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Instructor\InstructorMajorController;
+use App\Http\Controllers\Instructor\InstructorLessonsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -114,10 +116,20 @@ Route::middleware(['auth', 'role:instructor'])->group(function () {
   Route::get('/instructor/lessons/{category_id}/page/{page}', [InstructorLessonsController::class, 'show'])->name('instructor.lessons.show');
   //Cancel lesson
   Route::post('/instructor/lessons/{category_id}/cancel', [InstructorLessonsController::class, 'destroy'])->name('instructor.lessons.destroy');
-
 });
 
+Route::middleware(['auth', 'role:dean'])->group(function () {
+  Route::get('/majors/dean', [DeanMajorController::class, 'index'])->name('dean.majors.index');
 
+  // Uploaded lessons
+  Route::get('/dean/majors/{id}/status/{status}', [DeanLessonsController::class, 'index'])->name('dean.lessons.index');
+
+  //View lessons 
+  Route::get('/dean/lessons/{category_id}/page/{page}', [DeanLessonsController::class, 'show'])->name('dean.lessons.show');
+
+  //Lesson Action
+  Route::post('/dean/lessons/{category_id}/action/{action}', [DeanLessonsController::class, 'update'])->name('dean.lessons.update');
+});
 
 
 
