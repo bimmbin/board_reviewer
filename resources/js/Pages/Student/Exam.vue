@@ -26,7 +26,6 @@ const exit = ref("/img/exit.svg");
 
 const form = useForm({
     exam_id: exam_id,
-    category_id: category_id,
     lesson_id: lesson.id,
     current_page: current_page,
     choice_id: "",
@@ -109,7 +108,6 @@ function time_ended_submit() {
                         :href="
                             route('exam.result.show', [
                                 exam_id,
-                                category_id,
                                 parseInt(current_page) - 1,
                             ])
                         "
@@ -121,7 +119,7 @@ function time_ended_submit() {
                 <div v-else></div>
 
                 <button
-                    class="select-none py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
+                    class="select-none py-2 px-5 border-2 border-blue-500 rounded-md bg-main_bg text-white font-semibold"
                 >
                     Check
                 </button>

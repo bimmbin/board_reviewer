@@ -24,15 +24,11 @@ const submit = () => {
         <div class="w-full h-full flex flex-col justify-between gap-3">
             <div class="w-full h-full flex justify-between">
                 <h2 class="text-white text-2xl font-light max-md:text-xl">
-                    {{ props.major.major_name }}
+                    {{ props.major.student_major_name }}
                 </h2>
                 <img :src="drop" class="-rotate-90" />
             </div>
             <div class="w-full flex items-center justify-between gap-4">
-              <div class="bg-white flex-1 rounded-md flex flex-col items-center py-4 bg-opacity-80 hover:bg-opacity-100 cursor-pointer active:bg-opacity-80 select-none">
-                <h2 class="text-2xl font-medium ">{{ props.major.category_approved_count }}</h2>
-                <span class="text-xs text-gray-700 ">Lessons</span>
-              </div>
               <Link :href="route('students.show', props.major.id)" class="bg-white flex-1 rounded-md flex flex-col items-center py-4 bg-opacity-80 hover:bg-opacity-100 cursor-pointer active:bg-opacity-80 select-none">
                 <h2 class="text-2xl font-medium ">{{ props.major.students_count }}</h2>
                 <span class="text-xs text-gray-700 ">Students</span>

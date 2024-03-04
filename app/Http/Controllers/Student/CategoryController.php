@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Student;
 
 use Carbon\Carbon;
 use Inertia\Inertia;
+use App\Models\Major;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Builder;
 
 class CategoryController extends Controller
 {
@@ -15,36 +17,41 @@ class CategoryController extends Controller
   {
     // $categories = Category::with('page_views', 'lessons')->get();
     $user = Auth::user();
-    $student_profile_id = Auth::user()->student_profile->id;
 
-    $categories = Category::with(['recent_lessons' => function ($query) use ($student_profile_id) {
-      $query->where('student_profile_id', $student_profile_id)->latest();
-    }])->where('major_id', $user->student_profile->major->id)->where('status', 'approved')->get();
-    $categories->loadCount('lessons');
+    $majors = Major::whereHas('student_majors', function (Builder $query) use ($user) {
+      $query->where('student_major_id', $user->student_profile->student_major->id);
+    })->with(['categories' => function ($query) {
+      $query->where('status', 'approved')->latest();
+    }], 'categories.lessons', 'categories.lessons.correct_answer', 'categories.lessons.choices', 'categories.recent_lessons', 'categories.recent_lessons.page_views')->get();
+
 
     //filtering categories if the user already has a finished recent lesson
-    $filtered_categories  = $categories->map(function ($category) {
-      foreach ($category->recent_lessons as $recent_lesson) {
-        if (count($recent_lesson->page_views) == count($category->lessons)) {
-          $category->is_finished = true;
-        }
+    // $filtered_majors  = $majors->map(function ($major) {
+    //   foreach ($major->categories as $category) {
+    //     foreach ($category->recent_lessons as $recent_lesson) {
+    //       // if (count($recent_lesson->page_views) == count($category->lessons)) {
+    //         $category->is_finished = true;
+    //       // }
+    //     }
+    //   }
+    //   return $major;
+    // });
+    $filtered_majors = $majors->map(function ($major) {
+      foreach ($major->categories as $category) {
+          $finished = false;
+          foreach ($category->recent_lessons as $recent_lesson) {
+              if (count($recent_lesson->page_views) == count($category->lessons)) {
+                  $finished = true;
+              }
+          }
+          $category->is_finished = $finished;
       }
-      //counting the page based on lessons length
-      if (count($category->recent_lessons) != 0) {
-        $category->recent_lesson_id = $category->recent_lessons[0]->id;
-        $category->latest_lesson_length = count($category->recent_lessons[0]->page_views);
-        $category->recent_time_remaining = now()->diffForHumans($category->recent_lessons[0]->countdown, true);
-        $category->recent_time_ended = now()->diff($category->recent_lessons[0]->countdown)->invert;
-      } else {
-        $category->latest_lesson_length = 0;
-      }
-      unset($category->recent_lessons);
-      return $category;
-    });
-    
-    // dd(session()->all());
+      return $major;
+  });
+
+    // dd($filtered_majors);
     return Inertia::render('Student/Category', [
-      'categories' => $filtered_categories
+      'majors' => $filtered_majors
     ]);
   }
 }

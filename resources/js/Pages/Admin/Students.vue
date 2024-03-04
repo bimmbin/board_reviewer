@@ -61,7 +61,7 @@ watch(search, (value) => {
             />
             <div
                 @click="show_details = !show_details"
-                class="bg-blue-500 text-white px-5 py-3 rounded-md select-none cursor-pointer max-md:text-sm max-md:px-3 max-md:py-2 whitespace-nowrap border border-blue-500 max-lg:-translate-x-36 max-md:-translate-x-0"
+                class="bg-main_bg text-white px-5 py-3 rounded-md select-none cursor-pointer max-md:text-sm max-md:px-3 max-md:py-2 whitespace-nowrap border border-blue-500 max-lg:-translate-x-36 max-md:-translate-x-0"
             >
                 <span v-if="!show_details">Create new</span>
                 <span v-else>Close</span>
@@ -92,7 +92,7 @@ watch(search, (value) => {
         >
             <thead>
                 <tr
-                    class="space-y-3 text-sm md:text-base border border-blue-500 lg:text-lg text-start text-btn bg-blue-500 text-white"
+                    class="space-y-3 text-sm md:text-base border border-blue-500 lg:text-lg text-start text-btn bg-main_bg text-white"
                 >
                     <th class="text-left pl-5 py-5 max-md:py-3 font-semibold">
                         Student ID

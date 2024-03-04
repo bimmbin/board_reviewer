@@ -20,23 +20,23 @@ class DatabaseSeeder extends Seeder
   public function run(): void
   {
 
-    Major::factory(1)
-      ->has(
-        Category::factory()->count(10)
-          ->has(
-            Lesson::factory()->count(40)
-              ->has(
-                Choice::factory()->count(4),
-                'choices'
-              )->has(
-                CorrectAnswer::factory()->count(1)->sequence(fn (Sequence $sequence) => ['choice_id' => ($sequence->index+1)*4]),
-                'correct_answer'
-              ),
-            'lessons'
-          ),
-        'categories'
-      )
-      ->create();
+    // Major::factory(1)
+    //   ->has(
+    //     Category::factory()->count(10)
+    //       ->has(
+    //         Lesson::factory()->count(40)
+    //           ->has(
+    //             Choice::factory()->count(4),
+    //             'choices'
+    //           )->has(
+    //             CorrectAnswer::factory()->count(1)->sequence(fn (Sequence $sequence) => ['choice_id' => ($sequence->index+1)*4]),
+    //             'correct_answer'
+    //           ),
+    //         'lessons'
+    //       ),
+    //     'categories'
+    //   )
+    //   ->create();
 
     // \App\Models\User::factory(10)->create();
 

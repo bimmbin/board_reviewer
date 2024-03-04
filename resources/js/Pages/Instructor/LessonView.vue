@@ -90,7 +90,7 @@ const exit = ref("/img/exit.svg");
                 <div v-if="current_page == lessons_count">
                     <Link
                         :href="route('instructor.majors.index')"
-                        class="py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
+                        class="py-2 px-5 border-2 border-blue-500 rounded-md bg-main_bg text-white font-semibold"
                     >
                         Finish
                     </Link>
@@ -103,7 +103,7 @@ const exit = ref("/img/exit.svg");
                                 parseInt(current_page) + 1,
                             ])
                         "
-                        class="py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
+                        class="py-2 px-5 border-2 border-blue-500 rounded-md bg-main_bg text-white font-semibold"
                     >
                         Next
                     </Link>

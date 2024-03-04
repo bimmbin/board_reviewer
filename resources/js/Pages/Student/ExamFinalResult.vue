@@ -18,7 +18,7 @@ const { exam, correct_count, lesson_count } = defineProps({
 const trophy = ref("/img/trophy.png");
 
 const form = useForm({
-    category_id: exam.category.id,
+    major_id: exam.major.id,
 });
 
 const submit = () => {
@@ -40,8 +40,7 @@ const submit = () => {
                     <p class="text-lg max-md:text-base">
                         You have successfully completed an exam on
                         <span class="font-medium text-blue-700"
-                            >{{ exam.category.major.major_name }}
-                            {{ exam.category.category_name }}</span
+                            >{{ exam.major.major_name }}</span
                         >
                     </p>
                 </div>
@@ -62,7 +61,7 @@ const submit = () => {
                 </Link>
 
                 <button
-                    class="select-none py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
+                    class="select-none py-2 px-5 border-2 border-blue-500 rounded-md bg-main_bg text-white font-semibold"
                 >
                     Retake
                 </button>

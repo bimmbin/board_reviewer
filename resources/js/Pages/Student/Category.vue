@@ -8,19 +8,24 @@ export default {
 
 <script setup>
 import CategoryCard from "@/Components/CategoryCard.vue";
+import StudentLessonCard from "@/Components/Student/StudentLessonCard.vue";
 
-const { categories } = defineProps({
-    categories: Object,
+const { majors } = defineProps({
+    majors: Object,
 });
 </script>
 
 <template>
-  <h1 class="text-3xl font-semibold mb-5 max-md:mt-20 text-blue-800 max-md:mb-2">Lessons</h1>
-    <div
-        class="w-full flex flex-wrap gap-3 max-xl:flex-nowrap max-xl:flex-col max-sm:px-0 justify-stretch"
+    <h1
+        class="text-3xl font-bold mb-5 max-md:mt-20 text-main_bg max-md:mb-2"
     >
-        <div v-for="category in categories">
-            <CategoryCard :category="category" />
+        Lessons
+    </h1>
+    <div
+        class="w-full flex flex-col gap-2"
+    >
+        <div v-for="major in majors">
+            <StudentLessonCard :major="major"></StudentLessonCard>
         </div>
     </div>
 </template>

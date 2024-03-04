@@ -20,13 +20,13 @@ const lesson_icon = ref("/img/lesson_icon.svg");
 </script>
 
 <template>
-    <form v-if="!$props.major.has_taken"
+    <form
         @submit.prevent="submit"
         class="flex-1 border border-blue-200 rounded-md px-10 py-10 bg-[#F4F8FF]"
     >
         <div class="flex flex-col items-center gap-20">
             <h1 class="font-bold text-[3rem]">
-                {{ props.major.major_coverage[0].percent }}%
+                {{ props.major.major_coverage.percent }}%
             </h1>
             <div class="flex flex-col items-center">
                 <h2

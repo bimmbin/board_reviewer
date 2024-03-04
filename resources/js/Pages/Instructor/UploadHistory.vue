@@ -22,7 +22,6 @@ let show_details = ref(false);
 
 const cancel = ref("/img/cancel.svg");
 const view = ref("/img/view.svg");
-
 </script>
 
 <template>
@@ -47,7 +46,7 @@ const view = ref("/img/view.svg");
         >
             <thead>
                 <tr
-                    class="space-y-3 text-sm md:text-base border border-blue-500 lg:text-lg text-start text-btn bg-blue-500 text-white"
+                    class="space-y-3 text-sm md:text-base border border-blue-500 lg:text-lg text-start text-btn bg-main_bg text-white"
                 >
                     <th class="text-left pl-5 py-5 max-md:py-3 font-semibold">
                         No.
@@ -84,13 +83,20 @@ const view = ref("/img/view.svg");
                     <td>{{ lesson.item_count }}</td>
                     <td>
                         <span
-                            class="px-3 py-2 bg-yellow-300 text-yellow-800 rounded-md text-sm max-md:text-xs max-md:py-1"
+                            class="px-3 py-2 rounded-md text-sm max-md:text-xs max-md:py-1"
+                            :class="
+                                lesson.status == 'approved'
+                                    ? '!bg-green-300 text-green-800'
+                                    : lesson.status == 'disapproved'
+                                    ? '!bg-gray-300 text-gray-800'
+                                    : 'bg-yellow-300 text-yellow-800'
+                            "
                             >{{ lesson.status }}</span
                         >
                     </td>
                     <td>{{ lesson.date }}</td>
                     <td>
-                      <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-2">
                             <ElementDetails details="View lesson">
                                 <Link
                                     :href="
@@ -107,7 +113,7 @@ const view = ref("/img/view.svg");
                                     </div>
                                 </Link>
                             </ElementDetails>
-                            <CancelLesson :lesson_id="lesson.id"/>
+                            <CancelLesson :lesson_id="lesson.id" />
                         </div>
                     </td>
                 </tr>

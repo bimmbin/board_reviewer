@@ -19,7 +19,7 @@ const show_nav = ref(false);
     <div class="flex font-pop bg-portbg">
         <!-- navigation -->
         <div
-            class="h-screen bg-blue-500 flex flex-col max-md:hidden sticky top-0 left-0"
+            class="h-screen bg-main_bg flex flex-col max-md:hidden sticky top-0 left-0"
         >
             <!-- Logo -->
             <div class="flex justify-center gap-2 px-3 py-5">
@@ -34,7 +34,7 @@ const show_nav = ref(false);
             >
                 <DashNav
                     image="project"
-                    nav_name="Majors"
+                    nav_name="Students"
                     :href="route('majors.index')"
                     @click="$emit('close_emit')"
                     :active="$page.url.startsWith('/admin/majors')"
@@ -73,26 +73,13 @@ const show_nav = ref(false);
                     @click="$emit('close_emit')"
                     :active="$page.url.startsWith('/student/exam/categories')"
                 />
-                <DashDrop image="project" nav_name="History">
-                    <DashNav
+                <DashNav
                         image="project"
-                        nav_name="Lesson attempts"
-                        :href="route('recent.lesson.index')"
-                        @click="$emit('close_emit')"
-                        :active="
-                            $page.url.startsWith('/student/recents/lessons')
-                        "
-                        :sub_nav="true"
-                    />
-                    <DashNav
-                        image="project"
-                        nav_name="Exam attempts"
+                        nav_name="Assessment"
                         :href="route('recent.exam.index')"
                         @click="$emit('close_emit')"
                         :active="$page.url.startsWith('/student/recents/exams')"
-                        :sub_nav="true"
                     />
-                </DashDrop>
             </div>
 
             <!-- Instructor Navigation -->
@@ -154,9 +141,10 @@ const show_nav = ref(false);
         <div
             class="w-[1180px] min-h-screen mx-auto max-2xl:w-[1000px] max-xl:w-[900px] max-lg:w-screen max-md:px-5 py-5 max-sm:py-0 text-black max-xl:px-10"
         >
+        <div class=""></div>
             <!-- Header -->
             <div
-                class="flex justify-between bg-blue-500 items-center bg-gray1 absolute z-10 top-0 left-0 w-full py-2 px-5 text-black md:hidden"
+                class="flex justify-between bg-main_bg items-center bg-gray1 absolute z-10 top-0 left-0 w-full py-2 px-5 text-black md:hidden"
             >
                 <div>
                     <Link :href="route('category.index')"

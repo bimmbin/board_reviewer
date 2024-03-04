@@ -11,19 +11,24 @@ class StudentProfile extends Model
 
   protected $fillable = [
     'user_id',
-    'major_id',
+    'major_major_id',
     'first_name',
     'last_name',
     'middle_name',
     'student_number',
   ];
 
-  public function major()
+  public function student_major()
   {
-    return $this->belongsTo(Major::class);
+    return $this->belongsTo(StudentMajor::class);
   }
   public function user()
   {
     return $this->belongsTo(User::class);
   }
+  public function assessments()
+  {
+    return $this->hasMany(Assessment::class);
+  }
+
 }

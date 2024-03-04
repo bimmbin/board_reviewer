@@ -62,7 +62,7 @@ const { lesson, current_page, lessons_count, category_id } = defineProps({
                                 parseInt(current_page) + 1,
                             ])
                         "
-                        class="py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
+                        class="py-2 px-5 border-2 border-blue-500 rounded-md bg-main_bg text-white font-semibold"
                     >
                         Next
                     </Link>

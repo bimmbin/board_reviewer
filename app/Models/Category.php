@@ -83,10 +83,7 @@ class Category extends Model
   {
     return $this->hasMany(RecentLesson::class);
   }
-  public function exams()
-  {
-    return $this->hasMany(Exam::class);
-  }
+  
   public function staff_profile()
   {
     return $this->belongsTo(StaffProfile::class);

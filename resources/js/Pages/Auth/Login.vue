@@ -37,7 +37,7 @@ const chcc_bg = ref("/img/chcc_bg.png");
     <div class="flex absolute w-full top-0 left-0">
         <div class="relative bg-chcc_bg w-full h-screen max-xl:hidden">
             <div
-                class="absolute top-0 left-0 w-full h-full bg-blue-600 bg-opacity-90 text-white bg-cover hidden xl:flex flex-col items-center px-[62px] pt-[73px] gap-[20px] 2xl:justify-center 2xl:pt-0"
+                class="absolute top-0 left-0 w-full h-full bg-main_bg bg-opacity-90 text-white bg-cover hidden xl:flex flex-col items-center px-[62px] pt-[73px] gap-[20px] 2xl:justify-center 2xl:pt-0"
             >
                 <img class="xl:w-[350px]" :src="chcc_logo" alt="CHCC-Logo" />
 
@@ -60,7 +60,7 @@ const chcc_bg = ref("/img/chcc_bg.png");
         <div
             class="bg-white w-full h-screen relative items-center flex flex-col xl:justify-center "
         >
-            <div class="w-full h-20 bg-blue-500 xl:hidden"></div>
+            <div class="w-full h-20 bg-main_bg xl:hidden"></div>
             <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
                 {{ status }}
             </div>
@@ -124,7 +124,7 @@ const chcc_bg = ref("/img/chcc_bg.png");
                     </div>
 
                     <div class="w-full">
-                        <!-- <Link :href="route('category.index')" class="mt-3 w-full inline-flex justify-center items-center px-4 py-3 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-400 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                        <!-- <Link :href="route('category.index')" class="mt-3 w-full inline-flex justify-center items-center px-4 py-3 bg-main_bg border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-400 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                         Login
                       </Link> -->
                         <PrimaryButton
@@ -137,7 +137,7 @@ const chcc_bg = ref("/img/chcc_bg.png");
                     </div>
                 </form>
             </div>
-            <div class="w-full h-full bg-blue-500 xl:hidden">
+            <div class="w-full h-full bg-main_bg xl:hidden">
                 <div
                     class="w-full h-full flex flex-col items-center gap-10 py-10 text-white"
                 >

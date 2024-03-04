@@ -12,6 +12,7 @@ use App\Http\Requests\File;
 use Illuminate\Http\Request;
 use App\Models\CorrectAnswer;
 use App\Http\Controllers\Controller;
+use App\Models\StudentMajor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -22,19 +23,12 @@ class AdminLessonController extends Controller
    */
   public function index()
   {
-    $majors = Major::with('categories')->get();
+    // $majors = StudentMajor::with('categories')->get();
+    $majors = StudentMajor::all();
     $majors->loadCount('students');
-    //get approved category count of each major
-    $filtered_majors  = $majors->map(function ($major) {
-
-      $major->category_approved_count = $major->categories()->where('status', 'approved')->count();
-
-      return $major;
-    });
-
 
     return Inertia::render('Admin/AdminMajors', [
-      'majors' => $filtered_majors
+      'majors' => $majors
     ]);
   }
 

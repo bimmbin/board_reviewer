@@ -20,7 +20,7 @@
                         Back
                     </div>
                     <div
-                        class="py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
+                        class="py-2 px-5 border-2 border-blue-500 rounded-md bg-main_bg text-white font-semibold"
                     >
                         Next
                     </div>

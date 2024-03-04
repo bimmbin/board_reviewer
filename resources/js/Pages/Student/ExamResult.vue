@@ -106,7 +106,7 @@ const exit = ref("/img/exit.svg");
                 <div v-if="current_page == lessons_count">
                     <Link
                         :href="route('exam.result.index', exam_id)"
-                        class="select-none py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
+                        class="select-none py-2 px-5 border-2 border-blue-500 rounded-md bg-main_bg text-white font-semibold"
                     >
                         Finish
                     </Link>
@@ -116,11 +116,10 @@ const exit = ref("/img/exit.svg");
                         :href="
                             route('exam.show', [
                                 exam_id,
-                                category_id,
                                 parseInt(current_page) + 1,
                             ])
                         "
-                        class="select-none py-2 px-5 border-2 border-blue-500 rounded-md bg-blue-500 text-white font-semibold"
+                        class="select-none py-2 px-5 border-2 border-blue-500 rounded-md bg-main_bg text-white font-semibold"
                     >
                         Next
                     </Link>

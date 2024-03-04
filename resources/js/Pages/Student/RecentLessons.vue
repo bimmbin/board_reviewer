@@ -40,7 +40,7 @@ const formatTime = (dateString) => {
         >
             <thead>
                 <tr
-                    class="space-y-3 text-sm md:text-base border border-blue-500 lg:text-lg text-start text-btn bg-blue-500 text-white"
+                    class="space-y-3 text-sm md:text-base border border-blue-500 lg:text-lg text-start text-btn bg-main_bg text-white"
                 >
                     <th class="text-left pl-5 py-5 font-semibold">Topic</th>
                     <th class="text-left py-5 font-semibold">Date</th>

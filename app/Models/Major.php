@@ -17,8 +17,17 @@ class Major extends Model
   {
     return $this->hasMany(Category::class);
   }
-  public function students()
+  public function student_majors()
   {
-    return $this->hasMany(StudentProfile::class);
+    return $this->belongsToMany(Major::class, 'student_major_conjunctions');
   }
+  public function major_coverage()
+  {
+    return $this->belongsToMany(MajorCoverage::class, 'student_major_conjunctions');
+  }
+  public function exams()
+  {
+    return $this->hasMany(Exam::class);
+  }
+  
 }

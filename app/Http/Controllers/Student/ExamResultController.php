@@ -14,24 +14,24 @@ use Illuminate\Support\Facades\Session;
 
 class ExamResultController extends Controller
 {
-  public function index($id)
+  public function index($exam_id)
   {
     $user = Auth::user();
-    Session::forget($id . $user->username);
 
-    $exam = Exam::findOrFail($id);
+    $exam = Exam::findOrFail($exam_id);
     $exam->touch();
     $exam->load('exam_answers');
-    $exam->load('category', 'category.major');
+    $exam->load('major');
     $correct_count = $exam->exam_answers()->where('is_correct', 1)->count();
 
-    $lesson_count = Category::withCount('lessons')->findOrFail($exam->category_id);
+    $lessons_count = count(Session::get($exam_id . $user->username));
+
+    Session::forget($exam_id . $user->username);
 
     return Inertia::render('Student/ExamFinalResult', [
       'exam' => $exam,
       'correct_count' => $correct_count,
-      'lesson_count' => $lesson_count->lessons_count,
-
+      'lesson_count' => $lessons_count,
     ]);
   }
 
@@ -50,8 +50,7 @@ class ExamResultController extends Controller
     //check if user choice is correct
     if ($request->not_answered == 1) {
       $is_correct = false;
-    }
-    elseif ($lesson->correct_answer->choice->id == $request->choice_id) {
+    } elseif ($lesson->correct_answer->choice->id == $request->choice_id) {
       $is_correct = true;
     } else {
       $is_correct = false;
@@ -68,10 +67,10 @@ class ExamResultController extends Controller
       $e_answer->save();
     }
 
-    return redirect()->route('exam.result.show', [$request->exam_id, $request->category_id, $request->current_page]);
+    return redirect()->route('exam.result.show', [$request->exam_id, $request->current_page]);
   }
 
-  public function show($exam_id, $id, $page)
+  public function show($exam_id, $page)
   {
 
     $user = Auth::user();
@@ -80,7 +79,7 @@ class ExamResultController extends Controller
     $lesson = $lessons->skip($page - 1)->first();
     $lesson->load('correct_answer', 'correct_answer.choice');
 
-  
+
     $exam_answer = ExamAnswer::where('exam_id', $exam_id)->where('lesson_id', $lesson->id)->first();
 
     //this prevents the user to go in results page without answering
@@ -88,9 +87,8 @@ class ExamResultController extends Controller
       return redirect()->back();
     }
     $exam_answer->load('choice');
-    
+
     return Inertia::render('Student/ExamResult', [
-      'category_id' => $id,
       'lesson' => $lesson,
       'current_page' => $page,
       'lessons_count' => $lessons_count,

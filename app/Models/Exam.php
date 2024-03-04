@@ -11,26 +11,20 @@ class Exam extends Model
   use HasFactory;
 
   protected $fillable = [
-    'student_profile_id',
-    'category_id',
+    'major_id',
+    'assessment_id',
   ];
 
-  public function student_profile()
-  {
-    return $this->belongsTo(StudentProfile::class);
-  }
+  
 
-  public function category()
+  public function major()
   {
-    return $this->belongsTo(Category::class);
+    return $this->belongsTo(Major::class);
   }
 
   public function exam_answers()
   {
     return $this->hasMany(ExamAnswer::class);
   }
-  public function lessons(): HasManyThrough
-  {
-    return $this->hasManyThrough(Lesson::class, Category::class);
-  }
+  
 }

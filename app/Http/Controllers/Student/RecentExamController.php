@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Assessment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -16,50 +17,32 @@ class RecentExamController extends Controller
   {
     $user_id = Auth::user()->student_profile->id;
 
-    $recent_exams = Exam::with(['category' => function ($query) {
-      $query->withCount('lessons'); //this counts the grandchild relation
-    }])->withCount(['exam_answers' => function (Builder $query) {
-      $query->where('is_correct', '1');
+    $assessments = Assessment::with(['exams' => function ($query) {
+      $query->withCount(['exam_answers' => function (Builder $query) {
+        $query->where('is_correct', '1');
+      }]);
     }])->where('student_profile_id', $user_id)->latest()->get();
 
-    //added time_taken
-    $filtered_recent_exams  = $recent_exams->map(function ($exam) {
-      $time = $exam->created_at->diff($exam->updated_at);
-      if ($time->h > 0) {
-        if ($time->h == 1) {
-          $hour = $time->h . ' hour, ';
-        } else {
-          $hour = $time->h . ' hours, ';
-        }
-      } else {
-        $hour = '';
-      }
-      if ($time->i > 0) {
-        if ($time->i == 1) {
-          $minute = $time->i . ' minute, and ';
-        } else {
-          $minute = $time->i . ' minutes, and ';
-        }
-      } else {
-        $minute = '';
-      }
-       if ($time->s > 0) {
-        if ($time->s == 1) {
-          $second = $time->s . ' second ';
-        } else {
-          $second = $time->s . ' seconds ';
-        }
-      } else {
-        $second = '';
-      }
-      $exam->time_taken = $hour.$minute.$second;
+    $exam_coverage = Auth::user()->student_profile->student_major->majors;
 
-      return $exam;
+    $filtered_assessments = $assessments->map(function ($assessment) use ($exam_coverage) {
+      $total_score = 0;
+      foreach ($exam_coverage as $exam_cover) {
+        foreach ($assessment->exams as $exam) {
+          if ($exam_cover->id == $exam->major_id) {
+            // $exam->newshit = floatval('0.'.$exam_cover->major_coverage[0]->percent);
+            $total_score += ($exam->exam_answers_count / 10) * floatval('0.'.$exam_cover->major_coverage[0]->percent);
+          }
+        }
+      }
+      $assessment->total_score = intval(substr(explode('.', $total_score)[1], 0, 2));
+      return $assessment;
     });
-    // dd($filtered_recent_exams);
+
 
     return Inertia::render('Student/RecentExams', [
-      'recent_exams' => $filtered_recent_exams
+      'assessments' => $filtered_assessments,
+      'exam_coverage' => $exam_coverage
     ]);
   }
 }

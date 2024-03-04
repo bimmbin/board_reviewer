@@ -18,7 +18,7 @@ const chcc_logo = ref("/img/chcc_logo.png");
         class="w-screen fixed top-0 left-0 h-screen bg-black bg-opacity-80 z-10 flex select-none"
     >
         <div
-            class="flex-1 h-full bg-blue-500 px-7 max-sm:px-5 py-5 z-20 flex flex-col"
+            class="flex-1 h-full bg-main_bg px-7 max-sm:px-5 py-5 z-20 flex flex-col"
         >
             <!-- Logo -->
             <div class="flex justify-center">
@@ -38,7 +38,7 @@ const chcc_logo = ref("/img/chcc_logo.png");
                 >
                     <DashNav
                         image="project"
-                        nav_name="Majors"
+                        nav_name="Students"
                         :href="route('majors.index')"
                         @click="$emit('close_emit')"
                         :active="$page.url.startsWith('/admin/majors')"
@@ -74,32 +74,15 @@ const chcc_logo = ref("/img/chcc_logo.png");
                                 $page.url.startsWith('/student/exam/categories')
                             "
                         />
-                        <DashDrop image="project" nav_name="History">
-                            <DashNav
-                                image="project"
-                                nav_name="Lesson attempts"
-                                :href="route('recent.lesson.index')"
-                                @click="$emit('close_emit')"
-                                :active="
-                                    $page.url.startsWith(
-                                        '/student/recents/lessons'
-                                    )
-                                "
-                                :sub_nav="true"
-                            />
-                            <DashNav
-                                image="project"
-                                nav_name="Exams attempts"
-                                :href="route('recent.exam.index')"
-                                @click="$emit('close_emit')"
-                                :active="
-                                    $page.url.startsWith(
-                                        '/student/recents/exams'
-                                    )
-                                "
-                                :sub_nav="true"
-                            />
-                        </DashDrop>
+                        <DashNav
+                            image="project"
+                            nav_name="Assessment"
+                            :href="route('recent.exam.index')"
+                            @click="$emit('close_emit')"
+                            :active="
+                                $page.url.startsWith('/student/recents/exams')
+                            "
+                        />
                     </div>
                 </div>
 
@@ -116,7 +99,6 @@ const chcc_logo = ref("/img/chcc_logo.png");
                             @click="$emit('close_emit')"
                             :active="$page.url.startsWith('/instructor/majors')"
                         />
-                     
                     </div>
                 </div>
 

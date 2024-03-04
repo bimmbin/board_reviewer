@@ -33,7 +33,7 @@ const check = ref("/img/check.svg");
 <template>
     <Link
         :href="route_name"
-        class="w-[550px] px-6 py-5 bg-gradient-to-r from-blue-600 to-blue-400 max-2xl:w-[450px] max-xl:w-full h-52 max-sm:h-40 bg-gray2 flex flex-col justify-between rounded-xl"
+        class="w-[550px] px-6 py-5 bg-[#3d6ca5] border-t border-l border-r border-blue-200 max-2xl:w-[450px] max-xl:w-full h-52 max-sm:h-40 bg-gray2 flex flex-col justify-between rounded-xl"
     >
         <div class="w-full h-full flex flex-col justify-between">
             <div class="flex justify-between items-center">
@@ -56,10 +56,16 @@ const check = ref("/img/check.svg");
                     class="w-12 max-md:w-10"
                 />
             </div>
-            <div class="flex items-center">
+            <div class="flex items-center gap-5">
                 <h2 class="text-white text-2xl font-light max-md:text-xl">
                     {{ props.category.category_name }}
                 </h2>
+                <div
+                    v-if="props.category.is_finished"
+                    class="text-white border rounded-lg border-white w-fit px-2 py-1 text-xs"
+                >
+                    Finished
+                </div>
             </div>
         </div>
     </Link>

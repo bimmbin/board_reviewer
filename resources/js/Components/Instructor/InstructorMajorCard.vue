@@ -67,7 +67,7 @@ const submit = () => {
                         <label
                             :for="major.id"
                             :class="{ hidden: form.progress }"
-                            class="bg-blue-500 px-3 py-2 select-none whitespace-nowrap text-white cursor-pointer hover:bg-blue-400 rounded"
+                            class="bg-main_bg px-3 py-2 select-none whitespace-nowrap text-white cursor-pointer hover:bg-blue-400 rounded"
                         >
                             <input
                                 type="file"
@@ -87,7 +87,7 @@ const submit = () => {
                     <button
                         class="bg-blue-200 text-white px-3 py-2 rounded max-md:w-full"
                         :disabled="form.file.length == 0"
-                        :class="{ 'bg-blue-500': form.file.length != 0 }"
+                        :class="{ 'bg-main_bg': form.file.length != 0 }"
                     >
                         submit
                     </button>

@@ -7,10 +7,14 @@ use App\Models\Major;
 use App\Models\Choice;
 use App\Models\Lesson;
 use App\Models\Category;
-use App\Models\CorrectAnswer;
 use App\Models\StaffProfile;
+use App\Models\CorrectAnswer;
+use App\Models\MajorCoverage;
 use App\Models\StudentProfile;
 use Illuminate\Database\Seeder;
+use App\Models\MajorExamCoverage;
+use App\Models\StudentMajor;
+use App\Models\StudentMajorConjunction;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -22,11 +26,28 @@ class tester extends Seeder
    */
   public function run(): void
   {
-    $major_lists = ['General Education', 'Social Science', 'Mathematics', 'Filipino', 'English', 'Professional Education'];
+    $major_lists = ['General Education', 'Professional Education', 'Social Science', 'Mathematics', 'Filipino', 'English'];
 
     foreach ($major_lists as $major) {
       Major::create([
         'major_name' => $major
+      ]);
+      StudentMajor::create([
+        'student_major_name' => $major
+      ]);
+    }
+    MajorCoverage::create([
+      'percent' => 60,
+    ]);
+    MajorCoverage::create([
+      'percent' => 40,
+    ]);
+
+    for ($i = 1; $i <= 2; $i++) {
+      StudentMajorConjunction::create([
+        'student_major_id' => '1',
+        'major_id' => $i,
+        'major_coverage_id' => $i,
       ]);
     }
 
@@ -53,7 +74,7 @@ class tester extends Seeder
 
       StudentProfile::create([
         'user_id' => $student->id,
-        'major_id' => 1,
+        'student_major_id' => 1,
         'first_name' => fake()->firstName(),
         'last_name' => fake()->lastName(),
         'middle_name' => fake()->lastName(),
