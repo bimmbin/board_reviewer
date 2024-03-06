@@ -63,6 +63,7 @@ class StudentController extends Controller
    */
   public function store(Request $request)
   {
+    // dd($request->all());
     $request->validate([
       'student_number' => 'required|integer|unique:' . StudentProfile::class,
       'first_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
@@ -93,7 +94,7 @@ class StudentController extends Controller
         'first_name' => $request->first_name,
         'last_name' => $request->last_name,
         'middle_name' => $request->middle_name,
-        'student_number' => rand(1000, 9999) . "2021",
+        'student_number' => $request->student_number,
       ]
     );
     if (!$student_profile->exists) {
