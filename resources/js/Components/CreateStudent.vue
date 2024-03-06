@@ -22,7 +22,10 @@ const form = useForm({
 
 const submit = () => {
     form.post(route("students.store"), {
-        onSuccess: () => emit("close_emit"),
+         onSuccess: () => {
+            emit("close_emit");
+            form.reset();
+        }
     });
 };
 </script>

@@ -88,7 +88,7 @@ class StudentController extends Controller
         'user_id' => $student_user->id,
       ],
       [
-        'major_id' => $request->major_id,
+        'student_major_id' => $request->major_id,
         'user_role' => 'student',
         'first_name' => $request->first_name,
         'last_name' => $request->last_name,
