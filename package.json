@@ -18,8 +18,10 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
+        "apexcharts": "^3.46.0",
         "date-fns": "^2.30.0",
         "typeface-poppins": "^1.1.13",
-        "vue-collapsed": "^1.2.9"
+        "vue-collapsed": "^1.2.9",
+        "vue3-apexcharts": "^1.5.2"
     }
 }

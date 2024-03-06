@@ -20,6 +20,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Dean\DeanHistoryController;
 use App\Http\Controllers\Instructor\InstructorMajorController;
 use App\Http\Controllers\Instructor\InstructorLessonsController;
+use App\Http\Controllers\Student\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,9 @@ Route::fallback(function () {
 });
 
 Route::middleware(['auth', 'role:student'])->group(function () {
+
+  
+  Route::get('/student/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
   Route::get('/student/lessons', [CategoryController::class, 'index'])->name('category.index');
 
   //Lesson

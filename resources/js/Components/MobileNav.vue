@@ -60,6 +60,13 @@ const chcc_logo = ref("/img/chcc_logo.png");
                     <div class="flex flex-col sticky left-0 top-0">
                         <DashNav
                             image="project"
+                            nav_name="Dashboard"
+                            :href="route('dashboard.index')"
+                            @click="$emit('close_emit')"
+                            :active="$page.url.startsWith('/student/dashboard')"
+                        />
+                        <DashNav
+                            image="project"
                             nav_name="Lessons"
                             :href="route('category.index')"
                             @click="$emit('close_emit')"
