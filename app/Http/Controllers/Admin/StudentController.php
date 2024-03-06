@@ -75,7 +75,7 @@ class StudentController extends Controller
       ['username' => $request->last_name . $request->student_number],
       [
         'user_role' => 'student',
-        'password' => Hash::make('student123'),
+        'password' => Hash::make($request->student_number),
       ]
     );
     if (!$student_user->exists) {

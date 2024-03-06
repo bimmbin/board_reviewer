@@ -68,7 +68,7 @@ class InstructorController extends Controller
     $instructor = User::create([
       'username' => $request->last_name . $request->employee_number,
       'user_role' => 'instructor',
-      'password' => Hash::make('instructor123'),
+      'password' => Hash::make($request->employee_number),
     ]);
 
     StaffProfile::create([

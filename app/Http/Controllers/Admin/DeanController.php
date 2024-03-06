@@ -69,7 +69,7 @@ class DeanController extends Controller
       $dean = User::create([
         'username' => $request->last_name . $request->employee_number,
         'user_role' => 'dean',
-        'password' => Hash::make('dean123'),
+        'password' => Hash::make($request->employee_number),
       ]);
   
       StaffProfile::create([
