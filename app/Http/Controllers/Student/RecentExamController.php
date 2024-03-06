@@ -31,11 +31,15 @@ class RecentExamController extends Controller
         foreach ($assessment->exams as $exam) {
           if ($exam_cover->id == $exam->major_id) {
             // $exam->newshit = floatval('0.'.$exam_cover->major_coverage[0]->percent);
-            $total_score += ($exam->exam_answers_count / 10) * floatval('0.'.$exam_cover->major_coverage[0]->percent);
+            $total_score += ($exam->exam_answers_count / 10) * floatval('0.' . $exam_cover->major_coverage[0]->percent);
           }
         }
       }
-      $assessment->total_score = intval(substr(explode('.', $total_score)[1], 0, 2));
+      if ($total_score != 0) {
+        $assessment->total_score = intval(substr(explode('.', $total_score)[1], 0, 2));
+      } else {
+        $assessment->total_score = intval(explode('.', $total_score)[0]);
+      }
       return $assessment;
     });
 
