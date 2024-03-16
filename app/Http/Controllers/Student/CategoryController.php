@@ -38,16 +38,16 @@ class CategoryController extends Controller
     // });
     $filtered_majors = $majors->map(function ($major) {
       foreach ($major->categories as $category) {
-          $finished = false;
-          foreach ($category->recent_lessons as $recent_lesson) {
-              if (count($recent_lesson->page_views) == count($category->lessons)) {
-                  $finished = true;
-              }
+        $finished = false;
+        foreach ($category->recent_lessons as $recent_lesson) {
+          if (count($recent_lesson->page_views) == count($category->lessons)) {
+            $finished = true;
           }
-          $category->is_finished = $finished;
+        }
+        $category->is_finished = $finished;
       }
       return $major;
-  });
+    });
 
     // dd($filtered_majors);
     return Inertia::render('Student/Category', [

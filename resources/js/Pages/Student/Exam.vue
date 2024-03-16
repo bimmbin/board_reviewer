@@ -37,11 +37,11 @@ const submit = () => {
 };
 
 function time_ended_submit() {
-  form.choice_id = 1;
-  form.not_answered = 1;
-  form.post(route("exam.answer.store"));
+    form.choice_id = 1;
+    form.not_answered = 1;
+    form.post(route("exam.answer.store"));
 }
-
+console.log(current_page)
 </script>
 
 <template>
@@ -62,7 +62,10 @@ function time_ended_submit() {
                             {{ lesson.category.category_name }}
                         </h1>
                     </div>
-                    <ExamCountdown :time_remaining="lesson.time_remaining" @time_ended_submit="time_ended_submit()"/>
+                    <ExamCountdown
+                        :time_remaining="lesson.time_remaining"
+                        @time_ended_submit="time_ended_submit()"
+                    />
                     <span
                         class="w-fit h-fit px-3 py-3 bg-blue-200 rounded-md text-blue-500 max-md:text-sm max-md:py-2 max-md:px-2"
                         >{{ current_page }}/{{ lessons_count }}</span

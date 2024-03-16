@@ -26,12 +26,18 @@ class ExamResultController extends Controller
 
     $lessons_count = count(Session::get($exam_id . $user->username));
 
-    Session::forget($exam_id . $user->username);
+    $lessons = Session::get($exam_id . $user->username);
+    $lessons->load('correct_answer', 'correct_answer.choice', 'exam_answer', 'exam_answer.choice');
+
+    // dd($lessons);
+
+    // Session::forget($exam_id . $user->username);
 
     return Inertia::render('Student/ExamFinalResult', [
       'exam' => $exam,
       'correct_count' => $correct_count,
       'lesson_count' => $lessons_count,
+      'lessons' => $lessons,
     ]);
   }
 
@@ -66,6 +72,7 @@ class ExamResultController extends Controller
     if (!$e_answer->exists) {
       $e_answer->save();
     }
+    
 
     return redirect()->route('exam.result.show', [$request->exam_id, $request->current_page]);
   }
