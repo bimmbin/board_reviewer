@@ -32,7 +32,7 @@ const submit = () => {
             Create {{ route_name }} Account
         </h1>
         <form @submit.prevent="submit" class="mt-3 flex flex-col gap-3 pb-5">
-            <div class="flex gap-3">
+            <div class="flex flex-col gap-3">
                 <div class="flex-1">
                     <InputLabel for="employee_number" value="Employee ID" />
 
@@ -72,7 +72,7 @@ const submit = () => {
             </div>
 
             <!-- second row  -->
-            <div class="flex gap-3">
+            <div class="flex flex-col gap-3">
                 <div class="flex-1">
                     <InputLabel for="last_name" value="Last Name" />
 

@@ -44,7 +44,7 @@ console.log(page.props.ziggy.url);
     <div class="flex flex-col gap-3">
         <div class="flex gap-3">
             <div class="w-60 border border-blue-200 rounded-md px-10 py-5 bg-[#F4F8FF]">
-
+              Average %
             </div>
             <div
                 class="flex-1 border border-blue-200 rounded-md px-10 py-5 bg-[#F4F8FF] text-center text-main_bg"

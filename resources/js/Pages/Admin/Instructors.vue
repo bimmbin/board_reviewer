@@ -27,7 +27,7 @@ const search = ref(filters.search);
 
 watch(search, (value) => {
     router.get(
-        ("/instructors"),
+        "/instructors",
         { search: value },
         {
             preserveState: true,
@@ -41,13 +41,11 @@ watch(search, (value) => {
     <div
         class="w-full flex items-center justify-between gap-5 max-lg:flex-col max-lg:items-start max-md:gap-2"
     >
-        <Link
-            :href="route('instructors.index')"
-            class="text-3xl font-semibold max-md:mt-20 text-blue-800 max-md:mb-2 max-md:text-2xl"
-            :class="{ 'opacity-20': show_details }"
+        <div
+            class="text-3xl font-bold max-md:mt-20 text-main_bg max-md:mb-2 max-md:text-2xl flex items-center"
         >
             Instructors
-        </Link>
+        </div>
         <div
             class="w-full flex-1 flex items-center justify-between gap-10 max-md:gap-3"
         >
@@ -68,12 +66,17 @@ watch(search, (value) => {
         </div>
     </div>
     <Collapse :when="show_details">
-        <div class="flex flex-col gap-10 bg-blue-100 px-5 mt-5">
+        <div class="flex flex-col items-center gap-10 px-5 mt-5">
             <!-- Create using excel form -->
             <!-- <UploadExcel @close_it="show_details = !show_details" /> -->
-       
+
             <!-- Create manual form -->
-            <CreateStaff route_name="instructors" @close_emit="show_details = !show_details" />
+            <div class="w-fit px-10 flex flex-col items-center bg-blue-100">
+                <CreateStaff
+                    route_name="instructors"
+                    @close_emit="show_details = !show_details"
+                />
+            </div>
         </div>
     </Collapse>
 
@@ -120,7 +123,10 @@ watch(search, (value) => {
                     <td>
                         <div class="flex items-center gap-3">
                             <div class="">
-                                <EditStaff :staff="instructor" route_name="instructors" />
+                                <EditStaff
+                                    :staff="instructor"
+                                    route_name="instructors"
+                                />
                             </div>
                         </div>
                     </td>

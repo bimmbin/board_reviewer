@@ -42,13 +42,11 @@ watch(search, (value) => {
     <div
         class="w-full flex items-center justify-between gap-5 max-lg:flex-col max-lg:items-start max-md:gap-2"
     >
-        <Link
-            :href="route('students.show', major_id)"
-            class="text-3xl font-semibold max-md:mt-20 text-blue-800 max-md:mb-2 max-md:text-2xl"
-            :class="{ 'opacity-20': show_details }"
+        <div
+            class="text-3xl font-bold max-md:mt-20 text-main_bg max-md:mb-2 max-md:text-2xl flex items-center"
         >
             Students
-        </Link>
+        </div>
         <div
             class="w-full flex-1 flex items-center justify-between gap-10 max-md:gap-3"
         >
@@ -69,15 +67,22 @@ watch(search, (value) => {
         </div>
     </div>
     <Collapse :when="show_details">
-        <div class="flex flex-col gap-10 bg-blue-100 px-5 mt-5">
+        <div
+            class="flex max-lg:flex-col gap-10 max-lg:gap-3 bg-blue-100 px-8 max-md:px-5 py-5 mt-5"
+        >
+            <!-- Create manual form -->
+            <CreateStudent
+                :major_id="major_id"
+                @close_emit="show_details = !show_details"
+            />
+            <div class="flex lg:flex-col items-center gap-2 opacity-60">
+                <span class="text-blue-500 font-medium">or</span>
+                <div
+                    class="w-fit h-full border-l max-lg:border-t max-lg:w-full max-lg:h-fit border-blue-300"
+                ></div>
+            </div>
             <!-- Create using excel form -->
             <UploadExcel @close_it="show_details = !show_details" />
-            <div class="flex items-center gap-2">
-                <span class="text-blue-800 font-medium">or</span>
-                <div class="w-full h-fit border-t border-blue-300"></div>
-            </div>
-            <!-- Create manual form -->
-            <CreateStudent :major_id="major_id" @close_emit="show_details = !show_details" />
         </div>
     </Collapse>
 

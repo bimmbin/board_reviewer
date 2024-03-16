@@ -28,11 +28,11 @@ const view = ref("/img/view.svg");
     <div
         class="w-full flex items-center justify-between gap-5 max-lg:flex-col max-lg:items-start max-md:gap-2 mt-2"
     >
-        <h1
-            class="text-3xl font-semibold max-md:mt-20 text-blue-800 max-md:mb-2 max-md:text-2xl capitalize"
+        <div
+            class="text-3xl font-bold max-md:mt-20 text-main_bg max-md:mb-2 max-md:text-2xl flex items-center capitalize"
         >
             Upload History
-        </h1>
+        </div>
     </div>
 
     <div

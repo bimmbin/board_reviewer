@@ -22,22 +22,18 @@ const { instructors, dean_count } = defineProps({
 });
 
 let show_details = ref(false);
-
-
 </script>
 
 <template>
     <div
         class="w-full flex items-center justify-between gap-5 max-lg:flex-col max-lg:items-start max-md:gap-2"
     >
-        <Link
-            :href="route('instructors.index')"
-            class="text-3xl font-semibold max-md:mt-20 text-blue-800 max-md:mb-2 max-md:text-2xl"
-            :class="{ 'opacity-20': show_details }"
+        <div
+            class="text-3xl font-bold max-md:mt-20 text-main_bg max-md:mb-2 max-md:text-2xl flex items-center"
         >
             Dean Account
-        </Link>
-        
+        </div>
+
         <div
             class="w-full flex-1 flex items-center justify-between gap-10 max-md:gap-3"
         >
@@ -49,7 +45,8 @@ let show_details = ref(false);
                 :class="{ 'opacity-20': show_details }"
             /> -->
             <div class=""></div>
-            <div v-if="!(dean_count > 0)"
+            <div
+                v-if="!(dean_count > 0)"
                 @click="show_details = !show_details"
                 class="bg-main_bg text-white px-5 py-3 rounded-md select-none cursor-pointer max-md:text-sm max-md:px-3 max-md:py-2 whitespace-nowrap border border-blue-500 max-lg:-translate-x-36 max-md:-translate-x-0"
             >
@@ -59,12 +56,17 @@ let show_details = ref(false);
         </div>
     </div>
     <Collapse :when="show_details">
-        <div class="flex flex-col gap-10 bg-blue-100 px-5 mt-5">
+        <div class="flex flex-col gap-10 items-center px-5 mt-5">
             <!-- Create using excel form -->
             <!-- <UploadExcel @close_it="show_details = !show_details" /> -->
-       
+
             <!-- Create manual form -->
-            <CreateStaff route_name="dean" @close_emit="show_details = !show_details" />
+            <div class="w-fit px-10 flex flex-col items-center bg-blue-100">
+                <CreateStaff
+                    route_name="dean"
+                    @close_emit="show_details = !show_details"
+                />
+            </div>
         </div>
     </Collapse>
 
@@ -111,7 +113,10 @@ let show_details = ref(false);
                     <td>
                         <div class="flex items-center gap-3">
                             <div class="">
-                                <EditStaff :staff="instructor" route_name="dean" />
+                                <EditStaff
+                                    :staff="instructor"
+                                    route_name="dean"
+                                />
                             </div>
                         </div>
                     </td>
