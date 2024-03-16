@@ -32,6 +32,7 @@ const form = useForm({
     not_answered: 0,
 });
 
+
 const submit = () => {
     form.post(route("exam.answer.store"), {
         onSuccess: () => {
@@ -109,21 +110,26 @@ function time_ended_submit() {
             <div
                 class="max-md:fixed max-md:bottom-16 max-md:px-5 max-md:left-0 w-full flex justify-between items-center"
             >
-                <div class=""></div>
-                <div v-if="current_page == lessons_count">
-                    <button
-                        class="select-none py-2 px-5 border-2 border-blue-500 rounded-md bg-main_bg text-white font-semibold"
+                <div v-if="current_page != 1">
+                    <Link
+                        :href="
+                            route('exam.result.show', [
+                                exam_id,
+                                parseInt(current_page) - 1,
+                            ])
+                        "
+                        class="select-none py-2 px-5 border-2 border-blue-500 rounded-md text-blue-500 font-semibold"
                     >
-                        Finish
-                    </button>
+                        Back
+                    </Link>
                 </div>
-                <div v-else>
-                    <button
-                        class="select-none py-2 px-5 border-2 border-blue-500 rounded-md bg-main_bg text-white font-semibold"
-                    >
-                        Next
-                    </button>
-                </div>
+                <div v-else></div>
+
+                <button
+                    class="select-none py-2 px-5 border-2 border-blue-500 rounded-md bg-main_bg text-white font-semibold"
+                >
+                    Check
+                </button>
             </div>
         </form>
     </div>
