@@ -38,7 +38,7 @@ const submit = () => {
         class="w-full h-screen absolute top-0 left-0 px-10 max-md:px-5 py-5 bg-black bg-opacity-70 flex items-center justify-center cursor-default"
     >
         <div
-            class="w-[900px] mx-auto max-2xl:w-[800px] max-xl:w-[700px] max-md:w-screen max-md:px-5 py-5 max-sm:py-5 text-black max-xl:px-10 bg-blue-100 rounded-xl px-5"
+            class="w-[400px] mx-auto max-md:w-screen max-md:px-5 py-5 max-sm:py-5 text-black max-xl:px-10 bg-blue-100 rounded-xl px-5"
         >
             <!-- Dialog Content -->
             <!-- Edit header -->
@@ -60,7 +60,7 @@ const submit = () => {
                 @submit.prevent="submit"
                 class="mt-3 flex flex-col gap-3 border-b border-blue-300 pb-5"
             >
-                <div class="flex gap-3">
+                <div class="flex flex-col gap-3">
                     <div class="flex-1">
                         <InputLabel for="employee_number" value="Employee ID" />
 
@@ -100,7 +100,7 @@ const submit = () => {
                 </div>
 
                 <!-- second row  -->
-                <div class="flex gap-3">
+                <div class="flex flex-col gap-3">
                     <div class="flex-1">
                         <InputLabel for="last_name" value="Last Name" />
 
