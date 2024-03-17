@@ -197,7 +197,7 @@ const chcc_bg = ref("/img/chcc_bg.png");
                 <div class="flex flex-col border-t border-blue-300">
                     <span class="font-semibold">Admin</span>
                     <span>Username: {{ admin.username }}</span>
-                    <span>Password: {{ admin.staff_profile }}</span>
+                    <span>Password: admin123</span>
                 </div>
             </div>
         </div>
