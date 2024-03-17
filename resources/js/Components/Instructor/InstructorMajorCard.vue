@@ -20,7 +20,10 @@ const form = useForm({
 
 const submit = () => {
     form.post(route("instructor.majors.store"), {
-        onFinish: () => form.reset("file"),
+        onSuccess: () => {
+            emit("close_it");
+            form.reset("file");
+        },
     });
 };
 </script>
@@ -36,7 +39,7 @@ const submit = () => {
                 </h2>
                 <img :src="drop" class="-rotate-90" />
             </div>
-            <div class="w-full flex items-center justify-between gap-4">
+            <div class="w-full flex justify-between gap-4 text-center">
                 <Link
                     :href="route('instructor.lessons.index', [props.major.id, 'pending'])"
                     class="bg-white flex-1 rounded-md flex flex-col items-center py-4 bg-opacity-80 hover:bg-opacity-100 cursor-pointer active:bg-opacity-80 select-none"

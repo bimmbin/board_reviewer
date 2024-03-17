@@ -22,7 +22,7 @@ class File extends FormRequest
     public function rules(): array
     {
         return [
-          'file' => 'required|file|max:10048'
+          'file' => 'required|file|mimes:xlsx, xls|max:10048'
         ];
     }
 }

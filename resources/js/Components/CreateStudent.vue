@@ -31,7 +31,7 @@ const submit = () => {
 </script>
 
 <template>
-    <div class="flex-1 pt-5 max-lg:mt-0">
+    <div class="flex-1 pt-5 max-lg:pt-0">
         <h1 class="text-xl font-semibold text-blue-800 max-md:mb-2">
             Create manually
         </h1>

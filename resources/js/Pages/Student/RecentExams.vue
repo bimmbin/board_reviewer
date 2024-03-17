@@ -25,11 +25,11 @@ const formatTime = (dateString) => {
 </script>
 
 <template>
-    <h1
-        class="text-3xl font-semibold mb-5 max-md:mt-20 text-blue-800 max-md:mb-2"
+    <div
+        class="text-3xl mb-3 font-bold max-md:mt-20 text-main_bg max-md:mb-2 max-md:text-2xl flex items-center"
     >
-        Recent Exams
-    </h1>
+        Assessments
+    </div>
     <div class="w-full pb-10 overflow-x-auto">
         <table
             id="dataTable"

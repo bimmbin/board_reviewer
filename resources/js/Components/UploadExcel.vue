@@ -3,20 +3,29 @@ import { Link, useForm } from "@inertiajs/vue3";
 
 const emit = defineEmits(["close_it"]);
 
+const { major_id } = defineProps({
+    major_id: String,
+});
+
 const form = useForm({
     file: [],
+    major_id: major_id,
 });
 
 const submit = () => {
     form.post(route("students.store.excel"), {
-        onFinish: () => emit("close_it"),
+        onSuccess: () => {
+            emit("close_it");
+        },
     });
 };
 </script>
 
 <template>
     <div class="flex-1">
-        <h1 class="text-xl font-semibold text-blue-800 max-md:mb-2 pt-5 max-lg:pt-0">
+        <h1
+            class="text-xl font-semibold text-blue-800 max-md:mb-2 pt-5 max-lg:pt-0"
+        >
             Using excel
         </h1>
         <form

@@ -14,6 +14,18 @@ defineProps({
     status: {
         type: String,
     },
+    student: {
+        type: Object,
+    },
+    instructor: {
+        type: Object,
+    },
+    dean: {
+        type: Object,
+    },
+    admin: {
+        type: Object,
+    },
 });
 
 const form = useForm({
@@ -58,7 +70,7 @@ const chcc_bg = ref("/img/chcc_bg.png");
         </div>
 
         <div
-            class="bg-white w-full h-screen relative items-center flex flex-col xl:justify-center "
+            class="bg-white w-full h-screen relative items-center flex flex-col xl:justify-center"
         >
             <div class="w-full h-20 bg-main_bg xl:hidden"></div>
             <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
@@ -137,7 +149,8 @@ const chcc_bg = ref("/img/chcc_bg.png");
                     </div>
                 </form>
             </div>
-            <div class="w-full h-full bg-main_bg xl:hidden">
+
+            <div class="w-full h-full bg-main_bg xl:hidden order-last mt-5">
                 <div
                     class="w-full h-full flex flex-col items-center gap-10 py-10 text-white"
                 >
@@ -150,6 +163,41 @@ const chcc_bg = ref("/img/chcc_bg.png");
                     <h1 class="font-semibold text-[25px] max-md:text-xl">
                         Interactive Licensure Exam Reviewer
                     </h1>
+                </div>
+            </div>
+            <div class="flex flex-col gap-3 flex-wrap">
+                <span class="font-semibold">For testing purposes</span>
+                <div class="flex-1 flex flex-col border-t border-blue-300">
+                    <span class="font-semibold">Student</span>
+                    <span>Username: {{ student.username }}</span>
+                    <span
+                        >Password:
+                        {{ student.student_profile.student_number }}</span
+                    >
+                </div>
+
+                <div class="flex flex-col border-t border-blue-300">
+                    <span class="font-semibold">Instructor</span>
+                    <span>Username: {{ instructor.username }}</span>
+                    <span
+                        >Password:
+                        {{ instructor.staff_profile.employee_number }}</span
+                    >
+                </div>
+
+                <div class="flex flex-col border-t border-blue-300">
+                    <span class="font-semibold">Dean</span>
+                    <span>Username: {{ dean.username }}</span>
+                    <span
+                        >Password:
+                        {{ dean.staff_profile.employee_number }}</span
+                    >
+                </div>
+
+                <div class="flex flex-col border-t border-blue-300">
+                    <span class="font-semibold">Admin</span>
+                    <span>Username: {{ admin.username }}</span>
+                    <span>Password: {{ admin.staff_profile }}</span>
                 </div>
             </div>
         </div>

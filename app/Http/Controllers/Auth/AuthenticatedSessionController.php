@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,9 +20,19 @@ class AuthenticatedSessionController extends Controller
    */
   public function create(): Response
   {
+
+    $student = User::with('student_profile')->where('user_role', 'student')->latest()->first();
+    $instructor = User::with('staff_profile')->where('user_role', 'instructor')->latest()->first();
+    $dean = User::with('staff_profile')->where('user_role', 'dean')->latest()->first();
+    $admin = User::where('user_role', 'admin')->latest()->first();
+
     return Inertia::render('Auth/Login', [
       'canResetPassword' => Route::has('password.request'),
       'status' => session('status'),
+      'student' => $student,
+      'instructor' => $instructor,
+      'dean' => $dean,
+      'admin' => $admin,
     ]);
   }
 

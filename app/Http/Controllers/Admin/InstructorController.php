@@ -60,9 +60,9 @@ class InstructorController extends Controller
   {
     $request->validate([
       'employee_number' => 'required|integer|unique:' . StaffProfile::class,
-      'first_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
-      'last_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
-      'middle_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
+      'first_name' => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
+      'last_name' => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
+      'middle_name' => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
     ]);
 
     $instructor = User::create([
@@ -104,10 +104,10 @@ class InstructorController extends Controller
   public function update(Request $request, string $id)
   {
     $request->validate([
-      'employee_number' => ['required', Rule::unique('staff_profiles')->ignore($id)],
-      'first_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
-      'last_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
-      'middle_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
+      'employee_number' => ['required','integer', Rule::unique('staff_profiles')->ignore($id)],
+      'first_name' => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
+      'last_name' => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
+      'middle_name' => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
     ]);
 
     $staff_user = User::findOrFail($request->user_id);

@@ -21,6 +21,7 @@ use App\Http\Controllers\Dean\DeanHistoryController;
 use App\Http\Controllers\Instructor\InstructorMajorController;
 use App\Http\Controllers\Instructor\InstructorLessonsController;
 use App\Http\Controllers\Student\DashboardController;
+use App\Http\Controllers\ViewAllAssessmentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +51,7 @@ Route::fallback(function () {
 
 Route::middleware(['auth', 'role:student'])->group(function () {
 
-  
+
   Route::get('/student/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
   Route::get('/student/lessons', [CategoryController::class, 'index'])->name('category.index');
 
@@ -137,10 +138,16 @@ Route::middleware(['auth', 'role:dean'])->group(function () {
 
   //Dean action history
   Route::get('/history/dean', [DeanHistoryController::class, 'index'])->name('dean.history.index');
+
+  // //View Assessments
+  // Route::get('/history/assessments', [ViewAllAssessmentsController::class, 'index'])->name('view.assessments.index');
 });
 
 
-
+Route::middleware(['auth', 'role:dean,instructor'])->group(function () {
+  //View Assessments
+  Route::get('/history/assessments', [ViewAllAssessmentsController::class, 'index'])->name('view.assessments.index');
+});
 
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [

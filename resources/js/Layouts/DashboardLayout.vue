@@ -230,6 +230,13 @@ const show_nav = ref(false);
                     @click="$emit('close_emit')"
                     :active="$page.url.startsWith('/instructor/upload/history')"
                 />
+                <DashNav
+                    image="project"
+                    nav_name="Assessments"
+                    :href="route('view.assessments.index')"
+                    @click="$emit('close_emit')"
+                    :active="$page.url.startsWith('/history/assessments')"
+                />
             </div>
 
             <!-- Dean Navigation -->
@@ -247,6 +254,13 @@ const show_nav = ref(false);
                     :href="route('dean.history.index')"
                     @click="$emit('close_emit')"
                     :active="$page.url.startsWith('/history/dean')"
+                />
+                <DashNav
+                    image="project"
+                    nav_name="Assessments"
+                    :href="route('view.assessments.index')"
+                    @click="$emit('close_emit')"
+                    :active="$page.url.startsWith('/history/assessments')"
                 />
             </div>
 

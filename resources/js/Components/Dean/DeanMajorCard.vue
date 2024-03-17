@@ -12,13 +12,11 @@ const props = defineProps({
 });
 
 const drop = ref("/img/drop.svg");
-
-
 </script>
 
 <template>
     <div
-        class="w-[550px] px-6 py-5 bg-gradient-to-r from-blue-600 to-blue-400 max-2xl:w-[450px] max-xl:w-full bg-gray2 flex flex-col justify-between rounded-xl"
+        class="w-[550px] px-6 py-5 bg-main_bg max-2xl:w-[450px] max-xl:w-full bg-gray2 flex flex-col justify-between rounded-xl"
     >
         <div class="w-full h-full flex flex-col justify-between gap-3">
             <div class="w-full h-full flex justify-between">
@@ -27,9 +25,11 @@ const drop = ref("/img/drop.svg");
                 </h2>
                 <img :src="drop" class="-rotate-90" />
             </div>
-            <div class="w-full flex items-center justify-between gap-3">
+            <div class="w-full flex justify-between gap-3 text-center">
                 <Link
-                    :href="route('dean.lessons.index', [props.major.id, 'pending'])"
+                    :href="
+                        route('dean.lessons.index', [props.major.id, 'pending'])
+                    "
                     class="bg-white flex-1 rounded-md flex flex-col items-center py-4 bg-opacity-80 hover:bg-opacity-100 cursor-pointer active:bg-opacity-80 select-none"
                 >
                     <h2 class="text-2xl font-medium">
@@ -38,7 +38,12 @@ const drop = ref("/img/drop.svg");
                     <span class="text-xs text-gray-700">Pending Lessons</span>
                 </Link>
                 <Link
-                    :href="route('dean.lessons.index', [props.major.id, 'approved'])"
+                    :href="
+                        route('dean.lessons.index', [
+                            props.major.id,
+                            'approved',
+                        ])
+                    "
                     class="bg-white flex-1 rounded-md flex flex-col items-center py-4 bg-opacity-80 hover:bg-opacity-100 cursor-pointer active:bg-opacity-80 select-none"
                 >
                     <h2 class="text-2xl font-medium">
@@ -47,16 +52,22 @@ const drop = ref("/img/drop.svg");
                     <span class="text-xs text-gray-700">Approved Lessons</span>
                 </Link>
                 <Link
-                    :href="route('dean.lessons.index', [props.major.id, 'disapproved'])"
+                    :href="
+                        route('dean.lessons.index', [
+                            props.major.id,
+                            'disapproved',
+                        ])
+                    "
                     class="bg-white flex-1 rounded-md flex flex-col items-center py-4 bg-opacity-80 hover:bg-opacity-100 cursor-pointer active:bg-opacity-80 select-none"
                 >
                     <h2 class="text-2xl font-medium">
                         {{ props.major.category_disapproved_count }}
                     </h2>
-                    <span class="text-xs text-gray-700">Disapproved Lessons</span>
+                    <span class="text-xs text-gray-700"
+                        >Disapproved Lessons</span
+                    >
                 </Link>
             </div>
-
         </div>
     </div>
 </template>

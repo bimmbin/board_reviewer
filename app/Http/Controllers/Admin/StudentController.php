@@ -31,31 +31,58 @@ class StudentController extends Controller
     $reviewers = SimpleXLSX::parse($request->file);
 
     $counter = 0;
+    $existing_accounts = [];
     foreach ($reviewers->rows() as $row) {
 
       // Skip the first iteration
       if ($counter++ == 0) continue;
 
-      $student = User::firstOrNew(
+      $spaceless_lastname = str_replace(' ', '', $row[1]);
+
+      //user
+      $student_user = User::firstOrNew(
+        ['username' => $spaceless_lastname . $row[0]],
         [
-          'student_number' => $row[0]
+          'user_role' => 'student',
+          'password' => Hash::make($row[0]),
+        ]
+      );
+      if (!$student_user->exists) {
+        $student_user->save();
+      } else {
+        $existing_accounts[] = 'Student ' . $row[0] . ' ' . $row[2] . ' ' . $row[1] . ' already exists';
+      };
+
+      //profile
+      $student_profile = StudentProfile::firstOrNew(
+        [
+          'user_id' => $student_user->id,
         ],
         [
-          'major_id' => 1,
-          'user_role' => 'student',
+          'student_major_id' => $request->major_id,
+          'student_number' => $row[0],
           'last_name' => $row[1],
           'first_name' => $row[2],
           'middle_name' => $row[3],
-          'username' => $row[1] . $row[0],
-          'password' => Hash::make($row[0])
         ]
       );
-      if (!$student->exists) {
-        $student->save();
+      if (!$student_profile->exists) {
+        $student_profile->save();
       };
     };
 
-    return redirect()->back();
+    if (count($existing_accounts) != 0) {
+      return redirect()->back()->with([
+        'message' => $existing_accounts,
+        'color' => 'red',
+        'is_array' => true
+      ]);
+    } else {
+      return redirect()->back()->with([
+        'message' => 'Students uploaded sucessfully',
+        'color' => 'green',
+      ]);
+    }
   }
 
   /**
@@ -66,9 +93,9 @@ class StudentController extends Controller
     // dd($request->all());
     $request->validate([
       'student_number' => 'required|integer|unique:' . StudentProfile::class,
-      'first_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
-      'last_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
-      'middle_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
+      'first_name' => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
+      'last_name' => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
+      'middle_name' => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
     ]);
 
     //user
@@ -152,10 +179,10 @@ class StudentController extends Controller
   public function update(Request $request, string $id)
   {
     $request->validate([
-      'student_number' => ['required', Rule::unique('student_profiles')->ignore($id)],
-      'first_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
-      'last_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
-      'middle_name' => 'required|regex:/^[a-zA-Z]+$/u|max:255',
+      'student_number' => ['required', 'integer', Rule::unique('student_profiles')->ignore($id)],
+      'first_name' => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
+      'last_name' => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
+      'middle_name' => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
     ]);
 
     $student_profile = StudentProfile::findOrFail($id);

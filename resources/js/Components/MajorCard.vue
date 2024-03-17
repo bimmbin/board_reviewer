@@ -28,7 +28,7 @@ const submit = () => {
                 </h2>
                 <img :src="drop" class="-rotate-90" />
             </div>
-            <div class="w-full flex items-center justify-between gap-4">
+            <div class="w-full flex justify-between gap-4 text-center">
               <Link :href="route('students.show', props.major.id)" class="bg-white flex-1 rounded-md flex flex-col items-center py-4 bg-opacity-80 hover:bg-opacity-100 cursor-pointer active:bg-opacity-80 select-none">
                 <h2 class="text-2xl font-medium ">{{ props.major.students_count }}</h2>
                 <span class="text-xs text-gray-700 ">Students</span>

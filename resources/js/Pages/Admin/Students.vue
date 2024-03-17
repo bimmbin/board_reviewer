@@ -15,6 +15,7 @@ import Pagination from "@/Components/Pagination.vue";
 import CreateStudent from "@/Components/CreateStudent.vue";
 import UploadExcel from "@/Components/UploadExcel.vue";
 import EditStudent from "@/Components/Admin/EditStudent.vue";
+import Flash from "@/Components/Flash.vue";
 
 const { students, major_id, filters } = defineProps({
     students: Object,
@@ -39,6 +40,25 @@ watch(search, (value) => {
 </script>
 
 <template>
+    <transition
+        enter-active-class="duration-300 ease-out"
+        enter-from-class="transform opacity-0"
+        enter-to-class="opacity-100"
+        leave-active-class="duration-700 ease-in"
+        leave-from-class="opacity-100"
+        leave-to-class="transform opacity-0"
+    >
+        <Flash
+            v-if="$page.props.flash.message"
+            :message="$page.props.flash.message"
+            :color="$page.props.flash.color"
+            :is_array="$page.props.flash.is_array"
+            @close_flash="
+                ($page.props.flash.message = null),
+                    ($page.props.flash.color = null)
+            "
+        />
+    </transition>
     <div
         class="w-full flex items-center justify-between gap-5 max-lg:flex-col max-lg:items-start max-md:gap-2"
     >
@@ -82,7 +102,10 @@ watch(search, (value) => {
                 ></div>
             </div>
             <!-- Create using excel form -->
-            <UploadExcel @close_it="show_details = !show_details" />
+            <UploadExcel
+                :major_id="major_id"
+                @close_it="show_details = !show_details"
+            />
         </div>
     </Collapse>
 

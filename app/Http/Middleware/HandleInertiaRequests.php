@@ -54,7 +54,8 @@ class HandleInertiaRequests extends Middleware
       ],
       'flash' => [
         'message' => fn () => $request->session()->get('message'),
-        'color' => fn () => $request->session()->get('color')
+        'color' => fn () => $request->session()->get('color'),
+        'is_array' => fn () => $request->session()->get('is_array'),
       ],
     ];
   }
