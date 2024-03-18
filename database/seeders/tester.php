@@ -54,14 +54,14 @@ class tester extends Seeder
     $admin = User::create([
       'username' => 'admin',
       'user_role' => 'admin',
-      'password' => Hash::make($i . "23452023"),
+      'password' => Hash::make("admin123"),
     ]);
     StaffProfile::create([
       'user_id' => $admin->id,
       'first_name' => fake()->firstName(),
       'last_name' => fake()->lastName(),
       'middle_name' => fake()->lastName(),
-      'employee_number' => "admin123",
+      'employee_number' => "23452022",
     ]);
 
 
