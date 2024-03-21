@@ -22,6 +22,7 @@
         "date-fns": "^2.30.0",
         "typeface-poppins": "^1.1.13",
         "vue-collapsed": "^1.2.9",
-        "vue3-apexcharts": "^1.5.2"
+        "vue3-apexcharts": "^1.5.2",
+        "vue3-carousel": "^0.3.1"
     }
 }

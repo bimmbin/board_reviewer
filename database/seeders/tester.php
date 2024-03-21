@@ -8,14 +8,15 @@ use App\Models\Choice;
 use App\Models\Lesson;
 use App\Models\Category;
 use App\Models\StaffProfile;
+use App\Models\StudentMajor;
 use App\Models\CorrectAnswer;
 use App\Models\MajorCoverage;
 use App\Models\StudentProfile;
 use Illuminate\Database\Seeder;
 use App\Models\MajorExamCoverage;
-use App\Models\StudentMajor;
-use App\Models\StudentMajorConjunction;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Models\StudentMajorConjunction;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -111,20 +112,75 @@ class tester extends Seeder
       'middle_name' => fake()->lastName(),
       'employee_number' => $i . "23452024",
     ]);
-    // User::factory()->count(40)->create();
-    // Category::factory()->count(10)
-    //   ->has(
-    //     Lesson::factory()->count(40)
-    //       ->has(
-    //         Choice::factory()->count(4),
-    //         'choices'
-    //       )->has(
-    //         CorrectAnswer::factory()->count(1)->sequence(fn (Sequence $sequence) => ['choice_id' => ($sequence->index + 1) * 4]),
-    //         'correct_answer'
-    //       ),
-    //     'lessons'
-    //   )
 
-    //   ->create();
+
+    $quotesarray = [
+      [
+        "quote" => "Trust yourself; you know more than you think you do.",
+        "author" => "Benjamin Spock",
+      ],
+      [
+        "quote" => "Education not just preparation for life, but part of life itself – a continuous art.",
+        "author" => "Henry Ford",
+      ],
+      [
+        "quote" => "My advice is to never do tomorrow what you can do today. Procrastination is the thief of time.",
+        "author" => "Charles Dickens",
+      ],
+      [
+        "quote" => "The roots of education are bitter, but the fruit is sweet.",
+        "author" => "Aristotle",
+      ],
+      [
+        "quote" => "I never said it would be easy, I only said it would be worth it.",
+        "author" => "Mae West",
+      ],
+      [
+        "quote" => "Nothing is impossible, the word itself says ‘I’m possible’!",
+        "author" => "Audrey Hepburn",
+      ],
+      [
+        "quote" => "If you can dream it, you can do it.",
+        "author" => "Walt Disney",
+      ],
+      [
+        "quote" => "The only limit to the height of your achievements is the reach of your dreams and your willingness to work for them.",
+        "author" => "Michelle Obama",
+      ],
+      [
+        "quote" => "Do not let what you cannot do interfere with what you can do.",
+        "author" => "John Wooden",
+      ],
+      [
+        "quote" => "Believe you can and you’re halfway there.",
+        "author" => "Theodore Roosevelt",
+      ],
+      [
+        "quote" => "You are capable of more than you know. Aim high. Behave honorably.",
+        "author" => "E.O. Wilson",
+      ],
+      [
+        "quote" => "In order to succeed, we must first believe that we can.",
+        "author" => "Nikos Kazantzakis",
+      ],
+      [
+        "quote" => "The future belongs to those who believe in the beauty of their dreams.",
+        "author" => "Eleanor Roosevelt",
+      ],
+      [
+        "quote" => "When you get tired, learn to rest, not quit.",
+        "author" => "Banksy",
+      ],
+      [
+        "quote" => "Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle.",
+        "author" => "Christian D. Larson",
+      ],
+      [
+        "quote" => "Keep your dreams alive. Understand to achieve anything requires faith and belief in yourself, vision, hard work, determination, and dedication. Remember all things are possible for those who believe.",
+        "author" => "Gail Devers",
+      ]
+    ];
+
+    DB::table('quotes')->insert($quotesarray);
   }
 }

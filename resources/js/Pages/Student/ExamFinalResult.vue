@@ -70,12 +70,12 @@ const submit = () => {
                 </div>
             </div>
             <div class="flex text-sm font-light">
-                <h2 class="flex-1 text-center px-3 py-1">Question</h2>
+                <h2 class="flex-1 text-center px-3 py-1">Questions</h2>
                 <div class="w-80 flex">
                     <div
                         class="flex-1 text-center flex items-center justify-center px-3 py-1"
                     >
-                        Correct Ans
+                        Answer
                     </div>
                     <div
                         class="flex-1 text-center flex items-center justify-center px-3 py-1"

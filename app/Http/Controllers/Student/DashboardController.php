@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use Inertia\Inertia;
+use App\Models\Quote;
 use App\Models\Assessment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,6 +22,9 @@ class DashboardController extends Controller
         $query->where('is_correct', '1');
       }]);
     }])->where('student_profile_id', $user_id)->get();
+
+    $quotes = Quote::inRandomOrder()->get();
+
 
     $exam_coverage = Auth::user()->student_profile->student_major->majors;
 
@@ -42,6 +46,11 @@ class DashboardController extends Controller
       return $assessment;
     });
 
+    $average_total = 0;
+    foreach ($filtered_assessments as $assessment) {
+      $average_total += $assessment->total_score;
+    }
+    
     // getting the categories for apexchart
     $categories = [];
     for ($i=0; $i < count($assessments); $i++) { 
@@ -65,11 +74,18 @@ class DashboardController extends Controller
         "data" => $data,
       ];
     }
-
+    
+    if (count($filtered_assessments) != 0) {
+      $average = $average_total / count($filtered_assessments);
+    } else {
+      $average = 0;
+    }
 
     return Inertia::render('Student/Dashboard', [
       'series' => $series,
-      'categories' => $categories
+      'categories' => $categories,
+      'quotes' => $quotes,
+      'average' => $average,
     ]);
   }
 }
