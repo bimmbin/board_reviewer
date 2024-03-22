@@ -7,6 +7,7 @@ export default {
 </script>
 
 <script setup>
+import { Head } from "@inertiajs/vue3";
 import ExamCategoryCard from "@/Components/ExamCategoryCard.vue";
 
 const { majors } = defineProps({
@@ -15,6 +16,8 @@ const { majors } = defineProps({
 </script>
 
 <template>
+    <Head title="Exam" />
+
     <h1
         class="text-3xl font-bold mb-5 max-md:mt-20 text-main_bg max-md:mb-2"
     >

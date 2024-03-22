@@ -8,7 +8,7 @@ export default {
 
 <script setup>
 import { ref } from "vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, Head } from "@inertiajs/vue3";
 
 import Pagination from "@/Components/Pagination.vue";
 import ElementDetails from "@/Components/ElementDetails.vue";
@@ -25,10 +25,11 @@ let show_flash = ref(false);
 const check_green = ref("/img/check_green.svg");
 const view = ref("/img/view.svg");
 const cancel = ref("/img/cancel.svg");
-
 </script>
 
 <template>
+    <Head :title="status + ' lessons'" />
+
     <transition
         enter-active-class="duration-300 ease-out"
         enter-from-class="transform opacity-0"
@@ -41,7 +42,10 @@ const cancel = ref("/img/cancel.svg");
             v-if="$page.props.flash.message"
             :message="$page.props.flash.message"
             :color="$page.props.flash.color"
-            @close_flash="$page.props.flash.message = null, $page.props.flash.color = null"
+            @close_flash="
+                ($page.props.flash.message = null),
+                    ($page.props.flash.color = null)
+            "
         />
     </transition>
 
@@ -127,7 +131,10 @@ const cancel = ref("/img/cancel.svg");
                                     </div>
                                 </Link>
                             </ElementDetails>
-                            <ElementDetails v-if="status != 'approved'" details="Approve">
+                            <ElementDetails
+                                v-if="status != 'approved'"
+                                details="Approve"
+                            >
                                 <Link
                                     :href="
                                         route('dean.lessons.update', [
@@ -150,7 +157,10 @@ const cancel = ref("/img/cancel.svg");
                                     </div>
                                 </Link>
                             </ElementDetails>
-                            <ElementDetails v-if="status != 'disapproved'" details="Disapprove">
+                            <ElementDetails
+                                v-if="status != 'disapproved'"
+                                details="Disapprove"
+                            >
                                 <Link
                                     :href="
                                         route('dean.lessons.update', [
@@ -165,11 +175,7 @@ const cancel = ref("/img/cancel.svg");
                                     <div
                                         class="p-2 bg-red-200 rounded-md select-none cursor-pointer hover:bg-red-300 active:bg-red-100"
                                     >
-                                        <img
-                                            :src="cancel"
-                                            alt=""
-                                            class="h-5"
-                                        />
+                                        <img :src="cancel" alt="" class="h-5" />
                                     </div>
                                 </Link>
                             </ElementDetails>

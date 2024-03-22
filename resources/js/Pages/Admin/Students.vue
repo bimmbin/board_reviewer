@@ -8,7 +8,7 @@ export default {
 
 <script setup>
 import { ref, watch } from "vue";
-import { router, Link } from "@inertiajs/vue3";
+import { router, Link, Head } from "@inertiajs/vue3";
 import { Collapse } from "vue-collapsed";
 
 import Pagination from "@/Components/Pagination.vue";
@@ -40,6 +40,8 @@ watch(search, (value) => {
 </script>
 
 <template>
+    <Head title="Students" />
+
     <transition
         enter-active-class="duration-300 ease-out"
         enter-from-class="transform opacity-0"

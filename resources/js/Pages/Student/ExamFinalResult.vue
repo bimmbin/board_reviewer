@@ -7,7 +7,7 @@ export default {
 </script>
 
 <script setup>
-import { Link, useForm } from "@inertiajs/vue3";
+import { Link, useForm, Head } from "@inertiajs/vue3";
 import { ref } from "vue";
 
 const { exam, lessons, correct_count, lesson_count } = defineProps({
@@ -29,6 +29,8 @@ const submit = () => {
 </script>
 
 <template>
+    <Head title="Exam Final Result" />
+
     <div class="w-full min-h-screen flex justify-center md:-mt-8">
         <div
             class="w-[800px] max-xl:w-full my-10 max-sm:mb-20 max-md:mt-20 flex flex-col justify-between relative"

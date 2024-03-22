@@ -9,7 +9,7 @@ export default {
 <script setup>
 import { ref } from "vue";
 import apexchart from "vue3-apexcharts";
-import { usePage } from "@inertiajs/vue3";
+import { usePage, Head } from "@inertiajs/vue3";
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 
@@ -42,6 +42,8 @@ console.log(page.props.ziggy.url);
 </script>
 
 <template>
+    <Head title="Student Dashboard" />
+
     <h1 class="text-3xl font-bold mb-5 max-md:mt-20 text-main_bg max-md:mb-2">
         Dashboard
     </h1>

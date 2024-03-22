@@ -7,7 +7,7 @@ export default {
 </script>
 
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Head } from "@inertiajs/vue3";
 import { format } from "date-fns";
 import RetakeExam from "@/Components/RetakeExam.vue";
 
@@ -24,6 +24,7 @@ const formatTime = (dateString) => {
 </script>
 
 <template>
+    <Head title="Assessments" />
     <div
         class="text-3xl mb-3 font-bold max-md:mt-20 text-main_bg max-md:mb-2 max-md:text-2xl flex items-center"
     >

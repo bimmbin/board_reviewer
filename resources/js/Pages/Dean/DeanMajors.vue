@@ -7,6 +7,7 @@ export default {
 </script>
 
 <script setup>
+import { Head } from "@inertiajs/vue3";
 import DeanMajorCard from "@/Components/Dean/DeanMajorCard.vue";
 
 const { majors } = defineProps({
@@ -15,10 +16,11 @@ const { majors } = defineProps({
 </script>
 
 <template>
+    <Head title="Lists of Majors" />
     <div
         class="text-3xl mb-3 font-bold max-md:mt-20 text-main_bg max-md:mb-2 max-md:text-2xl flex items-center"
     >
-        majors
+        Majors
     </div>
     <div
         class="w-full flex flex-wrap gap-3 max-xl:flex-nowrap max-xl:flex-col max-sm:px-0 justify-stretch"

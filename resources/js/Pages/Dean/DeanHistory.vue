@@ -8,7 +8,7 @@ export default {
 
 <script setup>
 import { ref } from "vue";
-import { Link } from "@inertiajs/vue3";
+import { Head } from "@inertiajs/vue3";
 
 import Pagination from "@/Components/Pagination.vue";
 
@@ -18,6 +18,7 @@ const { histories } = defineProps({
 </script>
 
 <template>
+    <Head title="Action History" />
     <div
         class="w-full flex items-center justify-between gap-5 max-lg:flex-col max-lg:items-start max-md:gap-2 mt-2"
     >

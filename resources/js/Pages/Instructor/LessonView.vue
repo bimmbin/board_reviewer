@@ -7,7 +7,7 @@ export default {
 </script>
 
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link, Head } from "@inertiajs/vue3";
 import { ref } from "vue";
 
 const { lesson, current_page, lessons_count, category_id, recent_id } =
@@ -22,6 +22,7 @@ const exit = ref("/img/exit.svg");
 </script>
 
 <template>
+    <Head :title="lesson.category.category_name" />
     <div class="w-full h-screen flex justify-center max-md:mt-6">
         <div
             class="w-[800px] max-xl:w-full my-10 mb-60 max-sm:mb-20 max-md:mt-20 flex flex-col justify-between relative"

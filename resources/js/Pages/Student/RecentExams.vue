@@ -7,7 +7,7 @@ export default {
 </script>
 
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Head } from "@inertiajs/vue3";
 import { format } from "date-fns";
 import RetakeExam from "@/Components/RetakeExam.vue";
 

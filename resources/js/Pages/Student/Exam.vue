@@ -7,7 +7,7 @@ export default {
 </script>
 
 <script setup>
-import { Link, useForm } from "@inertiajs/vue3";
+import { Link, useForm, Head } from "@inertiajs/vue3";
 import { ref } from "vue";
 
 import ExamCountdown from "@/Components/ExamCountdown.vue";
@@ -48,6 +48,8 @@ function time_ended_submit() {
 </script>
 
 <template>
+    <Head title="Exam" />
+
     <div class="w-full h-screen flex justify-center max-md:mt-6">
         <form
             @submit.prevent="submit"

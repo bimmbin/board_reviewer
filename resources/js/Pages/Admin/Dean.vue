@@ -8,7 +8,7 @@ export default {
 
 <script setup>
 import { ref, watch } from "vue";
-import { router, Link } from "@inertiajs/vue3";
+import { Head } from "@inertiajs/vue3";
 import { Collapse } from "vue-collapsed";
 
 import Pagination from "@/Components/Pagination.vue";
@@ -25,6 +25,8 @@ let show_details = ref(false);
 </script>
 
 <template>
+    <Head title="Dean Account" />
+
     <div
         class="w-full flex items-center justify-between gap-5 max-lg:flex-col max-lg:items-start max-md:gap-2"
     >
