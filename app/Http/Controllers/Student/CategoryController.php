@@ -21,7 +21,7 @@ class CategoryController extends Controller
     $majors = Major::whereHas('student_majors', function (Builder $query) use ($user) {
       $query->where('student_major_id', $user->student_profile->student_major->id);
     })->with(['categories' => function ($query) {
-      $query->where('status', 'approved')->latest();
+      $query->where('status', 'approved');
     }], 'categories.lessons', 'categories.lessons.correct_answer', 'categories.lessons.choices', 'categories.recent_lessons', 'categories.recent_lessons.page_views')->get();
 
 
