@@ -82,7 +82,7 @@ const submit = () => {
                     <div
                         class="flex-1 text-center flex items-center justify-center px-3 py-1"
                     >
-                        Your Ans
+                        Your Answer
                     </div>
                 </div>
             </div>
