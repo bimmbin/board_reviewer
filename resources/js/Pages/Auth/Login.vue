@@ -49,23 +49,47 @@ const chcc_bg = ref("/img/chcc_bg.png");
     <div class="flex absolute w-full top-0 left-0">
         <div class="relative bg-chcc_bg w-full h-screen max-xl:hidden">
             <div
-                class="absolute top-0 left-0 w-full h-full bg-main_bg bg-opacity-90 text-white bg-cover hidden xl:flex flex-col items-center px-[62px] pt-[73px] gap-[20px] 2xl:justify-center 2xl:pt-0"
+                class="absolute top-0 left-0 w-full h-full bg-main_bg bg-opacity-90 text-white bg-cover hidden xl:flex flex-col items-center px-[62px] pt-[73px] gap-5 2xl:justify-center 2xl:pt-0"
             >
                 <img class="xl:w-[350px]" :src="chcc_logo" alt="CHCC-Logo" />
 
-                <h1 class="font-semibold text-[25px]">
+                <h1 class="font-semibold text-[25px] pb-14">
                     Interactive Licensure Exam Reviewer
                 </h1>
 
-                <p class="text-[17px] text-center">
-                    Get ready to ace your licensure exams with our Interactive
-                    Licensure Exam Reviewer! Specifically designed for the
-                    School of Teacher Education at Concepcion Holy Cross
-                    College, Inc., this dynamic system offers an engaging
-                    platform to empower aspiring educators. Dive into targeted
-                    content, explore user-friendly features, and supercharge
-                    your exam preparation for success in the world of teaching
-                </p>
+                <div class="flex justify-between gap-10">
+                    <div class="flex flex-col items-center gap-1">
+                        <h1
+                            class="text-white font-bold text-2xl"
+                        >
+                            Mission
+                        </h1>
+                        <p class="text-[17px] text-center">
+                            Concepcion Holy Cross College is an institution for
+                            academic and values formation offering relevant,
+                            learner-centered and values-oriented programs that
+                            produces competent persons of character in the
+                            service of society
+                        </p>
+                    </div>
+                    <div class="flex flex-col items-center gap-1">
+                        <h1
+                            class="text-white font-bold text-2xl"
+                        >
+                            Vision
+                        </h1>
+
+                        <p
+                            class="text-[17px] text-center"
+                        >
+                            To become a God-centered learning institution,
+                            focused on holistic education that form and educates
+                            individuals, to become conscious, competent,
+                            compassionate, and committed person towards the
+                            development of a just and humane society
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
 
