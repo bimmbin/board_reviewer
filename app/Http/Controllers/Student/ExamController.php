@@ -125,6 +125,7 @@ class ExamController extends Controller
     }
     $lesson->setAttribute('time_remaining', now()->diff($lesson->time_ends));
 
+    
     $choices = $lesson->choices()->inRandomOrder()->get();
 
     return Inertia::render('Student/Exam', [
