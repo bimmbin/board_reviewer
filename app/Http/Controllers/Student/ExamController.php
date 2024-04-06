@@ -121,7 +121,7 @@ class ExamController extends Controller
 
     //set time for each lesson (1min)
     if (!$lesson->getAttribute('time_ends')) {
-      $lesson->setAttribute('time_ends', now()->addSeconds(15));
+      $lesson->setAttribute('time_ends', now()->addMinutes(1));
     }
     $lesson->setAttribute('time_remaining', now()->diff($lesson->time_ends));
 

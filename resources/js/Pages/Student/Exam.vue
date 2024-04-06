@@ -53,7 +53,7 @@ function time_ended_submit() {
     <div class="w-full h-screen flex justify-center max-md:mt-6">
         <form
             @submit.prevent="submit"
-            class="w-[800px] max-xl:w-full my-10 mb-60 max-sm:mb-20 max-md:mt-20 flex flex-col justify-between relative"
+            class="w-[800px] max-xl:w-full my-10 mb-60 max-sm:mb-20 max-md:mt-20 flex flex-col justify-between relative select-none"
         >
             <div class="flex flex-col">
                 <div class="flex items-center justify-between">
