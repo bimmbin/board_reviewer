@@ -38,10 +38,10 @@ class tester extends Seeder
       ]);
     }
     MajorCoverage::create([
-      'percent' => 60,
+      'percent' => 40,
     ]);
     MajorCoverage::create([
-      'percent' => 40,
+      'percent' => 60,
     ]);
 
     for ($i = 1; $i <= 2; $i++) {
