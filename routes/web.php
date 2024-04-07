@@ -20,6 +20,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Dean\DeanHistoryController;
 use App\Http\Controllers\Instructor\InstructorMajorController;
 use App\Http\Controllers\Instructor\InstructorLessonsController;
+use App\Http\Controllers\MainDashboardController;
 use App\Http\Controllers\Student\DashboardController;
 use App\Http\Controllers\ViewAllAssessmentsController;
 
@@ -144,9 +145,10 @@ Route::middleware(['auth', 'role:dean'])->group(function () {
 });
 
 
-Route::middleware(['auth', 'role:dean,instructor'])->group(function () {
+Route::middleware(['auth', 'role:dean,instructor,admin'])->group(function () {
   //View Assessments
   Route::get('/history/assessments', [ViewAllAssessmentsController::class, 'index'])->name('view.assessments.index');
+  Route::get('/dashboard', [MainDashboardController::class, 'index'])->name('main.dashboard.index');
 });
 
 // Route::get('/', function () {

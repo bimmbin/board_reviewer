@@ -38,6 +38,13 @@ const chcc_logo = ref("/img/chcc_logo.png");
                 >
                     <DashNav
                         image="project"
+                        nav_name="Dashboard"
+                        :href="route('main.dashboard.index')"
+                        @click="$emit('close_emit')"
+                        :active="$page.url.startsWith('/dashboard')"
+                    />
+                    <DashNav
+                        image="project"
                         nav_name="Students"
                         :href="route('majors.index')"
                         @click="$emit('close_emit')"
@@ -49,6 +56,13 @@ const chcc_logo = ref("/img/chcc_logo.png");
                         :href="route('instructors.index')"
                         @click="$emit('close_emit')"
                         :active="$page.url.startsWith('/instructors')"
+                    />
+                    <DashNav
+                        image="project"
+                        nav_name="Dean"
+                        :href="route('dean.index')"
+                        @click="$emit('close_emit')"
+                        :active="$page.url.startsWith('/dean')"
                     />
                 </div>
 
@@ -101,10 +115,68 @@ const chcc_logo = ref("/img/chcc_logo.png");
                     <div class="flex flex-col sticky left-0 top-0">
                         <DashNav
                             image="project"
+                            nav_name="Dashboard"
+                            :href="route('main.dashboard.index')"
+                            @click="$emit('close_emit')"
+                            :active="$page.url.startsWith('/dashboard')"
+                        />
+                        <DashNav
+                            image="project"
                             nav_name="Lists of Majors"
                             :href="route('instructor.majors.index')"
                             @click="$emit('close_emit')"
                             :active="$page.url.startsWith('/instructor/majors')"
+                        />
+                        <DashNav
+                            image="project"
+                            nav_name="Upload History"
+                            :href="route('instructor.history.index')"
+                            @click="$emit('close_emit')"
+                            :active="$page.url.startsWith('/instructor/upload/history')"
+                        />
+                        <DashNav
+                            image="project"
+                            nav_name="Assessments"
+                            :href="route('view.assessments.index')"
+                            @click="$emit('close_emit')"
+                            :active="$page.url.startsWith('/history/assessments')"
+                        />
+                    </div>
+                </div>
+
+                <!-- dean navigation -->
+                <div
+                    v-if="$page.props.auth.user.user_role == 'dean'"
+                    class="mt-20"
+                >
+                    <div class="flex flex-col sticky left-0 top-0">
+                        <DashNav
+                            image="project"
+                            nav_name="Dashboard"
+                            :href="route('main.dashboard.index')"
+                            @click="$emit('close_emit')"
+                            :active="$page.url.startsWith('/dashboard')"
+                        />
+                        <DashNav
+                            image="project"
+                            nav_name="Lists of Majors"
+                            :href="route('dean.majors.index')"
+                            @click="$emit('close_emit')"
+                            :active="$page.url.startsWith('/majors/dean')"
+                        />
+                        <DashNav
+                            image="project"
+                            nav_name="Action History"
+                            :href="route('dean.history.index')"
+                            @click="$emit('close_emit')"
+                            :active="$page.url.startsWith('/history/dean')"
+                        />
+                        <DashNav
+                            image="project"
+                            nav_name="Assessments"
+                            :href="route('view.assessments.index')"
+                            @click="$emit('close_emit')"
+                            :active="$page.url.startsWith('/history/assessments')"
                         />
                     </div>
                 </div>

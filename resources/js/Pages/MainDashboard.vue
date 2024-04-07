@@ -53,7 +53,7 @@ console.log(page.props.ziggy.url);
                 class="w-60 text-main_bg border border-blue-200 rounded-md px-10 py-5 bg-[#F4F8FF] flex flex-col items-center justify-center gap-3"
             >
                 
-                <span class="font-light text-sm">Average Score</span>
+                <span class="font-light text-sm text-center capitalize whitespace-nowrap">Students Average Score</span>
                 <span class="text-4xl font-bold">{{ average }}%</span>
             </div>
             <div

@@ -17,6 +17,7 @@ const show_nav = ref(false);
 
 <template>
     <div class="flex font-pop bg-portbg">
+        <!-- this is fake -->
         <div
             class="h-screen bg-main_bg flex flex-col max-md:hidden sticky top-0 left-0 opacity-0"
         >
@@ -156,6 +157,13 @@ const show_nav = ref(false);
             >
                 <DashNav
                     image="project"
+                    nav_name="Dashboard"
+                    :href="route('main.dashboard.index')"
+                    @click="$emit('close_emit')"
+                    :active="$page.url.startsWith('/dashboard')"
+                />
+                <DashNav
+                    image="project"
                     nav_name="Students"
                     :href="route('majors.index')"
                     @click="$emit('close_emit')"
@@ -218,6 +226,13 @@ const show_nav = ref(false);
             >
                 <DashNav
                     image="project"
+                    nav_name="Dashboard"
+                    :href="route('main.dashboard.index')"
+                    @click="$emit('close_emit')"
+                    :active="$page.url.startsWith('/dashboard')"
+                />
+                <DashNav
+                    image="project"
                     nav_name="Lists of Majors"
                     :href="route('instructor.majors.index')"
                     @click="$emit('close_emit')"
@@ -241,6 +256,13 @@ const show_nav = ref(false);
 
             <!-- Dean Navigation -->
             <div v-if="$page.props.auth.user.user_role == 'dean'" class="mt-20">
+                <DashNav
+                    image="project"
+                    nav_name="Dashboard"
+                    :href="route('main.dashboard.index')"
+                    @click="$emit('close_emit')"
+                    :active="$page.url.startsWith('/dashboard')"
+                />
                 <DashNav
                     image="project"
                     nav_name="Lists of Majors"
