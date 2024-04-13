@@ -46,25 +46,25 @@ const chcc_bg = ref("/img/chcc_bg.png");
 </script>
 
 <template>
-    <div class="flex absolute w-full top-0 left-0">
-        <div class="relative bg-chcc_bg w-full h-screen max-xl:hidden">
+    <div class="absolute top-0 left-0 flex w-full">
+        <div class="relative w-full h-screen bg-chcc_bg max-xl:hidden">
             <div
-                class="absolute top-0 left-0 w-full h-full bg-main_bg bg-opacity-90 text-white bg-cover hidden xl:flex flex-col items-center px-[62px] pt-[73px] gap-5 2xl:justify-center 2xl:pt-0"
+                class="absolute top-0 left-0 w-full h-full bg-main_bg bg-opacity-90 text-white bg-cover hidden xl:flex flex-col items-center px-[62px] pt-[10px] gap-5 2xl:justify-center 2xl:pt-0"
             >
-                <img class="xl:w-[350px]" :src="chcc_logo" alt="CHCC-Logo" />
+                <img
+                    class="w-[250px] max-2xl:w-60 max-sm:w"
+                    :src="chcc_logo"
+                    alt="CHCC-Logo"
+                />
 
-                <h1 class="font-semibold text-[25px] pb-14">
+                <h1 class="font-semibold text-[25px] pb-14 max-2xl:pb-5">
                     Interactive Licensure Exam Reviewer
                 </h1>
 
                 <div class="flex justify-between gap-10">
                     <div class="flex flex-col items-center gap-1">
-                        <h1
-                            class="text-white font-bold text-2xl"
-                        >
-                            Mission
-                        </h1>
-                        <p class="text-[17px] text-center">
+                        <h1 class="text-2xl font-bold text-white">Mission</h1>
+                        <p class="text-[17px] text-center max-2xl:text-base">
                             Concepcion Holy Cross College is an institution for
                             academic and values formation offering relevant,
                             learner-centered and values-oriented programs that
@@ -73,15 +73,9 @@ const chcc_bg = ref("/img/chcc_bg.png");
                         </p>
                     </div>
                     <div class="flex flex-col items-center gap-1">
-                        <h1
-                            class="text-white font-bold text-2xl"
-                        >
-                            Vision
-                        </h1>
+                        <h1 class="text-2xl font-bold text-white">Vision</h1>
 
-                        <p
-                            class="text-[17px] text-center"
-                        >
+                        <p class="text-[17px] text-center max-2xl:text-base">
                             To become a God-centered learning institution,
                             focused on holistic education that form and educates
                             individuals, to become conscious, competent,
@@ -94,10 +88,10 @@ const chcc_bg = ref("/img/chcc_bg.png");
         </div>
 
         <div
-            class="bg-white w-full h-screen relative items-center flex flex-col xl:justify-center"
+            class="relative flex flex-col items-center w-full h-screen bg-white xl:justify-center"
         >
             <div class="w-full h-20 bg-main_bg xl:hidden"></div>
-            <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+            <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
                 {{ status }}
             </div>
 
@@ -105,7 +99,7 @@ const chcc_bg = ref("/img/chcc_bg.png");
                 <div
                     class="flex justify-center mt-[60px] xl:mt-[1px] xl:w-[352px] xl:justify-start"
                 >
-                    <img class="w-14" :src="login_icon" alt="Flash-Vector" />
+                    <img class="w-14" :src="login_icon" />
                 </div>
 
                 <div class="sm:w-[352px] sm:text-left">
@@ -128,7 +122,7 @@ const chcc_bg = ref("/img/chcc_bg.png");
                         <TextInput
                             id="username"
                             type="text"
-                            class="mt-1 block w-full"
+                            class="block w-full mt-1"
                             v-model="form.username"
                             required
                             autofocus
@@ -147,7 +141,7 @@ const chcc_bg = ref("/img/chcc_bg.png");
                         <TextInput
                             id="password"
                             type="password"
-                            class="mt-1 block w-full"
+                            class="block w-full mt-1"
                             v-model="form.password"
                             required
                             autocomplete="current-password"
@@ -160,7 +154,7 @@ const chcc_bg = ref("/img/chcc_bg.png");
                     </div>
 
                     <div class="w-full">
-                        <!-- <Link :href="route('category.index')" class="mt-3 w-full inline-flex justify-center items-center px-4 py-3 bg-main_bg border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-400 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                        <!-- <Link :href="route('category.index')" class="inline-flex items-center justify-center w-full px-4 py-3 mt-3 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out border border-transparent rounded-md bg-main_bg hover:bg-blue-400 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                         Login
                       </Link> -->
                         <PrimaryButton
@@ -174,9 +168,9 @@ const chcc_bg = ref("/img/chcc_bg.png");
                 </form>
             </div>
 
-            <div class="w-full h-full bg-main_bg xl:hidden order-last mt-5">
+            <div class="order-last w-full h-full mt-5 bg-main_bg xl:hidden">
                 <div
-                    class="w-full h-full flex flex-col items-center gap-10 py-10 text-white"
+                    class="flex flex-col items-center w-full h-full gap-10 py-10 text-white"
                 >
                     <img
                         class="xl:w-[350px]"
@@ -189,9 +183,9 @@ const chcc_bg = ref("/img/chcc_bg.png");
                     </h1>
                 </div>
             </div>
-            <div class="flex flex-col gap-3 flex-wrap">
+            <!-- <div class="flex flex-col flex-wrap gap-3">
                 <span class="font-semibold">For testing purposes</span>
-                <div class="flex-1 flex flex-col border-t border-blue-300">
+                <div class="flex flex-col flex-1 border-t border-blue-300">
                     <span class="font-semibold">Student</span>
                     <span>Username: {{ student.username }}</span>
                     <span
@@ -223,7 +217,7 @@ const chcc_bg = ref("/img/chcc_bg.png");
                     <span>Username: {{ admin.username }}</span>
                     <span>Password: admin123</span>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 

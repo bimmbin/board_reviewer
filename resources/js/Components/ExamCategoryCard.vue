@@ -20,7 +20,8 @@ const lesson_icon = ref("/img/lesson_icon.svg");
 </script>
 
 <template>
-    <form v-if="!$props.major.has_taken"
+    <form
+        v-if="!$props.major.has_taken"
         @submit.prevent="submit"
         class="flex-1 border border-blue-200 rounded-md px-10 py-10 bg-[#F4F8FF]"
     >
@@ -30,7 +31,7 @@ const lesson_icon = ref("/img/lesson_icon.svg");
             </h1>
             <div class="flex flex-col items-center">
                 <h2
-                    class="px-5 border-b border-blue-200 text-center w-fit font-medium text-3xl"
+                    class="px-5 text-3xl font-medium text-center border-b border-blue-200 w-fit"
                 >
                     {{ props.major.major_name }}
                 </h2>
@@ -38,14 +39,14 @@ const lesson_icon = ref("/img/lesson_icon.svg");
             </div>
             <div class="flex flex-col items-center">
                 <h2
-                    class="px-5 border-b border-blue-200 text-center w-fit font-medium text-2xl"
+                    class="px-5 text-2xl font-medium text-center border-b border-blue-200 w-fit"
                 >
-                    10
+                    100
                 </h2>
                 <span class="font-light opacity-80">Items</span>
             </div>
             <button
-                class="w-full bg-main_bg rounded-md text-white py-3 px-5 font-medium hover:bg-blue-400"
+                class="w-full px-5 py-3 font-medium text-white rounded-md bg-main_bg hover:bg-blue-400"
             >
                 Take Exam
             </button>

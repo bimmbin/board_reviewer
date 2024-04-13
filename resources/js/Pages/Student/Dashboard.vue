@@ -44,29 +44,37 @@ console.log(page.props.ziggy.url);
 <template>
     <Head title="Student Dashboard" />
 
-    <h1 class="text-3xl font-bold mb-5 max-md:mt-20 text-main_bg max-md:mb-2">
+    <h1 class="mb-5 text-3xl font-bold max-md:mt-20 text-main_bg max-md:mb-2">
         Dashboard
     </h1>
     <div class="flex flex-col gap-3">
-        <div class="flex gap-3 h-32">
+        <div class="flex h-32 gap-3">
             <div
                 class="w-60 text-main_bg border border-blue-200 rounded-md px-10 py-5 bg-[#F4F8FF] flex flex-col items-center justify-center gap-3"
             >
-                
-                <span class="font-light text-sm">Average Score</span>
+                <span class="text-sm font-light">Average Score</span>
                 <span class="text-4xl font-bold">{{ average }}%</span>
             </div>
             <div
                 class="flex-1 border border-blue-200 rounded-md px-10 py-5 bg-[#F4F8FF] text-center text-main_bg"
             >
-                <carousel :items-to-show="1" :autoplay="10000" :wrap-around="true">
-                    <slide v-for="quote in quotes" :key="quote.id" class="flex flex-col items-center justify-center gap-2">
+                <carousel
+                    :items-to-show="1"
+                    :autoplay="10000"
+                    :wrap-around="true"
+                >
+                    <slide
+                        v-for="quote in quotes"
+                        :key="quote.id"
+                        class="flex flex-col items-center justify-center gap-2"
+                    >
                         <p>
                             {{ quote.quote }}
                         </p>
-                        <span class="font-light opacity-80 italic">- {{ quote.author }}</span>
+                        <span class="italic font-light opacity-80"
+                            >- {{ quote.author }}</span
+                        >
                     </slide>
-
                 </carousel>
             </div>
         </div>

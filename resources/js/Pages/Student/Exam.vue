@@ -37,20 +37,27 @@ const submit = () => {
         onSuccess: () => {
             form.reset();
         },
+        preserveState: false,
     });
+    // form.post(route("exam.answer.store"), { preserveState: false });
 };
 
 function time_ended_submit() {
     form.choice_id = 1;
     form.not_answered = 1;
-    form.post(route("exam.answer.store"));
+    form.post(route("exam.answer.store"), {
+        onSuccess: () => {
+            form.reset();
+        },
+        preserveState: false,
+    });
 }
 </script>
 
 <template>
     <Head title="Exam" />
 
-    <div class="w-full h-screen flex justify-center max-md:mt-6">
+    <div class="flex justify-center w-full h-screen max-md:mt-6">
         <form
             @submit.prevent="submit"
             class="w-[800px] max-xl:w-full my-10 mb-60 max-sm:mb-20 max-md:mt-20 flex flex-col justify-between relative select-none"
@@ -62,7 +69,7 @@ function time_ended_submit() {
                             ><img :src="exit" class="h-4 max-md:h-3"
                         /></Link>
                         <h1
-                            class="px-3 py-2 rounded-md text-lg font-semibold text-gray-500 max-md:text-sm max-md:px-1"
+                            class="px-3 py-2 text-lg font-semibold text-gray-500 rounded-md max-md:text-sm max-md:px-1"
                         >
                             {{ lesson.category.category_name }}
                         </h1>
@@ -72,12 +79,12 @@ function time_ended_submit() {
                         @time_ended_submit="time_ended_submit()"
                     />
                     <span
-                        class="w-fit h-fit px-3 py-3 bg-blue-200 rounded-md text-blue-500 max-md:text-sm max-md:py-2 max-md:px-2"
+                        class="px-3 py-3 text-blue-500 bg-blue-200 rounded-md w-fit h-fit max-md:text-sm max-md:py-2 max-md:px-2"
                         >{{ current_page }}/{{ lessons_count }}</span
                     >
                 </div>
                 <div class="flex flex-col items-center gap-10 mt-10">
-                    <p class="text-center text-xl max-md:text-base">
+                    <p class="text-xl text-center max-md:text-base">
                         {{ lesson.lesson_question }}
                     </p>
                     <div class="flex flex-col w-full gap-2">
@@ -93,7 +100,7 @@ function time_ended_submit() {
                              
                             <label
                                 :for="choice.id"
-                                class="max-md:text-sm w-full px-5 py-2 border border-blue-200 rounded-md hover:bg-blue-200 cursor-pointer"
+                                class="w-full px-5 py-2 border border-blue-200 rounded-md cursor-pointer max-md:text-sm hover:bg-blue-200"
                                 :class="{
                                     'bg-blue-200 text-blue-800':
                                         form.choice_id == choice.id,
@@ -109,19 +116,19 @@ function time_ended_submit() {
                 </div>
             </div>
             <div
-                class="max-md:fixed max-md:bottom-16 max-md:px-5 max-md:left-0 w-full flex justify-between items-center"
+                class="flex items-center justify-between w-full max-md:fixed max-md:bottom-16 max-md:px-5 max-md:left-0"
             >
                 <div class=""></div>
                 <div v-if="current_page == lessons_count">
                     <button
-                        class="select-none py-2 px-5 border-2 border-blue-500 rounded-md bg-main_bg text-white font-semibold"
+                        class="px-5 py-2 font-semibold text-white border-2 border-blue-500 rounded-md select-none bg-main_bg"
                     >
                         Finish
                     </button>
                 </div>
                 <div v-else>
                     <button
-                        class="select-none py-2 px-5 border-2 border-blue-500 rounded-md bg-main_bg text-white font-semibold"
+                        class="px-5 py-2 font-semibold text-white border-2 border-blue-500 rounded-md select-none bg-main_bg"
                     >
                         Next
                     </button>
