@@ -26,7 +26,7 @@ const formatTime = (dateString) => {
 
 <template>
     <div
-        class="text-3xl mb-3 font-bold max-md:mt-20 text-main_bg max-md:mb-2 max-md:text-2xl flex items-center"
+        class="flex items-center mb-3 text-3xl font-bold max-md:mt-20 text-main_bg max-md:mb-2 max-md:text-2xl"
     >
         Assessments
     </div>
@@ -38,20 +38,20 @@ const formatTime = (dateString) => {
         >
             <thead>
                 <tr
-                    class="space-y-3 text-sm md:text-base border border-blue-500 lg:text-lg text-start text-btn bg-main_bg text-white"
+                    class="space-y-3 text-sm text-white border border-blue-500 md:text-base lg:text-lg text-start text-btn bg-main_bg"
                 >
-                    <th class="text-left pl-5 py-5 font-semibold">Date</th>
-                    <th class="text-left py-5 font-semibold">Time</th>
-                    <!-- <th class="text-left py-5 font-semibold">Time taken</th> -->
+                    <th class="py-5 pl-5 font-semibold text-left">Date</th>
+                    <th class="py-5 font-semibold text-left">Time</th>
+                    <!-- <th class="py-5 font-semibold text-left">Time taken</th> -->
                     <th
                         v-for="exam_cover in exam_coverage"
-                        class="text-left py-5 font-semibold"
+                        class="py-5 font-semibold text-left"
                     >
                         {{ exam_cover.major_name }} Score
                     </th>
-                    <th class="text-left py-5 font-semibold">Total</th>
-                    <th class="text-left py-5 font-semibold">Status</th>
-                    <th class="text-left py-5 font-semibold">Action</th>
+                    <th class="py-5 font-semibold text-left">Total</th>
+                    <th class="py-5 font-semibold text-left">Status</th>
+                    <th class="py-5 font-semibold text-left">Action</th>
                 </tr>
             </thead>
 
@@ -59,9 +59,9 @@ const formatTime = (dateString) => {
                 <tr
                     v-for="(assessment, index) in assessments"
                     :key="index"
-                    class="border border-blue-300 text-sm md:text-base lg:text-lg font-regular"
+                    class="text-sm border border-blue-300 md:text-base lg:text-lg font-regular"
                 >
-                    <td class="pl-5 py-3">
+                    <td class="py-3 pl-5">
                         {{ formatDate(assessment.created_at) }}
                     </td>
 
@@ -74,7 +74,7 @@ const formatTime = (dateString) => {
                         <span v-for="exam in assessment.exams">
                             <!-- output only if exam_coverage_id equals to exam_taken_id -->
                             <p v-if="exam_cover.id == exam.major_id">
-                                {{ exam.exam_answers_count }}/10
+                                {{ exam.exam_answers_count }}/100
                             </p>
                         </span>
                     </td>
@@ -82,12 +82,12 @@ const formatTime = (dateString) => {
                     <td>
                         <span
                             v-if="assessment.total_score > 75"
-                            class="px-3 py-2 bg-green-300 text-green-800 rounded-md text-sm max-md:text-xs max-md:py-1"
+                            class="px-3 py-2 text-sm text-green-800 bg-green-300 rounded-md max-md:text-xs max-md:py-1"
                             >Passed</span
                         >
                         <span
                             v-else
-                            class="px-3 py-2 bg-red-300 text-red-800 rounded-md text-sm max-md:text-xs max-md:py-1"
+                            class="px-3 py-2 text-sm text-red-800 bg-red-300 rounded-md max-md:text-xs max-md:py-1"
                             >Failed</span
                         >
                     </td>
