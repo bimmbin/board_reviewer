@@ -28,9 +28,9 @@ class ViewAllAssessmentsController extends Controller
             foreach ($exam_coverage as $exam_cover) {
                 foreach ($assessment->exams as $exam) {
                     if ($exam_cover->id == $exam->major_id) {
-                        $exam_scores[] = $exam_cover->major_name . ' (' . $exam->exam_answers_count . '/100)';
+                        $exam_scores[] = $exam_cover->major_name . ' (' . $exam->exam_answers_count . '/150)';
                         // $exam->newshit = floatval('0.'.$exam_cover->major_coverage[0]->percent);
-                        $total_score += ($exam->exam_answers_count / 100) * floatval('0.' . $exam_cover->major_coverage[0]->percent);
+                        $total_score += ($exam->exam_answers_count / 150) * floatval('0.' . $exam_cover->major_coverage[0]->percent);
                     }
                 }
             }

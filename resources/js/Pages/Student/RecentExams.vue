@@ -74,7 +74,7 @@ const formatTime = (dateString) => {
                         <span v-for="exam in assessment.exams">
                             <!-- output only if exam_coverage_id equals to exam_taken_id -->
                             <p v-if="exam_cover.id == exam.major_id">
-                                {{ exam.exam_answers_count }}/100
+                                {{ exam.exam_answers_count }}/150
                             </p>
                         </span>
                     </td>

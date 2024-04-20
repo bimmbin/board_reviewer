@@ -41,7 +41,7 @@ const lesson_icon = ref("/img/lesson_icon.svg");
                 <h2
                     class="px-5 text-2xl font-medium text-center border-b border-blue-200 w-fit"
                 >
-                    100
+                    150
                 </h2>
                 <span class="font-light opacity-80">Items</span>
             </div>

@@ -98,7 +98,7 @@ class ExamController extends Controller
             $lesson_collection = $lesson_collection->merge($category->lessons);
         }
 
-        session()->put($exam->id . $user->username, $lesson_collection->shuffle()->take(100));
+        session()->put($exam->id . $user->username, $lesson_collection->shuffle()->take(150));
 
         return redirect()->route('exam.show', [$exam->id, 1]);
     }
