@@ -10,8 +10,8 @@ export default {
 import { Head } from "@inertiajs/vue3";
 import MajorCard from "@/Components/MajorCard.vue";
 
-const { majors } = defineProps({
-    majors: Object,
+const { major } = defineProps({
+    major: Object,
 });
 </script>
 
@@ -19,15 +19,13 @@ const { majors } = defineProps({
     <Head title="Students of every Majors" />
 
     <div
-        class="text-3xl mb-3 font-bold max-md:mt-20 text-main_bg max-md:mb-2 max-md:text-2xl flex items-center"
+        class="flex items-center mb-3 text-3xl font-bold max-md:mt-20 text-main_bg max-md:mb-2 max-md:text-2xl"
     >
         Students
     </div>
     <div
-        class="w-full flex flex-wrap gap-3 max-xl:flex-nowrap max-xl:flex-col max-sm:px-0 justify-stretch"
+        class="flex flex-wrap w-full gap-3 max-xl:flex-nowrap max-xl:flex-col max-sm:px-0 justify-stretch"
     >
-        <div v-for="major in majors">
-            <MajorCard :major="major" />
-        </div>
+        <MajorCard :major="major" />
     </div>
 </template>
