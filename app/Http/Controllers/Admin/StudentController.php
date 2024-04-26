@@ -139,7 +139,8 @@ class StudentController extends Controller
 
     $students = StudentProfile::whereHas('student_major', function (Builder $query) use ($id) {
       $query->where('id', $id);
-    })->with('user')->when($request->input('search'), function ($query, $search) {
+    })->with('user')
+    ->when($request->input('search'), function ($query, $search) {
       $query->where('first_name', 'like', "%{$search}%")
         ->orWhere('last_name', 'like', "%{$search}%")
         ->orWhere('middle_name', 'like', "%{$search}%")

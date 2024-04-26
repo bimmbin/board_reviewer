@@ -26,40 +26,95 @@ const formatTime = (dateString) => {
 
 const search = ref(filters.search);
 const sort = ref(filters.sort);
+const start_date = ref(filters.start_date);
+const end_date = ref(filters.end_date);
 
-watch([search, sort], ([searchValue, sortValue]) => {
+const submit = () => {
     router.get(
         "/history/assessments/",
-        { search: searchValue, sort: sortValue },
+        {
+            search: search.value,
+            sort: sort.value,
+            start_date: start_date.value,
+            end_date: end_date.value,
+        },
         { preserveState: false, replace: true }
     );
-});
+};
 </script>
 
 <template>
     <Head title="Assessments" />
-    <div class="flex items-center gap-5 mb-3">
+    <div class="flex items-end justify-between mb-3">
         <div
             class="flex items-center text-3xl font-bold max-md:mt-20 text-main_bg max-md:mb-2 max-md:text-2xl"
         >
             Assessments
         </div>
-        <input
-            v-model="search"
-            type="text"
-            placeholder="Search...."
-            class="rounded-md text-sm border border-blue-300 w-[25rem] max-md:text-sm max-md:w-full"
-        />
-        <select
-            v-model="sort"
-            class="text-sm border border-blue-300 rounded-md"
-        >
-            <option value="1" selected>Latest</option>
-            <option value="2">Highest to Lowest</option>
-            <option value="3">Lowest to Highest</option>
-        </select>
-    </div>
+        <div class="flex items-center gap-5 text-sm">
+            <div class="flex items-end gap-2">
+                <div class="flex flex-col">
+                    <label for="search" class="text-xs font-medium select-none"
+                        >Search</label
+                    >
+                    <input
+                        id="search"
+                        v-model="search"
+                        type="text"
+                        placeholder="Search by name or student number"
+                        class="rounded-md text-sm border border-blue-300 w-[18rem] max-md:text-sm max-md:w-full"
+                    />
+                </div>
+                <div class="flex flex-col">
+                    <label for="sort" class="text-xs font-medium select-none"
+                        >Sort</label
+                    >
+                    <select
+                        id="sort"
+                        v-model="sort"
+                        class="text-sm border border-blue-300 rounded-md"
+                    >
+                        <option value="1" selected>Latest</option>
+                        <option value="2">Highest to Lowest</option>
+                        <option value="3">Lowest to Highest</option>
+                    </select>
+                </div>
 
+                <div class="flex flex-col">
+                    <label
+                        for="start_date"
+                        class="text-xs font-medium select-none"
+                        >Start Date</label
+                    >
+                    <input
+                        v-model="start_date"
+                        id="start_date"
+                        type="date"
+                        class="text-sm border border-blue-300 rounded-md"
+                    />
+                </div>
+                <div class="flex flex-col">
+                    <label
+                        for="end_date"
+                        class="text-xs font-medium select-none"
+                        >End Date</label
+                    >
+                    <input
+                        v-model="end_date"
+                        id="end_date"
+                        type="date"
+                        class="text-sm border border-blue-300 rounded-md"
+                    />
+                </div>
+                <button
+                    @click="submit()"
+                    class="px-5 py-2 text-sm text-white border rounded-md border-main_bg bg-main_bg whitespace-nowrap"
+                >
+                    Apply Filter
+                </button>
+            </div>
+        </div>
+    </div>
     <div class="w-full pb-10 overflow-x-auto">
         <table
             id="dataTable"
@@ -84,8 +139,7 @@ watch([search, sort], ([searchValue, sortValue]) => {
 
             <tbody class="text-left">
                 <tr
-                    v-for="(assessment, index) in assessments"
-                    :key="index"
+                    v-for="assessment in assessments"
                     class="text-sm border border-blue-300 font-regular whitespace-nowrap"
                 >
                     <td class="py-4 pl-5 max-md:px-5">

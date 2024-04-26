@@ -16,6 +16,8 @@ class ViewAllAssessmentsController extends Controller
 
         $search = $request->input('search');
         $sort = $request->input('sort');
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
 
         $assessments = Assessment::with(['exams' => function ($query) {
             $query->withCount(['exam_answers' => function (Builder $query) {
@@ -29,6 +31,9 @@ class ViewAllAssessmentsController extends Controller
                         ->orWhere('middle_name', 'like', "%{$search}%")
                         ->orWhere('student_number', 'like', "%{$search}%");
                 });
+            })
+            ->when($start_date && $end_date, function ($query) use ($start_date, $end_date) {
+                $query->whereBetween('created_at', [$start_date, $end_date]);
             })
             ->get();
         // $assessments->load('student_profile', 'student_profile.student_major', 'student_profile.student_major.majors');
@@ -75,23 +80,26 @@ class ViewAllAssessmentsController extends Controller
             return $new_format_assessments;
         });
 
-        dd($filtered_assessments);
-
-        $filtered_assessments->when($sort, function (Collection $collection, $sort) {
+        $final_assessments = $filtered_assessments->when($sort, function (Collection $collection, $sort) {
             if ($sort == '1') {
-                return $collection->sortByDesc('updated_at');
+                return $collection->sortByDesc('updated_at')->values();
             } elseif ($sort == '2') {
-                return $collection->sortByDesc('total_score');
+                return $collection->sortByDesc('total_score')->values();
             } else {
-                return $collection->sortBy('total_score');
+                return $collection->sortBy('total_score')->values();
             }
         });
 
-        dd($filtered_assessments->all());
+        // dd($final_assessments);
 
         return Inertia::render('ViewAssessments', [
-            'assessments' => $filtered_assessments,
-            'filters' => $request->only('search'),
+            'assessments' => $final_assessments,
+            'filters' => [
+                'search' => $request->input('search'),
+                'sort' => $request->input('sort') ? $request->input('sort') : 1,
+                'start_date' => $request->input('start_date'),
+                'end_date' => $request->input('end_date'),
+            ],
         ]);
     }
 }
