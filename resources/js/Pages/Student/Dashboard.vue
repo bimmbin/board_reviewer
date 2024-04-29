@@ -35,10 +35,18 @@ const chartOptions = ref({
     },
     xaxis: {
         categories: categories,
+        title: {
+            text: "Student Attempts",
+        },
+    },
+    yaxis: {
+        title: {
+            text: "Score",
+        },
+        min: 1,
+        max: 150,
     },
 });
-
-console.log(page.props.ziggy.url);
 </script>
 
 <template>
