@@ -8,23 +8,23 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Exam extends Model
 {
-  use HasFactory;
+    use HasFactory;
 
-  protected $fillable = [
-    'major_id',
-    'assessment_id',
-  ];
+    protected $fillable = [
+        'major_id',
+        'assessment_id',
+        'is_exam',
+    ];
 
-  
 
-  public function major()
-  {
-    return $this->belongsTo(Major::class);
-  }
 
-  public function exam_answers()
-  {
-    return $this->hasMany(ExamAnswer::class);
-  }
-  
+    public function major()
+    {
+        return $this->belongsTo(Major::class);
+    }
+
+    public function exam_answers()
+    {
+        return $this->hasMany(ExamAnswer::class);
+    }
 }

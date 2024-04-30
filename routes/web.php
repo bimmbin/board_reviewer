@@ -22,6 +22,7 @@ use App\Http\Controllers\Instructor\InstructorMajorController;
 use App\Http\Controllers\Instructor\InstructorLessonsController;
 use App\Http\Controllers\MainDashboardController;
 use App\Http\Controllers\Student\DashboardController;
+use App\Http\Controllers\Student\QuizController;
 use App\Http\Controllers\ViewAllAssessmentsController;
 
 /*
@@ -78,6 +79,12 @@ Route::middleware(['auth', 'role:student'])->group(function () {
 
     //Exam Attempts
     Route::get('/student/recents/exams', [RecentExamController::class, 'index'])->name('recent.exam.index');
+
+    //Quiz
+    Route::post('/student/quiz/categories/take', [QuizController::class, 'store'])->name('quiz.store');
+    Route::get('/student/practice/{exam_id}/page/{page}', [QuizController::class, 'show'])->name('quiz.show');
+    Route::post('/student/practice/store/answer', [QuizController::class, 'store_answer'])->name('quiz.answer.store');
+    Route::get('/student/practice/{exam_id}/result',  [QuizController::class, 'result'])->name('quiz.result');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {

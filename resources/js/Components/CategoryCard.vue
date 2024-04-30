@@ -1,10 +1,14 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link, useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
 
 const props = defineProps({
     category: {
         type: Object,
+        required: true,
+    },
+    major_id: {
+        type: Number,
         required: true,
     },
 });
@@ -25,18 +29,26 @@ if (
         page_number,
     ]);
 }
-console.log(route_name);
+
 const lesson_icon = ref("/img/lesson_icon.svg");
 const check = ref("/img/check.svg");
+
+const form = useForm({
+    major_id: props.major_id,
+    category_id: props.category.id,
+});
+
+const submit = () => {
+    form.post(route("quiz.store"));
+};
 </script>
 
 <template>
-    <Link
-        :href="route_name"
+    <div
         class="w-[550px] px-6 py-5 bg-[#3d6ca5] border-t border-l border-r border-blue-200 max-2xl:w-[450px] max-xl:w-full h-52 max-sm:h-40 bg-gray2 flex flex-col justify-between rounded-xl"
     >
-        <div class="w-full h-full flex flex-col justify-between">
-            <div class="flex justify-between items-center">
+        <div class="flex flex-col justify-between w-full h-full">
+            <div class="flex items-center justify-between">
                 <img :src="lesson_icon" alt="" class="w-12 max-md:w-10" />
                 <span
                     v-if="
@@ -44,7 +56,7 @@ const check = ref("/img/check.svg");
                         props.category.latest_lesson_length !=
                             props.category.lessons_count
                     "
-                    class="bg-white px-3 py-2 max-md:px-2 max-md:py-1 rounded-md text-blue-500 max-md:text-sm"
+                    class="px-3 py-2 text-blue-500 bg-white rounded-md max-md:px-2 max-md:py-1 max-md:text-sm"
                     >{{ props.category.latest_lesson_length }}/{{
                         props.category.lessons_count
                     }}</span
@@ -57,16 +69,27 @@ const check = ref("/img/check.svg");
                 />
             </div>
             <div class="flex items-center gap-5">
-                <h2 class="text-white text-2xl font-light max-md:text-xl">
+                <h2 class="text-2xl font-light text-white max-md:text-xl">
                     {{ props.category.category_name }}
                 </h2>
                 <div
                     v-if="props.category.is_finished"
-                    class="text-white border rounded-lg border-white w-fit px-2 py-1 text-xs"
+                    class="px-2 py-1 text-xs text-white border border-white rounded-lg w-fit"
                 >
                     Finished
                 </div>
+                <button
+                    @click="submit()"
+                    class="px-3 py-1 font-medium bg-white rounded text-main_bg whitespace-nowrap"
+                >
+                    Practice Quiz
+                </button>
+                <Link
+                    :href="route_name"
+                    class="px-3 py-1 font-medium bg-white rounded text-main_bg whitespace-nowrap"
+                    >Take Lesson</Link
+                >
             </div>
         </div>
-    </Link>
+    </div>
 </template>

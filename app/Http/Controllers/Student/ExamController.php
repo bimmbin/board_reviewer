@@ -87,6 +87,7 @@ class ExamController extends Controller
             'major_id' => $request->major_id,
             'student_profile_id' => $user->student_profile->id,
             'assessment_id' => $assessment_final->id,
+            // 'is_exam' => 1,
         ]);
 
 
