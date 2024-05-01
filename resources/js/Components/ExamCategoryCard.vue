@@ -1,6 +1,7 @@
 <script setup>
 import { useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
+import Swal from "sweetalert2";
 
 const props = defineProps({
     major: {
@@ -17,6 +18,14 @@ const submit = () => {
     form.post(route("exam.store"));
 };
 const lesson_icon = ref("/img/lesson_icon.svg");
+
+const lock_info = () => {
+    Swal.fire({
+        title: "Locked",
+        text: "Please make sure to finish all the practice quizzes first.",
+        icon: "info",
+    });
+};
 </script>
 
 <template>
@@ -46,10 +55,18 @@ const lesson_icon = ref("/img/lesson_icon.svg");
                 <span class="font-light opacity-80">Items</span>
             </div>
             <button
-                class="w-full px-5 py-3 font-medium text-white rounded-md bg-main_bg hover:bg-blue-400"
+                v-if="props.major.is_unlocked"
+                class="flex items-center justify-center w-full gap-2 px-5 py-3 font-medium text-white rounded-md bg-main_bg hover:bg-blue-400"
             >
                 Take Exam
             </button>
+            <div
+                v-else
+                @click="lock_info()"
+                class="flex items-center justify-center w-full gap-2 px-5 py-3 font-medium text-white rounded-md bg-main_bg hover:bg-blue-400"
+            >
+                <img src="/img/lock.svg" alt="" />
+            </div>
         </div>
     </form>
 </template>

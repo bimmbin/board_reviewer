@@ -47,48 +47,43 @@ const submit = () => {
     <div
         class="w-[550px] px-6 py-5 bg-[#3d6ca5] border-t border-l border-r border-blue-200 max-2xl:w-[450px] max-xl:w-full h-52 max-sm:h-40 bg-gray2 flex flex-col justify-between rounded-xl"
     >
-        <div class="flex flex-col justify-between w-full h-full">
+        <div class="flex flex-col justify-between h-full">
+            <div class="flex justify-between w-full">
+                <div class="flex flex-col gap-5">
+                    <h2 class="text-2xl font-medium text-white max-md:text-xl">
+                        {{ props.category.category_name }}
+                    </h2>
+                    <div
+                        v-if="props.category.is_finished"
+                        class="px-2 py-1 text-xs text-white border border-white rounded-lg w-fit"
+                    >
+                        Finished
+                    </div>
+                </div>
+                <div class="flex flex-col justify-between">
+                    <img :src="lesson_icon" alt="" class="w-12 max-md:w-10" />
+                </div>
+            </div>
             <div class="flex items-center justify-between">
-                <img :src="lesson_icon" alt="" class="w-12 max-md:w-10" />
-                <span
-                    v-if="
-                        props.category.latest_lesson_length != 0 &&
-                        props.category.latest_lesson_length !=
-                            props.category.lessons_count
-                    "
-                    class="px-3 py-2 text-blue-500 bg-white rounded-md max-md:px-2 max-md:py-1 max-md:text-sm"
-                    >{{ props.category.latest_lesson_length }}/{{
-                        props.category.lessons_count
-                    }}</span
-                >
                 <img
-                    v-if="props.category.is_finished"
+                    v-if="props.category.finished_quizzes_count != 0"
                     :src="check"
                     alt=""
                     class="w-12 max-md:w-10"
                 />
-            </div>
-            <div class="flex items-center gap-5">
-                <h2 class="text-2xl font-light text-white max-md:text-xl">
-                    {{ props.category.category_name }}
-                </h2>
-                <div
-                    v-if="props.category.is_finished"
-                    class="px-2 py-1 text-xs text-white border border-white rounded-lg w-fit"
-                >
-                    Finished
+                <div class="flex gap-5">
+                    <Link
+                        :href="route_name"
+                        class="px-3 py-1 font-medium bg-white rounded text-main_bg whitespace-nowrap"
+                        >Take Lesson</Link
+                    >
+                    <button
+                        @click="submit()"
+                        class="px-3 py-1 font-medium bg-white rounded text-main_bg whitespace-nowrap"
+                    >
+                        Practice Quiz
+                    </button>
                 </div>
-                <button
-                    @click="submit()"
-                    class="px-3 py-1 font-medium bg-white rounded text-main_bg whitespace-nowrap"
-                >
-                    Practice Quiz
-                </button>
-                <Link
-                    :href="route_name"
-                    class="px-3 py-1 font-medium bg-white rounded text-main_bg whitespace-nowrap"
-                    >Take Lesson</Link
-                >
             </div>
         </div>
     </div>

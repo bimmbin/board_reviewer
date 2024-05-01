@@ -23,7 +23,12 @@ class ExamController extends Controller
             $query->where('student_major_id', $user->student_profile->student_major->id);
         })->whereHas('categories', function (Builder $query) use ($user) {
             $query->where('status', 'approved');
-        })->with('major_coverage')->get();
+        })->with(['categories' => function ($query) use ($user) {
+            $query->where('status', 'approved')
+                ->withCount(['finished_quizzes' => function ($query) use ($user) {
+                    $query->where('student_profile_id', $user->student_profile->id);
+                }]);
+        }, 'major_coverage'])->get();
 
         $coverage_count = Auth::user()->student_profile->student_major->majors->count();
 
@@ -38,6 +43,8 @@ class ExamController extends Controller
                             $major->has_taken = false;
                         }
                     }
+
+
                     return $major;
                 });
             } else {
@@ -53,8 +60,28 @@ class ExamController extends Controller
             });
         }
 
+
+        $final_majors = $filtered_majors->map(function ($major) {
+            $unfinished_quizzes = [];
+            foreach ($major->categories as $category) {
+                if ($category->finished_quizzes_count == 0) {
+                    $unfinished_quizzes[] = [
+                        'category_id' => $category->id,
+                        'category_name' => $category->category_name
+                    ];
+                    $is_unlocked = false;
+                } else {
+                    $is_unlocked = true;
+                }
+            }
+            $major->is_unlocked = $is_unlocked;
+            $major->unfinished_quizzes = $unfinished_quizzes;
+
+            return $major;
+        });
+
         return Inertia::render('Student/ExamCategories', [
-            'majors' => $filtered_majors,
+            'majors' => $final_majors,
         ]);
     }
 

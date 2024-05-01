@@ -11,6 +11,7 @@ use App\Models\ExamAnswer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\FinishedQuiz;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Database\Eloquent\Collection;
@@ -127,7 +128,7 @@ class QuizController extends Controller
         $lessons = Session::get($exam_id . $user->username);
         $lessons->load('correct_answer', 'correct_answer.choice', 'exam_answer', 'exam_answer.choice');
 
-        $category_name = $lessons->first()->category->category_name;
+        $category = $lessons->first()->category;
 
         // Session::forget($exam_id . $user->username);
         $filtered_lessons = $lessons->map(function ($lesson) use ($exam_id) {
@@ -142,12 +143,18 @@ class QuizController extends Controller
             return $recent_lessons;
         });
 
+        FinishedQuiz::firstOrCreate(
+            ['category_id' =>  $category->id],
+            ['student_profile_id' => $user->student_profile->id]
+        );
+
+
         return Inertia::render('Student/QuizResult', [
             'exam' => $exam,
             'correct_count' => $correct_count,
             'lesson_count' => $lessons_count,
             'lessons' => $filtered_lessons,
-            'category_name' => $category_name,
+            'category_name' => $category->category_name,
         ]);
     }
 }

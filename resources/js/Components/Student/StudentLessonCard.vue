@@ -6,11 +6,12 @@ import CategoryCard from "@/Components/CategoryCard.vue";
 
 const drop = ref("/img/drop.svg");
 
-const { major } = defineProps({
+const { major, show } = defineProps({
     major: Object,
+    show: Boolean,
 });
 
-const show_details = ref(false);
+const show_details = ref(show);
 </script>
 
 <template>
