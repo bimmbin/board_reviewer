@@ -6,9 +6,10 @@ import ElementDetails from "@/Components/ElementDetails.vue";
 
 const emit = defineEmits(["close_dialog"]);
 
-const { category_id, has_pdf } = defineProps({
+const { category_id, pdf, status } = defineProps({
     category_id: String,
-    has_pdf: Boolean,
+    pdf: String,
+    status: String,
 });
 
 const form = useForm({
@@ -32,6 +33,8 @@ watch(
                             icon: "success",
                             timer: 1500,
                             showConfirmButton: false,
+                        }).then(() => {
+                            window.location.reload();
                         });
                     },
                     onError: (error) => {
@@ -49,26 +52,17 @@ watch(
     }
 );
 
-const view_pdf = () => {
+function view_pdf() {
     router.get(route("instructor.pdf.show", { category_id: category_id }));
-};
-const baseUrl = window.location.origin + "/public/pdf/1714639491.pdf";
+}
+const baseUrl = window.location.origin + "/storage/" + pdf;
 </script>
 
 <template>
     <!-- <a :href="baseUrl">asdfsadfsd</a> -->
 
-    <div v-if="has_pdf" class="" @click="view_pdf()">
-        <ElementDetails details="View lesson">
-            <div
-                class="p-2 bg-blue-100 rounded-md cursor-pointer select-none hover:bg-blue-200 active:bg-blue-100"
-            >
-                <img src="/img/view.svg" alt="" class="h-5" />
-            </div>
-        </ElementDetails>
-    </div>
     <form
-        v-else
+        v-if="!pdf && status === 'pending'"
         class="flex items-center justify-between py-3 max-md:px-3 max-md:py-2 max-md:text-sm max-md:flex-col max-md:items-start max-md:gap-3 bg-opacity-80"
     >
         <div class="flex items-center gap-5">
@@ -87,4 +81,16 @@ const baseUrl = window.location.origin + "/public/pdf/1714639491.pdf";
             </label>
         </div>
     </form>
+    <div v-else>
+        <ElementDetails v-if="pdf" details="View PDF">
+            <a :href="baseUrl" target="_blank" rel="noopener noreferrer">
+                <div
+                    class="p-2 bg-blue-100 rounded-md cursor-pointer select-none hover:bg-blue-200 active:bg-blue-100"
+                >
+                    <img src="/img/view.svg" alt="" class="h-5" />
+                </div>
+            </a>
+        </ElementDetails>
+        <div v-else>N/A</div>
+    </div>
 </template>

@@ -13,6 +13,7 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
 
 import Pagination from "@/Components/Pagination.vue";
 import CancelLesson from "@/Components/Instructor/CancelLesson.vue";
+import ElementDetails from "@/Components/ElementDetails.vue";
 import UploadPdf from "@/Components/Instructor/UploadPdf.vue";
 
 const { lessons, status } = defineProps({
@@ -101,11 +102,32 @@ const baseUrl = window.location.origin + "/public/pdf/";
                     <td class="py-3 pl-5">
                         <UploadPdf
                             :category_id="lesson.id"
-                            :has_pdf="lesson.pdf"
+                            :pdf="lesson.pdf"
+                            :status="status"
                         />
                     </td>
                     <td class="py-3 pl-5">
                         <div class="flex items-center gap-2">
+                            <ElementDetails details="View Questionnaire">
+                                <Link
+                                    :href="
+                                        route('instructor.lessons.show', [
+                                            lesson.id,
+                                            1,
+                                        ])
+                                    "
+                                >
+                                    <div
+                                        class="p-2 bg-blue-100 rounded-md cursor-pointer select-none hover:bg-blue-200 active:bg-blue-100"
+                                    >
+                                        <img
+                                            src="/img/view.svg"
+                                            alt=""
+                                            class="h-5"
+                                        />
+                                    </div>
+                                </Link>
+                            </ElementDetails>
                             <CancelLesson :lesson_id="lesson.id" />
                         </div>
                     </td>

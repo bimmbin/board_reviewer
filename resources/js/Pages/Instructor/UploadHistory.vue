@@ -27,17 +27,17 @@ const view = ref("/img/view.svg");
 <template>
     <Head title="Upload History" />
     <div
-        class="w-full flex items-center justify-between gap-5 max-lg:flex-col max-lg:items-start max-md:gap-2 mt-2"
+        class="flex items-center justify-between w-full gap-5 mt-2 max-lg:flex-col max-lg:items-start max-md:gap-2"
     >
         <div
-            class="text-3xl font-bold max-md:mt-20 text-main_bg max-md:mb-2 max-md:text-2xl flex items-center capitalize"
+            class="flex items-center text-3xl font-bold capitalize max-md:mt-20 text-main_bg max-md:mb-2 max-md:text-2xl"
         >
             Upload History
         </div>
     </div>
 
     <div
-        class="w-full pb-10 overflow-x-auto mt-5 max-md:mt-2"
+        class="w-full pb-10 mt-5 overflow-x-auto max-md:mt-2"
         :class="{ 'opacity-0': show_details }"
     >
         <table
@@ -47,27 +47,27 @@ const view = ref("/img/view.svg");
         >
             <thead>
                 <tr
-                    class="space-y-3 text-sm md:text-base border border-blue-500 lg:text-lg text-start text-btn bg-main_bg text-white"
+                    class="space-y-3 text-sm text-white border border-blue-500 md:text-base lg:text-lg text-start text-btn bg-main_bg"
                 >
-                    <th class="text-left pl-5 py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
                         No.
                     </th>
-                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 font-semibold text-left max-md:py-3">
                         Major
                     </th>
-                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 font-semibold text-left max-md:py-3">
                         Lesson Name
                     </th>
-                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 font-semibold text-left max-md:py-3">
                         Items
                     </th>
-                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 font-semibold text-left max-md:py-3">
                         Status
                     </th>
-                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 font-semibold text-left max-md:py-3">
                         Date
                     </th>
-                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 font-semibold text-left max-md:py-3">
                         Action
                     </th>
                 </tr>
@@ -76,15 +76,15 @@ const view = ref("/img/view.svg");
             <tbody class="text-left capitalize">
                 <tr
                     v-for="(lesson, index) in lessons.data"
-                    class="border border-blue-300 text-sm md:text-base lg:text-lg font-regular"
+                    class="text-sm border border-blue-300 md:text-base lg:text-lg font-regular"
                 >
-                    <td class="pl-5 py-3">{{ index + 1 }}</td>
+                    <td class="py-3 pl-5">{{ index + 1 }}</td>
                     <td>{{ lesson.major_name }}</td>
                     <td>{{ lesson.category_name }}</td>
                     <td>{{ lesson.item_count }}</td>
                     <td>
                         <span
-                            class="px-3 py-2 rounded-md text-sm max-md:text-xs max-md:py-1"
+                            class="px-3 py-2 text-sm rounded-md max-md:text-xs max-md:py-1"
                             :class="
                                 lesson.status == 'approved'
                                     ? '!bg-green-300 text-green-800'
@@ -98,7 +98,7 @@ const view = ref("/img/view.svg");
                     <td>{{ lesson.date }}</td>
                     <td>
                         <div class="flex items-center gap-2">
-                            <ElementDetails details="View lesson">
+                            <ElementDetails details="View Questionnaire">
                                 <Link
                                     :href="
                                         route('instructor.lessons.show', [
@@ -108,7 +108,7 @@ const view = ref("/img/view.svg");
                                     "
                                 >
                                     <div
-                                        class="p-2 bg-blue-100 rounded-md select-none cursor-pointer hover:bg-blue-200 active:bg-blue-100"
+                                        class="p-2 bg-blue-100 rounded-md cursor-pointer select-none hover:bg-blue-200 active:bg-blue-100"
                                     >
                                         <img :src="view" alt="" class="h-5" />
                                     </div>

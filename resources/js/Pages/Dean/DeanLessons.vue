@@ -25,6 +25,8 @@ let show_flash = ref(false);
 const check_green = ref("/img/check_green.svg");
 const view = ref("/img/view.svg");
 const cancel = ref("/img/cancel.svg");
+
+const baseUrl = window.location.origin + "/storage/";
 </script>
 
 <template>
@@ -50,17 +52,17 @@ const cancel = ref("/img/cancel.svg");
     </transition>
 
     <div
-        class="w-full flex items-center justify-between gap-5 max-lg:flex-col max-lg:items-start max-md:gap-2 mt-2"
+        class="flex items-center justify-between w-full gap-5 mt-2 max-lg:flex-col max-lg:items-start max-md:gap-2"
     >
         <h1
-            class="text-3xl font-semibold max-md:mt-20 text-blue-800 max-md:mb-2 max-md:text-2xl capitalize"
+            class="text-3xl font-semibold text-blue-800 capitalize max-md:mt-20 max-md:mb-2 max-md:text-2xl"
         >
             {{ status }} lessons
         </h1>
     </div>
 
     <div
-        class="w-full pb-10 overflow-x-auto mt-5 max-md:mt-2"
+        class="w-full pb-10 mt-5 overflow-x-auto max-md:mt-2"
         :class="{ 'opacity-0': show_details }"
     >
         <table
@@ -70,27 +72,30 @@ const cancel = ref("/img/cancel.svg");
         >
             <thead>
                 <tr
-                    class="space-y-3 text-sm md:text-base border border-blue-500 lg:text-lg text-start text-btn bg-main_bg text-white"
+                    class="space-y-3 text-sm text-white border border-blue-500 md:text-base lg:text-lg text-start text-btn bg-main_bg"
                 >
-                    <th class="text-left pl-5 py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
                         No.
                     </th>
-                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 font-semibold text-left max-md:py-3">
                         Lesson Name
                     </th>
-                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 font-semibold text-left max-md:py-3">
                         Items
                     </th>
-                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 font-semibold text-left max-md:py-3">
                         Status
                     </th>
-                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 font-semibold text-left max-md:py-3">
                         Uploaded by
                     </th>
-                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 font-semibold text-left max-md:py-3">
                         Date
                     </th>
-                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 font-semibold text-left max-md:py-3">
+                        PDF
+                    </th>
+                    <th class="py-5 font-semibold text-left max-md:py-3">
                         Action
                     </th>
                 </tr>
@@ -100,22 +105,42 @@ const cancel = ref("/img/cancel.svg");
                 <tr
                     v-for="(lesson, index) in lessons.data"
                     :key="index"
-                    class="border border-blue-300 text-sm md:text-base lg:text-lg font-regular"
+                    class="text-sm border border-blue-300 md:text-base lg:text-lg font-regular"
                 >
-                    <td class="pl-5 py-3">{{ index + 1 }}</td>
+                    <td class="py-3 pl-5">{{ index + 1 }}</td>
                     <td>{{ lesson.category_name }}</td>
                     <td>{{ lesson.item_count }}</td>
                     <td>
                         <span
-                            class="px-3 py-2 bg-yellow-300 text-yellow-800 rounded-md text-sm max-md:text-xs max-md:py-1"
+                            class="px-3 py-2 text-sm text-yellow-800 bg-yellow-300 rounded-md max-md:text-xs max-md:py-1"
                             >{{ lesson.status }}</span
                         >
                     </td>
                     <td>{{ lesson.uploaded_by }}</td>
                     <td>{{ lesson.date }}</td>
                     <td>
+                        <ElementDetails v-if="lesson.pdf" details="View PDF">
+                            <a
+                                :href="baseUrl + lesson.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <div
+                                    class="p-2 bg-blue-100 rounded-md cursor-pointer select-none hover:bg-blue-200 active:bg-blue-100"
+                                >
+                                    <img
+                                        src="/img/view.svg"
+                                        alt=""
+                                        class="h-5"
+                                    />
+                                </div>
+                            </a>
+                        </ElementDetails>
+                        <div v-else>N/A</div>
+                    </td>
+                    <td>
                         <div class="flex items-center gap-2">
-                            <ElementDetails details="View">
+                            <ElementDetails details="View Questionnaire">
                                 <Link
                                     :href="
                                         route('dean.lessons.show', [
@@ -125,7 +150,7 @@ const cancel = ref("/img/cancel.svg");
                                     "
                                 >
                                     <div
-                                        class="p-2 bg-blue-100 rounded-md select-none cursor-pointer hover:bg-blue-200 active:bg-blue-100"
+                                        class="p-2 bg-blue-100 rounded-md cursor-pointer select-none hover:bg-blue-200 active:bg-blue-100"
                                     >
                                         <img :src="view" alt="" class="h-5" />
                                     </div>
@@ -173,7 +198,7 @@ const cancel = ref("/img/cancel.svg");
                                     type="button"
                                 >
                                     <div
-                                        class="p-2 bg-red-200 rounded-md select-none cursor-pointer hover:bg-red-300 active:bg-red-100"
+                                        class="p-2 bg-red-200 rounded-md cursor-pointer select-none hover:bg-red-300 active:bg-red-100"
                                     >
                                         <img :src="cancel" alt="" class="h-5" />
                                     </div>

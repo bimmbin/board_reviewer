@@ -1,6 +1,7 @@
 <script setup>
 import { Link, useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
+import Swal from "sweetalert2";
 
 const props = defineProps({
     category: {
@@ -41,6 +42,14 @@ const form = useForm({
 const submit = () => {
     form.post(route("quiz.store"));
 };
+const baseUrl = window.location.origin + "/storage/" + props.category.pdf;
+
+const no_pdf = () => {
+    Swal.fire({
+        title: "This lesson has no PDF uploaded",
+        icon: "error",
+    });
+};
 </script>
 
 <template>
@@ -72,11 +81,21 @@ const submit = () => {
                     class="w-12 max-md:w-10"
                 />
                 <div class="flex gap-5">
-                    <Link
-                        :href="route_name"
+                    <a
+                        v-if="props.category.pdf"
+                        :href="baseUrl"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         class="px-3 py-1 font-medium bg-white rounded text-main_bg whitespace-nowrap"
-                        >Take Lesson</Link
+                        >View Lesson
+                    </a>
+                    <div
+                        v-else
+                        @click="no_pdf()"
+                        class="px-3 py-1 font-medium bg-white rounded cursor-pointer text-main_bg whitespace-nowrap"
                     >
+                        View Lesson
+                    </div>
                     <button
                         @click="submit()"
                         class="px-3 py-1 font-medium bg-white rounded text-main_bg whitespace-nowrap"
