@@ -1,5 +1,6 @@
 <script>
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
+import Category from "../Student/Category.vue";
 
 export default {
     layout: DashboardLayout,
@@ -8,12 +9,11 @@ export default {
 
 <script setup>
 import { ref, watch } from "vue";
-import { Head, Link } from "@inertiajs/vue3";
-import { Collapse } from "vue-collapsed";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 
 import Pagination from "@/Components/Pagination.vue";
-import ElementDetails from "@/Components/ElementDetails.vue";
 import CancelLesson from "@/Components/Instructor/CancelLesson.vue";
+import UploadPdf from "@/Components/Instructor/UploadPdf.vue";
 
 const { lessons, status } = defineProps({
     lessons: Object,
@@ -24,23 +24,24 @@ let show_details = ref(false);
 let show_view = ref(false);
 
 const cancel = ref("/img/cancel.svg");
-const view = ref("/img/view.svg");
+
+const baseUrl = window.location.origin + "/public/pdf/";
 </script>
 
 <template>
     <Head :title="status + ' lessons'" />
     <div
-        class="w-full flex items-center justify-between gap-5 max-lg:flex-col max-lg:items-start max-md:gap-2 mt-2"
+        class="flex items-center justify-between w-full gap-5 mt-2 max-lg:flex-col max-lg:items-start max-md:gap-2"
     >
         <div
-            class="text-3xl mb-3 font-bold max-md:mt-20 text-main_bg max-md:mb-2 max-md:text-2xl flex items-center capitalize"
+            class="flex items-center mb-3 text-3xl font-bold capitalize max-md:mt-20 text-main_bg max-md:mb-2 max-md:text-2xl"
         >
             {{ status }} Lessons
         </div>
     </div>
 
     <div
-        class="w-full pb-10 overflow-x-auto mt-5 max-md:mt-2"
+        class="w-full pb-10 mt-5 overflow-x-auto max-md:mt-2"
         :class="{ 'opacity-0': show_details }"
     >
         <table
@@ -50,67 +51,61 @@ const view = ref("/img/view.svg");
         >
             <thead>
                 <tr
-                    class="space-y-3 text-sm md:text-base border border-blue-500 lg:text-lg text-start text-btn bg-main_bg text-white"
+                    class="space-y-3 text-sm text-white border border-blue-500 md:text-base lg:text-lg text-start text-btn bg-main_bg"
                 >
-                    <th class="text-left pl-5 py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
                         No.
                     </th>
-                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
                         Lesson Name
                     </th>
-                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
                         Items
                     </th>
-                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
                         Status
                     </th>
-                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
                         Uploaded by
                     </th>
-                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
                         Date
                     </th>
-                    <th class="text-left py-5 max-md:py-3 font-semibold">
+                    <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
+                        PDF
+                    </th>
+                    <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
                         Action
                     </th>
                 </tr>
             </thead>
 
-            <tbody class="text-left capitalize">
+            <tbody class="text-left capitalize whitespace-nowrap">
                 <tr
                     v-for="(lesson, index) in lessons.data"
                     :key="index"
-                    class="border border-blue-300 text-sm md:text-base lg:text-lg font-regular"
+                    class="text-sm border border-blue-300 md:text-base lg:text-lg font-regular"
                 >
-                    <td class="pl-5 py-3">{{ index + 1 }}</td>
-                    <td>{{ lesson.category_name }}</td>
-                    <td>{{ lesson.item_count }}</td>
-                    <td>
+                    <td class="py-3 pl-5">{{ index + 1 }}</td>
+                    <td class="py-3 pl-5">{{ lesson.category_name }}</td>
+                    <td class="py-3 pl-5">{{ lesson.item_count }}</td>
+                    <td class="py-3 pl-5">
                         <span
-                            class="px-3 py-2 bg-yellow-300 text-yellow-800 rounded-md text-sm max-md:text-xs max-md:py-1"
+                            class="px-3 py-2 text-sm text-yellow-800 bg-yellow-300 rounded-md max-md:text-xs max-md:py-1"
                             >{{ lesson.status }}</span
                         >
                     </td>
-                    <td>{{ lesson.uploaded_by }}</td>
-                    <td>{{ lesson.date }}</td>
-                    <td>
+                    <td class="py-3 pl-5">{{ lesson.uploaded_by }}</td>
+                    <td class="py-3 pl-5">{{ lesson.date }}</td>
+                    <!-- PDF Form -->
+                    <td class="py-3 pl-5">
+                        <UploadPdf
+                            :category_id="lesson.id"
+                            :has_pdf="lesson.pdf"
+                        />
+                    </td>
+                    <td class="py-3 pl-5">
                         <div class="flex items-center gap-2">
-                            <ElementDetails details="View lesson">
-                                <Link
-                                    :href="
-                                        route('instructor.lessons.show', [
-                                            lesson.id,
-                                            1,
-                                        ])
-                                    "
-                                >
-                                    <div
-                                        class="p-2 bg-blue-100 rounded-md select-none cursor-pointer hover:bg-blue-200 active:bg-blue-100"
-                                    >
-                                        <img :src="view" alt="" class="h-5" />
-                                    </div>
-                                </Link>
-                            </ElementDetails>
                             <CancelLesson :lesson_id="lesson.id" />
                         </div>
                     </td>

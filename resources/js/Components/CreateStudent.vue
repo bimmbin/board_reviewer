@@ -22,10 +22,10 @@ const form = useForm({
 
 const submit = () => {
     form.post(route("students.store"), {
-         onSuccess: () => {
+        onSuccess: () => {
             emit("close_emit");
             form.reset();
-        }
+        },
     });
 };
 </script>
@@ -35,7 +35,7 @@ const submit = () => {
         <h1 class="text-xl font-semibold text-blue-800 max-md:mb-2">
             Create manually
         </h1>
-        <form @submit.prevent="submit" class="mt-3 flex flex-col gap-3 pb-5">
+        <form @submit.prevent="submit" class="flex flex-col gap-3 pb-5 mt-3">
             <div class="flex flex-col gap-3">
                 <div class="flex-1">
                     <InputLabel for="student_number" value="Student ID" />
@@ -43,7 +43,7 @@ const submit = () => {
                     <TextInput
                         id="student_number"
                         type="text"
-                        class="mt-1 block w-full"
+                        class="block w-full mt-1"
                         v-model="form.student_number"
                         required
                         autofocus
@@ -61,7 +61,7 @@ const submit = () => {
                     <TextInput
                         id="first_name"
                         type="text"
-                        class="mt-1 block w-full"
+                        class="block w-full mt-1"
                         v-model="form.first_name"
                         required
                         autofocus
@@ -83,7 +83,7 @@ const submit = () => {
                     <TextInput
                         id="last_name"
                         type="text"
-                        class="mt-1 block w-full"
+                        class="block w-full mt-1"
                         v-model="form.last_name"
                         required
                         autofocus
@@ -98,7 +98,7 @@ const submit = () => {
                     <TextInput
                         id="middle_name"
                         type="text"
-                        class="mt-1 block w-full"
+                        class="block w-full mt-1"
                         v-model="form.middle_name"
                         required
                         autofocus

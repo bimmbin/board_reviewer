@@ -6,30 +6,31 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-  /**
-   * Run the migrations.
-   */
-  public function up(): void
-  {
-    Schema::create('categories', function (Blueprint $table) {
-      $table->id();
-      $table->foreignId('major_id')
-        ->constrained('majors')
-        ->onDelete('cascade');
-      $table->foreignId('staff_profile_id')
-        ->constrained('staff_profiles')
-        ->onDelete('cascade');
-      $table->string('category_name');
-      $table->string('status');
-      $table->timestamps();
-    });
-  }
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('major_id')
+                ->constrained('majors')
+                ->onDelete('cascade');
+            $table->foreignId('staff_profile_id')
+                ->constrained('staff_profiles')
+                ->onDelete('cascade');
+            $table->string('category_name');
+            $table->string('status');
+            $table->string('pdf')->nullable();
+            $table->timestamps();
+        });
+    }
 
-  /**
-   * Reverse the migrations.
-   */
-  public function down(): void
-  {
-    Schema::dropIfExists('categories');
-  }
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('categories');
+    }
 };

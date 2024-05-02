@@ -125,6 +125,10 @@ Route::middleware(['auth', 'role:instructor'])->group(function () {
     Route::get('/instructor/majors', [InstructorMajorController::class, 'index'])->name('instructor.majors.index');
     Route::post('/instructor/majors/upload', [InstructorMajorController::class, 'store'])->name('instructor.majors.store');
 
+    // upload lessons pdf
+    Route::post('/instructor/majors/upload/pdf', [InstructorLessonsController::class, 'store_pdf'])->name('instructor.pdf.store');
+    Route::get('/instructor/pdf/download/{category_id}', [InstructorLessonsController::class, 'view_pdf'])->name('instructor.pdf.show');
+
     // Uploaded lessons
     Route::get('/instructor/majors/{id}/status/{status}', [InstructorLessonsController::class, 'index'])->name('instructor.lessons.index');
     Route::get('/instructor/upload/history', [UploadHistoryController::class, 'index'])->name('instructor.history.index');
