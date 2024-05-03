@@ -52,6 +52,39 @@ class InstructorLessonsController extends Controller
         // dd(Storage::path('public/' . $pdf));
         return Storage::download('public/' . $pdf);
     }
+
+    public function store_embed(Request $request)
+    {
+        $request->validate([
+            'embed' => 'required|string'
+        ]);
+
+        $category = Category::findOrFail($request->category_id);
+        $category->embed = $request->embed;
+        $category->save();
+
+        return redirect()->back();
+    }
+
+    public function delete_pdf(Request $request)
+    {
+        $category = Category::findOrFail($request->category_id);
+        $category->pdf = null;
+        $category->save();
+
+        return redirect()->back();
+    }
+
+    public function delete_embed(Request $request)
+    {
+        $category = Category::findOrFail($request->category_id);
+        $category->embed = null;
+        $category->save();
+
+        return redirect()->back();
+    }
+
+
     public function show($category_id, $page)
     {
         $category = Category::with('lessons', 'lessons.choices', 'lessons.correct_answer')->findOrFail($category_id);

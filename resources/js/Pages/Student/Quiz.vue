@@ -10,6 +10,7 @@ export default {
 import { Link, useForm, Head } from "@inertiajs/vue3";
 import { ref } from "vue";
 
+import Spinner from "@/Components/Spinner.vue";
 import ExamCountdown from "@/Components/ExamCountdown.vue";
 
 const { lesson, choices, current_page, lessons_count, category_id, exam_id } =
@@ -128,9 +129,16 @@ function time_ended_submit() {
                 </div>
                 <div v-else>
                     <button
-                        class="px-5 py-2 font-semibold text-white border-2 border-blue-500 rounded-md select-none bg-main_bg"
+                        :disabled="form.processing"
+                        class="w-24 h-12 border-2 rounded-md select-none border-main_bg bg-main_bg"
                     >
-                        Next
+                        <div
+                            v-if="!form.processing"
+                            class="font-semibold text-center text-white"
+                        >
+                            Next
+                        </div>
+                        <Spinner v-else />
                     </button>
                 </div>
             </div>

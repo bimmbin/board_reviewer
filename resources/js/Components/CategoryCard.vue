@@ -54,25 +54,33 @@ const no_pdf = () => {
 
 <template>
     <div
-        class="w-[550px] px-6 py-5 bg-[#3d6ca5] border-t border-l border-r border-blue-200 max-2xl:w-[450px] max-xl:w-full h-52 max-sm:h-40 bg-gray2 flex flex-col justify-between rounded-xl"
+        class="w-fit px-6 py-5 bg-[#3d6ca5] border-t border-l border-r border-blue-200 max-2xl:w-[450px] bg-gray2 flex flex-col justify-between rounded-xl"
     >
-        <div class="flex flex-col justify-between h-full">
-            <div class="flex justify-between w-full">
-                <div class="flex flex-col gap-5">
+        <div class="flex flex-col justify-between h-full gap-5">
+            <div class="flex justify-between w-full gap-5">
+                <div class="flex items-center w-full gap-5">
                     <h2 class="text-2xl font-medium text-white max-md:text-xl">
                         {{ props.category.category_name }}
                     </h2>
                     <div
-                        v-if="props.category.is_finished"
+                        v-if="props.category.finished_quizzes_count != 0"
                         class="px-2 py-1 text-xs text-white border border-white rounded-lg w-fit"
                     >
                         Finished
                     </div>
                 </div>
-                <div class="flex flex-col justify-between">
+                <div class="flex justify-end w-20">
                     <img :src="lesson_icon" alt="" class="w-12 max-md:w-10" />
                 </div>
             </div>
+
+            <div
+                class="w-[560px] h-[315px] bg-gray-300 flex items-center justify-center"
+                v-if="!props.category.embed"
+            >
+                No Embedded Video
+            </div>
+            <div v-else v-html="props.category.embed"></div>
             <div class="flex items-center justify-between">
                 <img
                     v-if="props.category.finished_quizzes_count != 0"

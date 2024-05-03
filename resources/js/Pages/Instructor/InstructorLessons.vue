@@ -15,6 +15,8 @@ import Pagination from "@/Components/Pagination.vue";
 import CancelLesson from "@/Components/Instructor/CancelLesson.vue";
 import ElementDetails from "@/Components/ElementDetails.vue";
 import UploadPdf from "@/Components/Instructor/UploadPdf.vue";
+import StoreEmbed from "@/Components/Instructor/StoreEmbed.vue";
+import DeleteExtra from "@/Components/Instructor/DeleteExtra.vue";
 
 const { lessons, status } = defineProps({
     lessons: Object,
@@ -47,12 +49,12 @@ const baseUrl = window.location.origin + "/public/pdf/";
     >
         <table
             id="dataTable"
-            class="table-auto text-center w-[1220px] max-lg:w-[1080px] max-lg:mr-24 max-md:mr-0 max max-sm:w-[900px] text-lg"
+            class="table-auto text-center w-[1220px] max-lg:w-[1080px] max-lg:mr-24 max-md:mr-0 max max-sm:w-[900px]"
             style="font-size: clamp(0.875rem, 0.75rem + 0.3125vw, 1.125rem)"
         >
             <thead>
                 <tr
-                    class="space-y-3 text-sm text-white border border-blue-500 md:text-base lg:text-lg text-start text-btn bg-main_bg"
+                    class="space-y-3 text-white border border-blue-500 text-start text-btn bg-main_bg whitespace-nowrap"
                 >
                     <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
                         No.
@@ -76,19 +78,22 @@ const baseUrl = window.location.origin + "/public/pdf/";
                         PDF
                     </th>
                     <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
+                        Embed Video
+                    </th>
+                    <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
                         Action
                     </th>
                 </tr>
             </thead>
 
-            <tbody class="text-left capitalize whitespace-nowrap">
+            <tbody class="text-left capitalize">
                 <tr
                     v-for="(lesson, index) in lessons.data"
                     :key="index"
-                    class="text-sm border border-blue-300 md:text-base lg:text-lg font-regular"
+                    class="border border-blue-300 font-regular"
                 >
                     <td class="py-3 pl-5">{{ index + 1 }}</td>
-                    <td class="py-3 pl-5">{{ lesson.category_name }}</td>
+                    <td class="py-3 pl-5 w-44">{{ lesson.category_name }}</td>
                     <td class="py-3 pl-5">{{ lesson.item_count }}</td>
                     <td class="py-3 pl-5">
                         <span
@@ -99,13 +104,36 @@ const baseUrl = window.location.origin + "/public/pdf/";
                     <td class="py-3 pl-5">{{ lesson.uploaded_by }}</td>
                     <td class="py-3 pl-5">{{ lesson.date }}</td>
                     <!-- PDF Form -->
-                    <td class="py-3 pl-5">
+                    <td class="flex gap-2 py-3 pl-5">
                         <UploadPdf
                             :category_id="lesson.id"
                             :pdf="lesson.pdf"
                             :status="status"
                         />
+
+                        <DeleteExtra
+                            v-if="lesson.pdf"
+                            :category_id="lesson.id"
+                            extra_name="pdf"
+                        />
                     </td>
+
+                    <td>
+                        <div class="flex gap-2 py-3 pl-5">
+                            <StoreEmbed
+                                :category_id="lesson.id"
+                                :embed="lesson.embed"
+                                :status="status"
+                            />
+
+                            <DeleteExtra
+                                v-if="lesson.embed"
+                                :category_id="lesson.id"
+                                extra_name="embed"
+                            />
+                        </div>
+                    </td>
+
                     <td class="py-3 pl-5">
                         <div class="flex items-center gap-2">
                             <ElementDetails details="View Questionnaire">

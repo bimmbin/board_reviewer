@@ -12,6 +12,7 @@ import { Link, Head } from "@inertiajs/vue3";
 
 import Pagination from "@/Components/Pagination.vue";
 import ElementDetails from "@/Components/ElementDetails.vue";
+import StoreEmbed from "@/Components/Instructor/StoreEmbed.vue";
 import Flash from "@/Components/Flash.vue";
 
 const { lessons, status } = defineProps({
@@ -67,12 +68,12 @@ const baseUrl = window.location.origin + "/storage/";
     >
         <table
             id="dataTable"
-            class="table-auto text-center w-[1220px] max-lg:w-[1080px] max-lg:mr-24 max-md:mr-0 max max-sm:w-[900px] text-lg"
-            style="font-size: clamp(0.875rem, 0.75rem + 0.3125vw, 1.125rem)"
+            class="table-auto text-center w-[1220px] max-lg:w-[1080px] max-lg:mr-24 max-md:mr-0 max max-sm:w-[900px]"
+            style=""
         >
             <thead>
                 <tr
-                    class="space-y-3 text-sm text-white border border-blue-500 md:text-base lg:text-lg text-start text-btn bg-main_bg"
+                    class="space-y-3 text-white border border-blue-500 text-start text-btn bg-main_bg whitespace-nowrap"
                 >
                     <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
                         No.
@@ -80,22 +81,25 @@ const baseUrl = window.location.origin + "/storage/";
                     <th class="py-5 font-semibold text-left max-md:py-3">
                         Lesson Name
                     </th>
-                    <th class="py-5 font-semibold text-left max-md:py-3">
+                    <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
                         Items
                     </th>
-                    <th class="py-5 font-semibold text-left max-md:py-3">
+                    <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
                         Status
                     </th>
-                    <th class="py-5 font-semibold text-left max-md:py-3">
+                    <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
                         Uploaded by
                     </th>
-                    <th class="py-5 font-semibold text-left max-md:py-3">
+                    <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
                         Date
                     </th>
-                    <th class="py-5 font-semibold text-left max-md:py-3">
+                    <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
                         PDF
                     </th>
-                    <th class="py-5 font-semibold text-left max-md:py-3">
+                    <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
+                        Embedded Video
+                    </th>
+                    <th class="py-5 pl-5 font-semibold text-left max-md:py-3">
                         Action
                     </th>
                 </tr>
@@ -108,17 +112,17 @@ const baseUrl = window.location.origin + "/storage/";
                     class="text-sm border border-blue-300 md:text-base lg:text-lg font-regular"
                 >
                     <td class="py-3 pl-5">{{ index + 1 }}</td>
-                    <td>{{ lesson.category_name }}</td>
-                    <td>{{ lesson.item_count }}</td>
-                    <td>
+                    <td class="py-3 pl-5 w-44">{{ lesson.category_name }}</td>
+                    <td class="py-3 pl-5">{{ lesson.item_count }}</td>
+                    <td class="py-3 pl-5">
                         <span
                             class="px-3 py-2 text-sm text-yellow-800 bg-yellow-300 rounded-md max-md:text-xs max-md:py-1"
                             >{{ lesson.status }}</span
                         >
                     </td>
-                    <td>{{ lesson.uploaded_by }}</td>
-                    <td>{{ lesson.date }}</td>
-                    <td>
+                    <td class="py-3 pl-5">{{ lesson.uploaded_by }}</td>
+                    <td class="py-3 pl-5">{{ lesson.date }}</td>
+                    <td class="py-3 pl-5">
                         <ElementDetails v-if="lesson.pdf" details="View PDF">
                             <a
                                 :href="baseUrl + lesson.pdf"
@@ -138,7 +142,14 @@ const baseUrl = window.location.origin + "/storage/";
                         </ElementDetails>
                         <div v-else>N/A</div>
                     </td>
-                    <td>
+                    <td class="py-3 pl-5">
+                        <StoreEmbed
+                            :category_id="lesson.id"
+                            :embed="lesson.embed"
+                            :status="status"
+                        />
+                    </td>
+                    <td class="py-3 pl-5">
                         <div class="flex items-center gap-2">
                             <ElementDetails details="View Questionnaire">
                                 <Link

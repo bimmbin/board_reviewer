@@ -129,6 +129,13 @@ Route::middleware(['auth', 'role:instructor'])->group(function () {
     Route::post('/instructor/majors/upload/pdf', [InstructorLessonsController::class, 'store_pdf'])->name('instructor.pdf.store');
     Route::get('/instructor/pdf/download/{category_id}', [InstructorLessonsController::class, 'view_pdf'])->name('instructor.pdf.show');
 
+    // upload embed
+    Route::post('/instructor/majors/upload/embed', [InstructorLessonsController::class, 'store_embed'])->name('instructor.embed.store');
+
+    // delete pdf or embed 
+    Route::post('/instructor/majors/delete/pdf', [InstructorLessonsController::class, 'delete_pdf'])->name('instructor.delete.pdf');
+    Route::post('/instructor/majors/delete/embed', [InstructorLessonsController::class, 'delete_embed'])->name('instructor.delete.embed');
+
     // Uploaded lessons
     Route::get('/instructor/majors/{id}/status/{status}', [InstructorLessonsController::class, 'index'])->name('instructor.lessons.index');
     Route::get('/instructor/upload/history', [UploadHistoryController::class, 'index'])->name('instructor.history.index');

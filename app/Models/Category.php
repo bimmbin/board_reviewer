@@ -61,6 +61,7 @@ class Category extends Model
                     'item_count' => $item->lessons_count,
                     'uploaded_by' => $item->staff_profile->first_name . ' ' . $item->staff_profile->last_name,
                     'pdf' => $item->pdf,
+                    'embed' => $item->embed,
                     'date' => $item->created_at->toFormattedDateString(),
                 ];
             });
