@@ -143,9 +143,11 @@ class QuizController extends Controller
             return $recent_lessons;
         });
 
-        FinishedQuiz::firstOrCreate(
-            ['category_id' =>  $category->id],
-            ['student_profile_id' => $user->student_profile->id]
+        FinishedQuiz::create(
+            [
+                'category_id' =>  $category->id,
+                'student_profile_id' => $user->student_profile->id
+            ]
         );
 
 
