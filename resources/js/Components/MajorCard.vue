@@ -11,7 +11,6 @@ const props = defineProps({
 
 const drop = ref("/img/drop.svg");
 
-
 const submit = () => {
     form.post(route("majors.store"));
 };
@@ -21,18 +20,23 @@ const submit = () => {
     <div
         class="w-[550px] px-6 py-5 bg-[#3d6ca5] max-xl:w-full bg-gray2 flex flex-col justify-between rounded-xl"
     >
-        <div class="w-full h-full flex flex-col justify-between gap-3">
-            <div class="w-full h-full flex justify-between">
-                <h2 class="text-white text-2xl font-light max-md:text-xl">
-                    {{ props.major.student_major_name }}
+        <div class="flex flex-col justify-between w-full h-full gap-3">
+            <div class="flex justify-between w-full h-full">
+                <h2 class="text-2xl font-light text-white max-md:text-xl">
+                    Students
                 </h2>
                 <img :src="drop" class="-rotate-90" />
             </div>
-            <div class="w-full flex justify-between gap-4 text-center">
-              <Link :href="route('students.show', props.major.id)" class="bg-white flex-1 rounded-md flex flex-col items-center py-4 bg-opacity-80 hover:bg-opacity-100 cursor-pointer active:bg-opacity-80 select-none">
-                <h2 class="text-2xl font-medium ">{{ props.major.students_count }}</h2>
-                <span class="text-xs text-gray-700 ">Students</span>
-              </Link>
+            <div class="flex justify-between w-full gap-4 text-center">
+                <Link
+                    :href="route('students.show', props.major.id)"
+                    class="flex flex-col items-center flex-1 py-4 bg-white rounded-md cursor-pointer select-none bg-opacity-80 hover:bg-opacity-100 active:bg-opacity-80"
+                >
+                    <h2 class="text-2xl font-medium">
+                        {{ props.major.students_count }}
+                    </h2>
+                    <span class="text-xs text-gray-700">Students</span>
+                </Link>
             </div>
         </div>
     </div>
